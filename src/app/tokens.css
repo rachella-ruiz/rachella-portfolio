@@ -1,0 +1,262 @@
+/* ============================================================
+   Rachella Ruiz — Design Tokens
+   Extraídos de las Variables de Webflow (junio 2026).
+   Esta es la fuente de verdad para el rebuild en Next.js + Tailwind.
+
+   Modos / breakpoints (estándar de Webflow):
+     - Base   = escritorio (por defecto)
+     - Tablet = max-width 991px
+     - Móvil  = max-width 479px
+
+   Depuración aplicada (todo reversible):
+     - Paletas "secondary/green" y "secondary/violet": eliminadas (sin uso).
+     - Escala "fixed" (primitivos crudos 0–16rem): eliminada (la cubre Tailwind).
+     - Border-radius: de 12 → 7 pasos (ver nota en su sección).
+   Se mantuvieron intactos "spacer" y "section": son responsivos y
+   estructurales, mejor podarlos contra uso real al construir.
+
+   Estilos de texto (familia / peso) — referencia rápida:
+     h1–h5 .......... primary / semibold
+     h6 ............. primary / medium
+     body-lg, body,
+     body-sm, caption  primary / regular
+     button-lg/sm ... primary / medium
+     overline ....... secondary / medium
+   ============================================================ */
+
+:root {
+  /* ---------- Familias tipográficas ----------
+     Las fuentes se cargan y auto-hospedan con next/font (ver layout.tsx),
+     que expone --font-ibm-plex-sans / --font-ibm-plex-mono. Aquí las
+     conectamos a los tokens semánticos, con fallback del sistema. */
+  --font-primary: var(--font-ibm-plex-sans), "IBM Plex Sans", sans-serif;
+  --font-secondary: var(--font-ibm-plex-mono), "IBM Plex Mono", monospace;
+
+  /* ---------- Pesos ---------- */
+  --weight-thin: 100;
+  --weight-extra-light: 200;
+  --weight-light: 300;
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+  --weight-extra-bold: 800;
+  --weight-black: 900;
+
+  /* ---------- Letter-spacing ---------- */
+  --tracking-h1: -0.02em;
+  --tracking-h2: -0.02em;      /* hereda de h1 */
+  --tracking-h3: -0.015em;
+  --tracking-h4: -0.01em;
+  --tracking-h5: -0.005em;
+  --tracking-h6: 0em;          /* hereda de body */
+  --tracking-body-lg: 0em;     /* hereda de body */
+  --tracking-body: 0em;
+  --tracking-body-sm: 0em;     /* hereda de body */
+  --tracking-button-lg: 0.01em;/* hereda de caption */
+  --tracking-button-sm: 0.01em;/* hereda de caption */
+  --tracking-overline: 0.08em;
+  --tracking-caption: 0.01em;
+
+  /* ---------- Line-height ---------- */
+  --leading-h1: 95%;
+  --leading-h2: 110%;
+  --leading-h3: 115%;
+  --leading-h4: 120%;
+  --leading-h5: 130%;
+  --leading-h6: 135%;
+  --leading-body-lg: 140%;
+  --leading-body: 150%;
+  --leading-overline: 140%;
+  --leading-body-sm: 150%;
+  --leading-button: 120%;   /* aplica a button-lg y button-sm */
+  --leading-caption: 140%;
+
+  /* ---------- Tamaños de fuente (responsivos) — BASE ---------- */
+  --size-h1: 6rem;
+  --size-h2: 4.5rem;
+  --size-h3: 3rem;
+  --size-h4: 2.25rem;
+  --size-h5: 1.75rem;      /* no se usaba en Webflow; valor coherente entre h4 y h6 */
+  --size-h6: 1.25rem;
+  --size-body-lg: 1.25rem;
+  --size-body: 1rem;
+  --size-body-sm: 0.875rem;
+  --size-button-lg: 1rem;
+  --size-button-sm: 0.875rem;
+  --size-overline: 0.875rem;
+  --size-caption: 0.75rem;
+
+  /* ---------- Color: grey ---------- */
+  --grey-100: #f4f4f4;
+  --grey-200: #e0e0e0;
+  --grey-300: #c6c6c6;
+  --grey-400: #a8a8a8;
+  --grey-500: #8d8d8d;
+  --grey-600: #6f6f6f;
+  --grey-700: #525252;
+  --grey-800: #393939;
+  --grey-900: #262626;
+  --grey-1000: #1a1a1a;
+
+  /* ---------- Color: primary (violeta-azul) ---------- */
+  --primary-100: #d9d7fe;
+  --primary-200: #b6adfd;
+  --primary-300: #8b80fb;
+  --primary-400: #6257f2;
+  --primary-500: #483de1;
+  --primary-600: #322ac4;
+  --primary-700: #2218a3;
+  --primary-800: #140a74;
+  --primary-900: #06033d;
+  --primary-1000: #020226;
+
+  /* ---------- Color: base ---------- */
+  --white: #ffffff;
+  --black: #000000;
+
+  /* ---------- Color: sistema ---------- */
+  --color-red: #ca423f;
+  --color-green: #38a879;
+  --color-yellow: #dfc35f;
+
+  /* ---------- Color: accent ---------- */
+  --color-accent: #cedb8e;
+
+  /* ---------- Color: texto (semántico) ---------- */
+  --text-primary: var(--grey-100);
+  --text-secondary: var(--grey-300);
+  --text-tertiary: var(--grey-400);
+  --text-heading: var(--white);
+  --text-link: var(--primary-300);
+  --text-muted: var(--grey-500);
+  --text-placeholder: var(--grey-600);
+  --text-error: var(--color-red);
+  --text-success: var(--color-green);
+
+  /* ---------- Opacidad (overlays blancos) ---------- */
+  --opacity-transparent: transparent;
+  --opacity-10: rgba(255, 255, 255, 0.1);
+  --opacity-15: rgba(255, 255, 255, 0.15);
+  --opacity-20: rgba(255, 255, 255, 0.2);
+  --opacity-30: rgba(255, 255, 255, 0.3);
+  --opacity-40: rgba(255, 255, 255, 0.4);
+  --opacity-50: rgba(255, 255, 255, 0.5);
+  --opacity-60: rgba(255, 255, 255, 0.6);
+  --opacity-70: rgba(255, 255, 255, 0.7);
+  --opacity-80: rgba(255, 255, 255, 0.8);
+  --opacity-90: rgba(255, 255, 255, 0.9);
+
+  /* ---------- Espaciado: spacer (responsivo) — BASE ---------- */
+  --space-tiny: 0.125rem;
+  --space-xxsmall: 0.25rem;
+  --space-xsmall: 0.5rem;
+  --space-small: 1rem;
+  --space-medium: 2rem;
+  --space-large: 3rem;
+  --space-xlarge: 4rem;
+  --space-xxlarge: 5rem;
+  --space-xxl: 6rem;
+  --space-xhuge: 8rem;
+  --space-xxhuge: 12rem;
+  --space-custom-1: 1.25rem;
+  --space-custom-2: 1.5rem;
+  --space-custom-3: 2.5rem;
+
+  /* ---------- Espaciado: section (responsivo) — BASE ---------- */
+  --section-xsmall: 4rem;
+  --section-small: 6rem;
+  --section-medium: 8rem;
+  --section-large: 10rem;
+  --section-xlarge: 12rem;
+  --section-xxlarge: 13rem;
+
+  /* ---------- Border radius (responsivo) — BASE ----------
+     Depurado 12 → 7. Eliminados (re-agregar si hicieran falta):
+       xxsmall 0.25 · xlarge 1.25 · huge 1.75 · xhuge 2 · xxhuge 2.5
+     Los que quedaron conservan su nombre y valor originales. */
+  --radius-tiny: 0.125rem;
+  --radius-xsmall: 0.5rem;
+  --radius-small: 0.75rem;
+  --radius-medium: 1rem;
+  --radius-large: 1.125rem;
+  --radius-xxlarge: 1.5rem;
+  --radius-ultra: 3rem;
+}
+
+/* ============================================================
+   TABLET — max-width 991px
+   Los spacers no cambian en tablet; solo tamaños, secciones y radios.
+   ============================================================ */
+@media (max-width: 991px) {
+  :root {
+    /* tamaños de fuente */
+    --size-h1: 5rem;
+    --size-h2: 3.5rem;
+    --size-h3: 2.5rem;
+    --size-h4: 2rem;
+    --size-h5: 1.5rem;
+    --size-h6: 1.125rem;
+    --size-body-lg: 1.125rem;
+
+    /* secciones */
+    --section-xsmall: 2.75rem;
+    --section-small: 5rem;
+    --section-medium: 7rem;
+    --section-large: 8rem;
+    --section-xlarge: 9rem;
+    --section-xxlarge: 10rem;
+
+    /* radios */
+    --radius-xsmall: 0.25rem;
+    --radius-small: 0.5rem;
+    --radius-medium: 0.5rem;
+    --radius-large: 0.75rem;
+    --radius-xxlarge: 0.875rem;
+    --radius-ultra: 1.5rem;
+  }
+}
+
+/* ============================================================
+   MÓVIL — max-width 479px
+   ============================================================ */
+@media (max-width: 479px) {
+  :root {
+    /* tamaños de fuente */
+    --size-h1: 3rem;
+    --size-h2: 2.5rem;
+    --size-h3: 2rem;
+    --size-h4: 1.5rem;
+    --size-h5: 1.25rem;
+    --size-h6: 1rem;
+    --size-body-lg: 1rem;
+
+    /* spacers (solo móvil cambia) */
+    --space-medium: 1.5rem;
+    --space-large: 2rem;
+    --space-xlarge: 3rem;
+    --space-xxlarge: 4rem;
+    --space-xxl: 5rem;
+    --space-xhuge: 6rem;
+    --space-xxhuge: 6rem;
+    --space-custom-1: 1.125rem;
+    --space-custom-2: 1.125rem;
+    --space-custom-3: 2rem;
+
+    /* secciones */
+    --section-xsmall: 2.25rem;
+    --section-small: 3rem;
+    --section-medium: 5rem;
+    --section-large: 6.5rem;
+    --section-xlarge: 8rem;
+    --section-xxlarge: 10rem;
+
+    /* radios */
+    --radius-xsmall: 0.25rem;
+    --radius-small: 0.5rem;
+    --radius-medium: 0.5rem;
+    --radius-large: 0.75rem;
+    --radius-xxlarge: 0.875rem;
+    --radius-ultra: 1.25rem;
+  }
+}
