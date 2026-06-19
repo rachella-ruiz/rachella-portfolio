@@ -57,7 +57,7 @@ export default function MenuOverlay({
     },
   };
 
-  // El panel se expande desde la hamburguesa (origen arriba-derecha).
+  // El shell se expande desde la hamburguesa (origen arriba-derecha).
   const panelVariants: Variants = {
     hidden: reduce
       ? { opacity: 0 }
@@ -105,20 +105,22 @@ export default function MenuOverlay({
             className="absolute inset-0 h-full w-full cursor-default bg-black/40"
           />
 
-          {/* Panel: 100vh, padding 0.75rem, sin scroll (overflow hidden) */}
+          {/* Shell externo "menu": 50vw × 100vh, padding 0.75rem (único padding del shell).
+              Es el gap entre el borde del viewport y la card blanca. */}
           <motion.aside
             data-lenis-prevent
             variants={panelVariants}
             style={{ transformOrigin: "top right" }}
-            className="absolute right-0 top-0 flex h-full w-full flex-col justify-between overflow-hidden rounded-l-xxlarge bg-white p-3 text-grey-1000 md:w-1/2 md:max-w-3xl"
+            className="absolute right-0 top-0 h-full w-full overflow-hidden p-3 md:w-1/2"
           >
-            {/* Grupo superior: cierre + enlaces */}
-            <div>
-              {/* Botón de cierre 4rem (entra al final, ~0.70s) */}
+            {/* Card interna "menu_content": blanca, flex col, space-between, gap 2rem,
+                altura 100% del shell, padding 5rem 2.25rem 2.25rem. */}
+            <div className="relative flex h-full w-full flex-col items-start justify-between gap-medium overflow-hidden rounded-xxlarge bg-white px-[2.25rem] pb-[2.25rem] pt-xxlarge text-grey-1000">
+              {/* Botón de cierre 4rem (absoluto arriba-derecha; entra al final ~0.70s) */}
               <motion.div
                 variants={itemVariants}
                 custom={0.7}
-                className="flex justify-end"
+                className="absolute right-[2.25rem] top-[2.25rem]"
               >
                 <button
                   type="button"
@@ -140,11 +142,11 @@ export default function MenuOverlay({
                 </button>
               </motion.div>
 
-              {/* Enlaces (entran primero, ~0.30s) */}
+              {/* Enlaces (arriba; entran primero ~0.30s) */}
               <motion.nav
                 variants={itemVariants}
                 custom={0.3}
-                className="mt-large flex flex-col gap-small"
+                className="flex flex-col gap-small"
               >
                 {links.map((link) => (
                   <RollLink
@@ -157,32 +159,36 @@ export default function MenuOverlay({
                   />
                 ))}
               </motion.nav>
-            </div>
 
-            {/* Tarjeta negra "Schedule call" (entra en medio, ~0.50s).
-                La imagen transparente (menu-link2) cubre toda la tarjeta,
-                anclada a la derecha, sobre fondo negro. */}
-            <motion.div variants={itemVariants} custom={0.5}>
-              <Link
-                href="/contact"
-                onClick={onClose}
-                className="group relative block h-44 overflow-hidden rounded-large bg-black text-grey-100"
+              {/* Tarjeta negra "Schedule call" (abajo; entra ~0.50s).
+                  Imagen transparente con object-contain (eslabón completo), anclada
+                  a la derecha, llenando el área de la tarjeta (inset-0). */}
+              <motion.div
+                variants={itemVariants}
+                custom={0.5}
+                className="w-full"
               >
-                <Image
-                  src="/menu-link2.avif"
-                  alt=""
-                  fill
-                  aria-hidden="true"
-                  sizes="(max-width: 640px) 90vw, 28rem"
-                  className="object-cover object-right transition-transform duration-500 ease-out group-hover:scale-110"
-                />
-                {/* Etiqueta con la flecha de /arrow.svg */}
-                <span className="absolute left-medium top-medium z-10 inline-flex items-center gap-2 text-button-lg font-primary font-medium">
-                  Schedule call
-                  <ArrowIcon className="h-2.5 w-2.5" />
-                </span>
-              </Link>
-            </motion.div>
+                <Link
+                  href="/contact"
+                  onClick={onClose}
+                  className="group relative block h-44 overflow-hidden rounded-large bg-black text-grey-100"
+                >
+                  <Image
+                    src="/menu-link2.avif"
+                    alt=""
+                    fill
+                    aria-hidden="true"
+                    sizes="(max-width: 640px) 90vw, 28rem"
+                    className="object-contain object-right transition-transform duration-500 ease-out group-hover:scale-110"
+                  />
+                  {/* Etiqueta con la flecha de /arrow.svg */}
+                  <span className="absolute left-medium top-medium z-10 inline-flex items-center gap-2 text-button-lg font-primary font-medium">
+                    Schedule call
+                    <ArrowIcon className="h-2.5 w-2.5" />
+                  </span>
+                </Link>
+              </motion.div>
+            </div>
           </motion.aside>
         </motion.div>
       )}

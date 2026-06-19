@@ -9,10 +9,12 @@ const socials = [
 
 export default function Footer() {
   return (
-    // Footer pegado al borde inferior: lateral 0.75rem, superior 8rem, sin inferior.
-    <footer className="px-3 pt-section-medium">
-      {/* Panel blanco con esquinas redondeadas solo arriba, flush abajo */}
-      <div className="overflow-hidden rounded-t-xxlarge bg-white px-medium pt-large text-grey-800 sm:px-large">
+    // footer_wrap: padding 4rem 2rem 1rem 2rem (xlarge / medium / small / medium).
+    // El bottom de 1rem evita que el glow del wordmark se recorte en el borde.
+    <footer className="px-medium pb-small pt-xlarge">
+      {/* Panel blanco, esquinas redondeadas arriba. overflow-x-clip recorta el
+          wordmark (22vw) en horizontal sin recortar su borde inferior. */}
+      <div className="overflow-x-clip rounded-t-xxlarge bg-white px-medium pt-large text-grey-800 sm:px-large">
         {/* Móvil: columna centrada (íconos arriba, © abajo). Desktop: fila. */}
         <div className="flex flex-col-reverse items-center gap-small md:flex-row md:items-center md:justify-between md:gap-medium">
           {/* Overline mono, gris — una sola línea, centrado en móvil */}
@@ -27,21 +29,19 @@ export default function Footer() {
                 key={label}
                 href={href}
                 aria-label={label}
-                className="m-0 flex h-14 w-14 items-center justify-center rounded-full border border-grey-300 p-0 transition-[opacity,background-color] duration-200 ease-[ease] hover:bg-[#ececec] hover:opacity-60"
+                className="m-0 flex h-14 w-14 items-center justify-center rounded-full border border-[#ececec] p-0 transition-[opacity,background-color] duration-200 ease-[ease] hover:bg-[#ececec] hover:opacity-60"
               >
-                <img src={src} alt="" className="h-6 w-6" />
+                <img src={src} alt="" className="h-5 w-5" />
               </a>
             ))}
           </div>
         </div>
 
-        {/* Wordmark gigante al ancho del panel.
-            Espacio entre la fila superior y el wordmark: 4rem móvil / 8rem desktop
-            (space-xlarge / space-xhuge) — ajustable si se quiere más/menos alto. */}
-        <div className="mt-xlarge md:mt-xhuge">
+        {/* Wordmark gigante al ancho del panel (font-size 22vw) */}
+        <div className="mt-medium">
           <span
             className="block w-full font-primary font-semibold leading-none tracking-tight text-primary-500"
-            style={{ fontSize: "clamp(4rem, 19vw, 17rem)" }}
+            style={{ fontSize: "22vw" }}
           >
             Portfolio
           </span>
