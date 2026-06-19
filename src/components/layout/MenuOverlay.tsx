@@ -113,13 +113,16 @@ export default function MenuOverlay({
             className="absolute right-0 top-0 h-full w-full overflow-hidden p-3 md:w-1/2"
           >
             {/* Card interna "menu_content": blanca, flex col, space-between, gap 2rem,
-                altura 100% del shell, padding 5rem 2.25rem 2.25rem. */}
-            <div className="relative flex h-full w-full flex-col items-start justify-between gap-medium overflow-hidden rounded-xxlarge bg-white px-[2.25rem] pb-[2.25rem] pt-xxlarge text-grey-1000">
-              {/* Botón de cierre 4rem (absoluto arriba-derecha; entra al final ~0.70s) */}
+                altura 100% del shell. Padding desktop 5rem/2.25rem; en móvil se reduce
+                (top 4rem, lados 1.25rem, bottom 1.5rem) para ganar ancho de contenido. */}
+            <div className="relative flex h-full w-full flex-col items-start justify-between gap-medium overflow-hidden rounded-xxlarge bg-white px-[1.25rem] pb-[1.5rem] pt-[4rem] text-grey-1000 md:px-[2.25rem] md:pb-[2.25rem] md:pt-xxlarge">
+              {/* Botón de cierre 4rem (absoluto arriba-derecha; entra al final ~0.70s).
+                  Su `right` iguala el padding lateral del menu_content en cada breakpoint,
+                  así su borde derecho cae sobre el borde derecho del contenido. */}
               <motion.div
                 variants={itemVariants}
                 custom={0.7}
-                className="absolute right-[2.25rem] top-[2.25rem]"
+                className="absolute right-[1.25rem] top-[2.25rem] md:right-[2.25rem]"
               >
                 <button
                   type="button"
@@ -141,13 +144,14 @@ export default function MenuOverlay({
                 </button>
               </motion.div>
 
-              {/* Enlaces (arriba; entran primero ~0.30s) */}
-              {/* pr-medium alinea los puntos (al final de cada link) con el
-                  centro de la X de cierre y con el borde de la tarjeta. */}
+              {/* Enlaces (arriba; entran primero ~0.30s).
+                  pt-[3rem]: baja la lista para que "Home" y su punto queden claramente
+                  por debajo del botón de cierre. Sin pr: los puntos (al final de cada
+                  fila) caen sobre el borde derecho del contenido = borde derecho de la X. */}
               <motion.nav
                 variants={itemVariants}
                 custom={0.3}
-                className="flex w-full flex-col gap-small pr-medium"
+                className="flex w-full flex-col gap-small pt-[3rem]"
               >
                 {links.map((link) => (
                   <RollLink
@@ -167,7 +171,7 @@ export default function MenuOverlay({
               <motion.div
                 variants={itemVariants}
                 custom={0.5}
-                className="w-full pr-medium"
+                className="w-full"
               >
                 <a
                   href="https://calendly.com/rachellaruiz/30min"

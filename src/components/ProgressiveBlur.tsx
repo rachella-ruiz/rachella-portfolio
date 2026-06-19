@@ -8,7 +8,7 @@ export default function ProgressiveBlur() {
   return (
     <div
       aria-hidden="true"
-      className="pointer-events-none fixed inset-x-0 bottom-0 z-40 h-24 w-full"
+      className="pointer-events-none fixed inset-x-0 bottom-0 z-30 h-24 w-full"
     >
       {Array.from({ length: LAYERS }).map((_, i) => {
         const blur = 0.5 * Math.pow(2, i); // 0.5, 1, 2, 4, ... px
