@@ -20,9 +20,10 @@ export default function Footer() {
     // Wrapper externo: márgenes alrededor de la card blanca (8rem arriba / 0.75rem lados).
     <footer className="px-3 pt-section-medium">
       {/* Card blanca (footer_wrap): paddings internos 4rem arriba / 2rem lados, sin bottom.
-          Esquinas redondeadas arriba; overflow-x-clip recorta el wordmark (22vw) en
-          horizontal sin recortar su borde inferior. */}
-      <div className="overflow-x-clip rounded-t-xxlarge bg-white px-medium pt-xlarge text-grey-800">
+          Esquinas redondeadas arriba; overflow-hidden recorta el wordmark (22vw) en
+          horizontal y el sobrante vacío de su caja de línea (evita el espacio negro
+          al final del footer) sin cortar los glifos visibles de "Portfolio". */}
+      <div className="overflow-hidden rounded-t-xxlarge bg-white px-medium pt-xlarge text-grey-800">
         {/* Móvil: columna centrada (íconos arriba, © abajo). Desktop: fila. */}
         <div className="flex flex-col-reverse items-center gap-small md:flex-row md:items-center md:justify-between md:gap-medium">
           {/* Overline mono, gris — una sola línea, centrado en móvil */}

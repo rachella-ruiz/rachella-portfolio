@@ -35,7 +35,7 @@ export default function Nav() {
 
           {/* navbar_links: fila, a la derecha, centrado, gap 2rem */}
           <div className="flex items-center justify-end gap-medium">
-            <div className="hidden items-center gap-medium md:flex">
+            <div className="hidden items-center gap-[2.25rem] md:flex">
               <RollLink
                 href="/about"
                 label="About"
@@ -67,10 +67,10 @@ export default function Nav() {
               onClick={() => setOpen(true)}
               aria-label="Abrir menú"
               aria-expanded={open}
-              className="flex h-10 w-10 flex-col items-center justify-center gap-xxsmall text-grey-300 transition-colors hover:text-grey-100"
+              className="flex h-10 w-10 flex-col items-center justify-center gap-1.5 text-grey-300 transition-colors hover:text-grey-100"
             >
-              <span className="h-0.5 w-7 bg-current" />
-              <span className="h-0.5 w-7 bg-current" />
+              <span className="h-0.5 w-8 bg-current" />
+              <span className="h-0.5 w-8 bg-current" />
             </button>
           </div>
         </nav>

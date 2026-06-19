@@ -142,10 +142,12 @@ export default function MenuOverlay({
               </motion.div>
 
               {/* Enlaces (arriba; entran primero ~0.30s) */}
+              {/* pr-medium alinea los puntos (al final de cada link) con el
+                  centro de la X de cierre y con el borde de la tarjeta. */}
               <motion.nav
                 variants={itemVariants}
                 custom={0.3}
-                className="flex w-full flex-col gap-small md:gap-[2.25rem]"
+                className="flex w-full flex-col gap-small pr-medium"
               >
                 {links.map((link) => (
                   <RollLink
@@ -165,14 +167,14 @@ export default function MenuOverlay({
               <motion.div
                 variants={itemVariants}
                 custom={0.5}
-                className="w-full"
+                className="w-full pr-medium"
               >
                 <a
                   href="https://calendly.com/rachellaruiz/30min"
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={onClose}
-                  className="group relative block h-44 overflow-hidden rounded-large bg-black text-grey-100"
+                  className="group relative block h-44 overflow-hidden rounded-large bg-black text-grey-300 transition-colors hover:text-grey-100"
                 >
                   <Image
                     src="/menu-link2.avif"
@@ -182,9 +184,9 @@ export default function MenuOverlay({
                     sizes="(max-width: 640px) 90vw, 28rem"
                     className="object-contain object-right transition-transform duration-500 ease-out group-hover:scale-110"
                   />
-                  {/* Etiqueta con la flecha de /arrow.svg — color consistente
-                      (grey-100, sin cambio en hover), como los links del menú. */}
-                  <span className="absolute left-medium top-medium z-10 inline-flex items-center gap-2 text-button-lg font-primary font-medium text-grey-100">
+                  {/* Etiqueta con la flecha de /arrow.svg — hereda el color del
+                      enlace (grey-300 normal, grey-100 en hover). */}
+                  <span className="absolute left-medium top-medium z-10 inline-flex items-center gap-2 text-button-lg font-primary font-medium">
                     Schedule call
                     <ArrowIcon className="h-2.5 w-2.5" />
                   </span>
