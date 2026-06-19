@@ -13,9 +13,10 @@ export default function Footer() {
     <footer className="px-3 pt-section-medium">
       {/* Panel blanco con esquinas redondeadas solo arriba, flush abajo */}
       <div className="overflow-hidden rounded-t-xxlarge bg-white px-medium pt-large text-grey-800 sm:px-large">
-        <div className="flex items-center justify-between gap-medium">
-          {/* Overline mono, gris */}
-          <p className="text-overline font-secondary uppercase text-grey-500">
+        {/* Móvil: columna centrada (íconos arriba, © abajo). Desktop: fila. */}
+        <div className="flex flex-col-reverse items-center gap-small md:flex-row md:items-center md:justify-between md:gap-medium">
+          {/* Overline mono, gris — una sola línea, centrado en móvil */}
+          <p className="whitespace-nowrap text-overline font-secondary uppercase text-grey-500">
             © 2026 Rachella Ruiz
           </p>
 
@@ -34,8 +35,10 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Wordmark gigante al ancho del panel */}
-        <div className="mt-medium">
+        {/* Wordmark gigante al ancho del panel.
+            Espacio entre la fila superior y el wordmark: 4rem móvil / 8rem desktop
+            (space-xlarge / space-xhuge) — ajustable si se quiere más/menos alto. */}
+        <div className="mt-xlarge md:mt-xhuge">
           <span
             className="block w-full font-primary font-semibold leading-none tracking-tight text-primary-500"
             style={{ fontSize: "clamp(4rem, 19vw, 17rem)" }}

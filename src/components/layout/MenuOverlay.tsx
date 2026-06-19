@@ -105,76 +105,77 @@ export default function MenuOverlay({
             className="absolute inset-0 h-full w-full cursor-default bg-black/40"
           />
 
-          {/* Panel que se expande desde la esquina superior derecha */}
+          {/* Panel: 100vh, padding 0.75rem, sin scroll (overflow hidden) */}
           <motion.aside
             data-lenis-prevent
             variants={panelVariants}
             style={{ transformOrigin: "top right" }}
-            className="absolute right-0 top-0 flex h-full w-full flex-col justify-between overflow-y-auto rounded-l-xxlarge bg-white p-medium text-grey-1000 sm:p-large md:w-1/2 md:max-w-3xl"
+            className="absolute right-0 top-0 flex h-full w-full flex-col justify-between overflow-hidden rounded-l-xxlarge bg-white p-3 text-grey-1000 md:w-1/2 md:max-w-3xl"
           >
-            {/* Botón de cierre (entra al final, ~0.70s) */}
-            <motion.div
-              variants={itemVariants}
-              custom={0.7}
-              className="flex justify-end"
-            >
-              <button
-                type="button"
-                onClick={onClose}
-                aria-label="Cerrar menú"
-                className="flex h-11 w-11 items-center justify-center rounded-full bg-grey-100 text-grey-900 transition-colors hover:bg-grey-200"
+            {/* Grupo superior: cierre + enlaces */}
+            <div>
+              {/* Botón de cierre 4rem (entra al final, ~0.70s) */}
+              <motion.div
+                variants={itemVariants}
+                custom={0.7}
+                className="flex justify-end"
               >
-                <svg
-                  viewBox="0 0 24 24"
-                  className="h-5 w-5"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth={2}
-                  strokeLinecap="round"
-                  aria-hidden="true"
-                >
-                  <path d="M6 6l12 12M18 6L6 18" />
-                </svg>
-              </button>
-            </motion.div>
-
-            {/* Enlaces grandes (entran primero, ~0.30s) */}
-            <motion.nav
-              variants={itemVariants}
-              custom={0.3}
-              className="mt-large flex flex-col gap-small"
-            >
-              {links.map((link) => (
-                <RollLink
-                  key={link.href}
-                  href={link.href}
-                  label={link.label}
+                <button
+                  type="button"
                   onClick={onClose}
-                  dotPosition="end"
-                  className="text-h2 font-primary font-semibold text-grey-1000"
-                />
-              ))}
-            </motion.nav>
+                  aria-label="Cerrar menú"
+                  className="flex h-xlarge w-xlarge items-center justify-center rounded-full bg-grey-100 p-0 text-grey-900 transition-colors hover:bg-grey-200"
+                >
+                  <svg
+                    viewBox="0 0 24 24"
+                    className="h-6 w-6"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                    strokeLinecap="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M6 6l12 12M18 6L6 18" />
+                  </svg>
+                </button>
+              </motion.div>
 
-            {/* Tarjeta oscura "Schedule call" (entra en medio, ~0.50s) */}
-            <motion.div variants={itemVariants} custom={0.5} className="mt-large">
+              {/* Enlaces (entran primero, ~0.30s) */}
+              <motion.nav
+                variants={itemVariants}
+                custom={0.3}
+                className="mt-large flex flex-col gap-small"
+              >
+                {links.map((link) => (
+                  <RollLink
+                    key={link.href}
+                    href={link.href}
+                    label={link.label}
+                    onClick={onClose}
+                    dotPosition="end"
+                    className="text-h3 font-primary font-semibold text-grey-1000"
+                  />
+                ))}
+              </motion.nav>
+            </div>
+
+            {/* Tarjeta negra "Schedule call" (entra en medio, ~0.50s).
+                La imagen transparente (menu-link2) cubre toda la tarjeta,
+                anclada a la derecha, sobre fondo negro. */}
+            <motion.div variants={itemVariants} custom={0.5}>
               <Link
                 href="/contact"
                 onClick={onClose}
-                className="group relative block h-44 overflow-hidden rounded-large bg-grey-1000 text-grey-100"
+                className="group relative block h-44 overflow-hidden rounded-large bg-black text-grey-100"
               >
-                {/* La imagen (eslabón completo) ocupa la mitad derecha,
-                    proporcionada (object-contain), no recortada. */}
-                <span className="pointer-events-none absolute inset-y-0 right-0 w-1/2">
-                  <Image
-                    src="/menu-link.avif"
-                    alt=""
-                    fill
-                    aria-hidden="true"
-                    sizes="(max-width: 640px) 45vw, 14rem"
-                    className="object-contain object-center transition-transform duration-500 ease-out group-hover:scale-110"
-                  />
-                </span>
+                <Image
+                  src="/menu-link2.avif"
+                  alt=""
+                  fill
+                  aria-hidden="true"
+                  sizes="(max-width: 640px) 90vw, 28rem"
+                  className="object-cover object-right transition-transform duration-500 ease-out group-hover:scale-110"
+                />
                 {/* Etiqueta con la flecha de /arrow.svg */}
                 <span className="absolute left-medium top-medium z-10 inline-flex items-center gap-2 text-button-lg font-primary font-medium">
                   Schedule call

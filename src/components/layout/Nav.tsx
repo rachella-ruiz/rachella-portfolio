@@ -16,7 +16,7 @@ export default function Nav() {
           El contenido se compensa con padding-top en SiteLayout.
           Al abrir el menú se oculta para dejar libre la X del overlay. */}
       <header
-        className={`fixed inset-x-0 top-0 z-[100] w-full border-b border-grey-600 bg-black transition-opacity duration-300 ${
+        className={`fixed inset-x-0 top-0 z-[100] w-full border-b border-dotted border-grey-600 bg-black transition-opacity duration-300 ${
           open ? "pointer-events-none opacity-0" : "opacity-100"
         }`}
       >
@@ -26,9 +26,9 @@ export default function Nav() {
             <Image
               src="/logo.svg"
               alt="Rachella Ruiz"
-              width={40}
-              height={40}
-              className="h-10 w-10"
+              width={36}
+              height={36}
+              className="h-9 w-9"
               priority
             />
           </Link>
@@ -39,14 +39,15 @@ export default function Nav() {
               <RollLink
                 href="/about"
                 label="About"
-                className="text-button-lg font-primary text-text-secondary"
+                className="text-button-lg font-primary text-grey-300 transition-colors hover:text-grey-100"
               />
-              {/* Work: excepción del navbar — roll sin punto; lleva badge data-driven */}
+              {/* Work: excepción del navbar — roll sin punto; lleva badge data-driven.
+                  Mismo color que el resto (grey-300 / hover grey-100). */}
               <RollLink
                 href="/work"
                 label="Work"
                 showDot={false}
-                className="text-button-lg font-primary text-text-primary"
+                className="text-button-lg font-primary text-grey-300 transition-colors hover:text-grey-100"
                 badge={
                   <span className="absolute -right-4 -top-2 flex h-4 min-w-4 items-center justify-center rounded-full bg-primary-500 px-1 text-[0.625rem] font-medium leading-none text-white">
                     {projects.length}
@@ -56,7 +57,7 @@ export default function Nav() {
               <RollLink
                 href="/contact"
                 label="Contact"
-                className="text-button-lg font-primary text-text-secondary"
+                className="text-button-lg font-primary text-grey-300 transition-colors hover:text-grey-100"
               />
             </div>
 
@@ -66,7 +67,7 @@ export default function Nav() {
               onClick={() => setOpen(true)}
               aria-label="Abrir menú"
               aria-expanded={open}
-              className="flex h-10 w-10 flex-col items-center justify-center gap-2 text-text-primary"
+              className="flex h-10 w-10 flex-col items-center justify-center gap-2 text-grey-300 transition-colors hover:text-grey-100"
             >
               <span className="h-0.5 w-6 bg-current" />
               <span className="h-0.5 w-6 bg-current" />

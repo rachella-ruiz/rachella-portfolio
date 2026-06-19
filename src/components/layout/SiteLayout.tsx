@@ -11,8 +11,8 @@ export default function SiteLayout({
   return (
     <div className="flex min-h-screen flex-col">
       <Nav />
-      {/* pt = alto del navbar fijo (logo 2.5rem + py 1rem + borde 1px) */}
-      <main className="flex-1 pt-[calc(2.5rem+1rem+1px)]">{children}</main>
+      {/* pt = alto del navbar fijo (logo 2.25rem + py 1rem + borde 1px) */}
+      <main className="flex-1 pt-[calc(2.25rem+1rem+1px)]">{children}</main>
       <Footer />
       {/* Desenfoque progresivo decorativo, fijo al borde inferior del viewport */}
       <ProgressiveBlur />
