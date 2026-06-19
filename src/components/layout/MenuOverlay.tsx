@@ -2,7 +2,6 @@
 
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import Image from "next/image";
-import Link from "next/link";
 import type { Variants } from "motion/react";
 import RollLink from "@/components/RollLink";
 
@@ -146,7 +145,7 @@ export default function MenuOverlay({
               <motion.nav
                 variants={itemVariants}
                 custom={0.3}
-                className="flex flex-col gap-small"
+                className="flex w-full flex-col gap-small md:gap-[2.25rem]"
               >
                 {links.map((link) => (
                   <RollLink
@@ -168,8 +167,10 @@ export default function MenuOverlay({
                 custom={0.5}
                 className="w-full"
               >
-                <Link
-                  href="/contact"
+                <a
+                  href="https://calendly.com/rachellaruiz/30min"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   onClick={onClose}
                   className="group relative block h-44 overflow-hidden rounded-large bg-black text-grey-100"
                 >
@@ -181,12 +182,13 @@ export default function MenuOverlay({
                     sizes="(max-width: 640px) 90vw, 28rem"
                     className="object-contain object-right transition-transform duration-500 ease-out group-hover:scale-110"
                   />
-                  {/* Etiqueta con la flecha de /arrow.svg */}
-                  <span className="absolute left-medium top-medium z-10 inline-flex items-center gap-2 text-button-lg font-primary font-medium">
+                  {/* Etiqueta con la flecha de /arrow.svg — color consistente
+                      (grey-100, sin cambio en hover), como los links del menú. */}
+                  <span className="absolute left-medium top-medium z-10 inline-flex items-center gap-2 text-button-lg font-primary font-medium text-grey-100">
                     Schedule call
                     <ArrowIcon className="h-2.5 w-2.5" />
                   </span>
-                </Link>
+                </a>
               </motion.div>
             </div>
           </motion.aside>
