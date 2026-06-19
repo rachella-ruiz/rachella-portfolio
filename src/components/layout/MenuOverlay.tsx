@@ -1,8 +1,9 @@
 "use client";
 
-import { AnimatePresence, motion } from "motion/react";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
+import type { Variants } from "motion/react";
 
 type MenuLink = { href: string; label: string; dot?: boolean };
 
@@ -13,6 +14,25 @@ const links: MenuLink[] = [
   { href: "/contact", label: "Contact" },
 ];
 
+// Flecha ↗ (de /arrow.svg) inline con currentColor.
+function ArrowIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 9 9"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={1.5}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden="true"
+    >
+      <path d="M8 1L1 8" />
+      <path d="M2.91 1H8V6.09" />
+    </svg>
+  );
+}
+
 export default function MenuOverlay({
   open,
   onClose,
@@ -20,6 +40,52 @@ export default function MenuOverlay({
   open: boolean;
   onClose: () => void;
 }) {
+  const reduce = useReducedMotion();
+
+  // El backdrop entra con blur 0 → 16px.
+  const backdropVariants: Variants = {
+    hidden: {
+      opacity: 0,
+      backdropFilter: "blur(0px)",
+      transition: { duration: reduce ? 0 : 0.3 },
+    },
+    visible: {
+      opacity: 1,
+      backdropFilter: reduce ? "blur(0px)" : "blur(16px)",
+      transition: { duration: reduce ? 0 : 0.45, ease: "easeOut" },
+    },
+  };
+
+  // El panel se expande desde la hamburguesa (origen arriba-derecha).
+  const panelVariants: Variants = {
+    hidden: reduce
+      ? { opacity: 0 }
+      : { opacity: 0, scale: 0.2, transition: { duration: 0.3, ease: "easeIn" } },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: reduce
+        ? { duration: 0 }
+        : { duration: 0.5, ease: [0.22, 1, 0.36, 1] },
+    },
+  };
+
+  // Contenidos escalonados: el delay define en qué momento entra cada uno.
+  const itemVariants: Variants = {
+    hidden: reduce
+      ? { opacity: 0 }
+      : { opacity: 0, y: 14, transition: { duration: 0.2 } },
+    visible: (delay: number) => ({
+      opacity: 1,
+      y: 0,
+      transition: {
+        delay: reduce ? 0 : delay,
+        duration: reduce ? 0 : 0.4,
+        ease: "easeOut",
+      },
+    }),
+  };
+
   return (
     <AnimatePresence>
       {open && (
@@ -29,25 +95,28 @@ export default function MenuOverlay({
           animate="visible"
           exit="hidden"
         >
-          {/* Fondo que se desvanece; clic para cerrar */}
+          {/* Backdrop con blur; clic para cerrar */}
           <motion.button
             type="button"
             aria-label="Cerrar menú"
             onClick={onClose}
-            className="absolute inset-0 h-full w-full cursor-default bg-black/50"
-            variants={{ hidden: { opacity: 0 }, visible: { opacity: 1 } }}
-            transition={{ duration: 0.3 }}
+            variants={backdropVariants}
+            className="absolute inset-0 h-full w-full cursor-default bg-black/40"
           />
 
-          {/* Panel que entra deslizándose desde la derecha */}
+          {/* Panel que se expande desde la esquina superior derecha */}
           <motion.aside
             data-lenis-prevent
+            variants={panelVariants}
+            style={{ transformOrigin: "top right" }}
             className="absolute right-0 top-0 flex h-full w-full max-w-md flex-col justify-between overflow-y-auto rounded-l-xxlarge bg-white p-medium text-grey-1000 sm:p-large"
-            variants={{ hidden: { x: "100%" }, visible: { x: 0 } }}
-            transition={{ type: "tween", ease: [0.22, 1, 0.36, 1], duration: 0.45 }}
           >
-            {/* Botón de cierre */}
-            <div className="flex justify-end">
+            {/* Botón de cierre (entra al final, ~0.70s) */}
+            <motion.div
+              variants={itemVariants}
+              custom={0.7}
+              className="flex justify-end"
+            >
               <button
                 type="button"
                 onClick={onClose}
@@ -66,10 +135,14 @@ export default function MenuOverlay({
                   <path d="M6 6l12 12M18 6L6 18" />
                 </svg>
               </button>
-            </div>
+            </motion.div>
 
-            {/* Enlaces grandes */}
-            <nav className="mt-large flex flex-col gap-small">
+            {/* Enlaces grandes (entran primero, ~0.30s) */}
+            <motion.nav
+              variants={itemVariants}
+              custom={0.3}
+              className="mt-large flex flex-col gap-small"
+            >
               {links.map((link) => (
                 <Link
                   key={link.href}
@@ -85,26 +158,33 @@ export default function MenuOverlay({
                   </span>
                 </Link>
               ))}
-            </nav>
+            </motion.nav>
 
-            {/* Tarjeta oscura "Schedule call" con imagen que se amplía al hover */}
-            <Link
-              href="/contact"
-              onClick={onClose}
-              className="group relative mt-large flex h-44 items-start overflow-hidden rounded-large bg-grey-1000 p-medium text-grey-100"
-            >
-              <span className="text-button-lg font-primary font-medium">
-                Schedule call ↗
-              </span>
-              <Image
-                src="/menu-link.avif"
-                alt=""
-                width={220}
-                height={160}
-                aria-hidden="true"
-                className="pointer-events-none absolute bottom-0 right-2 h-auto w-44 origin-bottom-right object-contain transition-transform duration-500 ease-out group-hover:scale-110"
-              />
-            </Link>
+            {/* Tarjeta oscura "Schedule call" (entra en medio, ~0.50s) */}
+            <motion.div variants={itemVariants} custom={0.5} className="mt-large">
+              <Link
+                href="/contact"
+                onClick={onClose}
+                className="group relative block h-44 overflow-hidden rounded-large bg-grey-1000 text-grey-100"
+              >
+                {/* La imagen rellena la tarjeta (object-cover) */}
+                <Image
+                  src="/menu-link.avif"
+                  alt=""
+                  fill
+                  aria-hidden="true"
+                  sizes="(max-width: 640px) 90vw, 28rem"
+                  className="object-cover transition-transform duration-500 ease-out group-hover:scale-110"
+                />
+                {/* Scrim para legibilidad del texto a la izquierda */}
+                <span className="absolute inset-0 bg-gradient-to-r from-grey-1000/70 via-grey-1000/20 to-transparent" />
+                {/* Etiqueta con la flecha de /arrow.svg */}
+                <span className="absolute left-medium top-medium z-10 inline-flex items-center gap-2 text-button-lg font-primary font-medium">
+                  Schedule call
+                  <ArrowIcon className="h-2.5 w-2.5" />
+                </span>
+              </Link>
+            </motion.div>
           </motion.aside>
         </motion.div>
       )}
