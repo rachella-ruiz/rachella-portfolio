@@ -1,3 +1,4 @@
+import ProgressiveBlur from "@/components/ProgressiveBlur";
 import Footer from "./Footer";
 import Nav from "./Nav";
 
@@ -13,6 +14,8 @@ export default function SiteLayout({
       {/* pt = alto del navbar fijo (logo 2.5rem + py 1rem + borde 1px) */}
       <main className="flex-1 pt-[calc(2.5rem+1rem+1px)]">{children}</main>
       <Footer />
+      {/* Desenfoque progresivo decorativo, fijo al borde inferior del viewport */}
+      <ProgressiveBlur />
     </div>
   );
 }

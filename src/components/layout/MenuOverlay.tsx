@@ -150,6 +150,7 @@ export default function MenuOverlay({
                   href={link.href}
                   label={link.label}
                   onClick={onClose}
+                  dotPosition="end"
                   className="text-h2 font-primary font-semibold text-grey-1000"
                 />
               ))}
@@ -162,17 +163,18 @@ export default function MenuOverlay({
                 onClick={onClose}
                 className="group relative block h-44 overflow-hidden rounded-large bg-grey-1000 text-grey-100"
               >
-                {/* La imagen rellena la tarjeta (object-cover) */}
-                <Image
-                  src="/menu-link.avif"
-                  alt=""
-                  fill
-                  aria-hidden="true"
-                  sizes="(max-width: 640px) 90vw, 28rem"
-                  className="object-cover transition-transform duration-500 ease-out group-hover:scale-110"
-                />
-                {/* Scrim para legibilidad del texto a la izquierda */}
-                <span className="absolute inset-0 bg-gradient-to-r from-grey-1000/70 via-grey-1000/20 to-transparent" />
+                {/* La imagen (eslabón completo) ocupa la mitad derecha,
+                    proporcionada (object-contain), no recortada. */}
+                <span className="pointer-events-none absolute inset-y-0 right-0 w-1/2">
+                  <Image
+                    src="/menu-link.avif"
+                    alt=""
+                    fill
+                    aria-hidden="true"
+                    sizes="(max-width: 640px) 45vw, 14rem"
+                    className="object-contain object-center transition-transform duration-500 ease-out group-hover:scale-110"
+                  />
+                </span>
                 {/* Etiqueta con la flecha de /arrow.svg */}
                 <span className="absolute left-medium top-medium z-10 inline-flex items-center gap-2 text-button-lg font-primary font-medium">
                   Schedule call

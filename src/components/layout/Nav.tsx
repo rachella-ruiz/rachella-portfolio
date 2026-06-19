@@ -13,8 +13,13 @@ export default function Nav() {
   return (
     <>
       {/* Navbar fija arriba, fondo negro, borde inferior 1px grey-600.
-          El contenido se compensa con padding-top en SiteLayout. */}
-      <header className="fixed inset-x-0 top-0 z-[100] w-full border-b border-grey-600 bg-black">
+          El contenido se compensa con padding-top en SiteLayout.
+          Al abrir el menú se oculta para dejar libre la X del overlay. */}
+      <header
+        className={`fixed inset-x-0 top-0 z-[100] w-full border-b border-grey-600 bg-black transition-opacity duration-300 ${
+          open ? "pointer-events-none opacity-0" : "opacity-100"
+        }`}
+      >
         <nav className="flex w-full items-center justify-between px-large py-2">
           {/* Logo */}
           <Link href="/" aria-label="Inicio" className="shrink-0">

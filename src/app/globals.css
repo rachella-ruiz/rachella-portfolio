@@ -192,7 +192,7 @@
    Base — sitio en tema oscuro.
    ============================================================ */
 body {
-  background-color: var(--grey-1000);
+  background-color: var(--black);
   color: var(--text-primary);
   font-family: var(--font-primary);
   -webkit-font-smoothing: antialiased;
