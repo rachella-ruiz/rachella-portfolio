@@ -122,7 +122,7 @@ export default function MenuOverlay({
               <motion.div
                 variants={itemVariants}
                 custom={0.7}
-                className="absolute right-[1.25rem] top-[2.25rem] md:right-[2.25rem]"
+                className="absolute right-[1.25rem] top-[1.25rem] md:right-[2.25rem] md:top-[2.25rem]"
               >
                 <button
                   type="button"
@@ -178,7 +178,7 @@ export default function MenuOverlay({
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={onClose}
-                  className="group relative block h-44 overflow-hidden rounded-large bg-black text-grey-300 transition-colors hover:text-grey-100"
+                  className="group relative block h-60 overflow-hidden rounded-large bg-black text-grey-300 transition-colors hover:text-grey-100 md:h-44"
                 >
                   <Image
                     src="/menu-link2.avif"

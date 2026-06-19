@@ -18,16 +18,14 @@ const socials = [
 export default function Footer() {
   return (
     // Wrapper externo: inset 0.75rem lados (margen del panel) + 8rem arriba.
-    // z-40 lo eleva por encima del progressive blur (z-30) para que "Portfolio"
-    // no se vea diluido por el desenfoque del borde inferior.
-    <footer className="relative z-40 px-3 pt-section-medium">
+    <footer className="px-3 pt-section-medium">
       {/* Card blanca (footer_wrap). Padding lateral = gutter de página menos el inset
           del panel (0.75rem), de modo que (inset + padding) = var(--space-large),
           el MISMO gutter horizontal que usa la navbar (px-large) en cada breakpoint.
           Así el contenido del footer cae sobre los mismos ejes que el logo/hamburguesa.
           overflow-hidden recorta el wordmark (22vw) en horizontal y el sobrante vacío
           de su caja de línea (evita el espacio negro) sin cortar los glifos. */}
-      <div className="overflow-hidden rounded-t-xxlarge bg-white px-[calc(var(--space-large)-0.75rem)] pb-[1.5rem] pt-[2.25rem] text-grey-800 md:pb-[1rem] md:pt-[4rem]">
+      <div className="overflow-hidden rounded-t-xxlarge bg-white px-[calc(var(--space-large)-0.75rem)] pb-[5rem] pt-[2.25rem] text-grey-800 md:pt-[4rem]">
         {/* Móvil: columna centrada (íconos arriba, © abajo). Desktop: fila. */}
         <div className="flex flex-col-reverse items-center gap-small md:flex-row md:items-center md:justify-between md:gap-medium">
           {/* Overline mono, gris — una sola línea, centrado en móvil */}
@@ -56,12 +54,12 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Wordmark gigante al ancho del panel (font-size 22vw).
+        {/* Wordmark gigante al ancho del panel (font-size 20vw).
             Sin tracking/transform/margen: sus bordes ópticos caen sobre los gutters. */}
         <div className="mt-medium">
           <span
             className="block w-full font-primary font-semibold leading-none text-primary-500"
-            style={{ fontSize: "22vw" }}
+            style={{ fontSize: "20vw" }}
           >
             Portfolio
           </span>

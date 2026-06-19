@@ -53,7 +53,7 @@ export default function RollLink({
         {showDot && (
           <span
             aria-hidden="true"
-            className="h-[0.3em] w-[0.3em] shrink-0 scale-0 rounded-full bg-primary-500 opacity-0 transition-all duration-300 ease-out group-hover:scale-100 group-hover:opacity-100"
+            className="h-[0.45em] w-[0.45em] shrink-0 scale-0 rounded-full bg-primary-500 opacity-0 transition-all duration-300 ease-out group-hover:scale-100 group-hover:opacity-100"
           />
         )}
       </Link>
