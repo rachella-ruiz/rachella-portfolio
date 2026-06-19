@@ -3,52 +3,19 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import RollLink from "@/components/RollLink";
 import { projects } from "@/data/projects";
 import MenuOverlay from "./MenuOverlay";
-
-// Link del nav con dos efectos en hover (además del aclarado de texto):
-//  1) un punto morado que aparece encima (scale + opacity).
-//  2) un "roll" vertical: dos copias del label; al hover una sube y sale
-//     mientras la otra entra desde abajo. Todo con CSS, reversible.
-function NavLink({
-  href,
-  label,
-  badge,
-}: {
-  href: string;
-  label: string;
-  badge?: React.ReactNode;
-}) {
-  return (
-    <Link
-      href={href}
-      className="group relative inline-flex items-center text-button-lg font-primary text-text-secondary transition-colors hover:text-text-primary"
-    >
-      {/* Punto morado encima del link */}
-      <span className="pointer-events-none absolute -top-2 left-1/2 h-1.5 w-1.5 -translate-x-1/2 scale-0 rounded-full bg-primary-500 opacity-0 transition-all duration-300 ease-out group-hover:scale-100 group-hover:opacity-100" />
-
-      {/* Roll vertical: dos copias apiladas */}
-      <span className="relative block overflow-hidden">
-        <span className="block transition-transform duration-[400ms] ease-out group-hover:-translate-y-full">
-          {label}
-        </span>
-        <span className="absolute inset-0 block translate-y-full transition-transform duration-[400ms] ease-out group-hover:translate-y-0">
-          {label}
-        </span>
-      </span>
-
-      {badge}
-    </Link>
-  );
-}
 
 export default function Nav() {
   const [open, setOpen] = useState(false);
 
   return (
     <>
-      <header className="sticky top-0 z-40 bg-transparent">
-        <nav className="mx-auto flex w-full max-w-[1600px] items-center justify-between px-large py-small">
+      {/* Navbar fija arriba, fondo negro, borde inferior 1px grey-600.
+          El contenido se compensa con padding-top en SiteLayout. */}
+      <header className="fixed inset-x-0 top-0 z-[100] w-full border-b border-grey-600 bg-black">
+        <nav className="flex w-full items-center justify-between px-large py-2">
           {/* Logo */}
           <Link href="/" aria-label="Inicio" className="shrink-0">
             <Image
@@ -61,20 +28,31 @@ export default function Nav() {
             />
           </Link>
 
-          {/* Grupo derecho: links (desktop) + hamburguesa */}
-          <div className="flex items-center gap-large">
-            <div className="hidden items-center gap-large md:flex">
-              <NavLink href="/about" label="About" />
-              <NavLink
+          {/* navbar_links: fila, a la derecha, centrado, gap 2rem */}
+          <div className="flex items-center justify-end gap-medium">
+            <div className="hidden items-center gap-medium md:flex">
+              <RollLink
+                href="/about"
+                label="About"
+                className="text-button-lg font-primary text-text-secondary"
+              />
+              {/* Work: excepción del navbar — roll sin punto; lleva badge data-driven */}
+              <RollLink
                 href="/work"
                 label="Work"
+                showDot={false}
+                className="text-button-lg font-primary text-text-primary"
                 badge={
                   <span className="absolute -right-4 -top-2 flex h-4 min-w-4 items-center justify-center rounded-full bg-primary-500 px-1 text-[0.625rem] font-medium leading-none text-white">
                     {projects.length}
                   </span>
                 }
               />
-              <NavLink href="/contact" label="Contact" />
+              <RollLink
+                href="/contact"
+                label="Contact"
+                className="text-button-lg font-primary text-text-secondary"
+              />
             </div>
 
             {/* Hamburguesa de 2 líneas (siempre visible) */}

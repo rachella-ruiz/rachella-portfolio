@@ -4,13 +4,14 @@ import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
 import type { Variants } from "motion/react";
+import RollLink from "@/components/RollLink";
 
-type MenuLink = { href: string; label: string; dot?: boolean };
+type MenuLink = { href: string; label: string };
 
 const links: MenuLink[] = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About" },
-  { href: "/work", label: "Work", dot: true },
+  { href: "/work", label: "Work" },
   { href: "/contact", label: "Contact" },
 ];
 
@@ -109,7 +110,7 @@ export default function MenuOverlay({
             data-lenis-prevent
             variants={panelVariants}
             style={{ transformOrigin: "top right" }}
-            className="absolute right-0 top-0 flex h-full w-full max-w-md flex-col justify-between overflow-y-auto rounded-l-xxlarge bg-white p-medium text-grey-1000 sm:p-large"
+            className="absolute right-0 top-0 flex h-full w-full flex-col justify-between overflow-y-auto rounded-l-xxlarge bg-white p-medium text-grey-1000 sm:p-large md:w-1/2 md:max-w-3xl"
           >
             {/* Botón de cierre (entra al final, ~0.70s) */}
             <motion.div
@@ -144,19 +145,13 @@ export default function MenuOverlay({
               className="mt-large flex flex-col gap-small"
             >
               {links.map((link) => (
-                <Link
+                <RollLink
                   key={link.href}
                   href={link.href}
+                  label={link.label}
                   onClick={onClose}
-                  className="text-h2 font-primary font-semibold text-grey-1000 transition-colors hover:text-primary-500"
-                >
-                  <span className="relative inline-block">
-                    {link.label}
-                    {link.dot && (
-                      <span className="absolute -right-3 top-1 h-2 w-2 rounded-full bg-primary-500" />
-                    )}
-                  </span>
-                </Link>
+                  className="text-h2 font-primary font-semibold text-grey-1000"
+                />
               ))}
             </motion.nav>
 
