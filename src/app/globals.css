@@ -196,4 +196,5 @@ body {
   color: var(--text-primary);
   font-family: var(--font-primary);
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }

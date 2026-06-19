@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { IBM_Plex_Sans, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
+import "lenis/dist/lenis.css";
+import SmoothScroll from "@/components/SmoothScroll";
 
 // IBM Plex Sans/Mono no son fuentes "variable" en Google Fonts:
 // hay que declarar los pesos que usa el sistema de diseño.
@@ -35,7 +37,9 @@ export default function RootLayout({
       lang="es"
       className={`${ibmPlexSans.variable} ${ibmPlexMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <SmoothScroll>{children}</SmoothScroll>
+      </body>
     </html>
   );
 }
