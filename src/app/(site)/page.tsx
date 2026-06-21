@@ -1,16 +1,11 @@
-// Home. Por ahora solo el esqueleto: 3 secciones placeholder vacías,
-// en orden y con el espaciado correcto (tokens de section).
+// Home. Hero construido (Paso 2); SelectedWork y ConnectCTA siguen como
+// placeholders con el espaciado de sección.
+import Hero from "@/components/hero/Hero";
 
 export default function HomePage() {
   return (
     <>
-      <section
-        id="hero"
-        aria-label="Hero"
-        className="mx-auto w-full max-w-6xl px-medium py-section-small"
-      >
-        <div className="min-h-[40vh]" />
-      </section>
+      <Hero />
 
       <section
         id="selected-work"
