@@ -51,10 +51,15 @@ export default function RollLink({
       >
         <Roll label={label} />
         {showDot && (
-          <span
-            aria-hidden="true"
-            className="h-[0.45em] w-[0.45em] shrink-0 scale-0 rounded-full bg-primary-500 opacity-0 transition-all duration-300 ease-out group-hover:scale-100 group-hover:opacity-100"
-          />
+          // El punto va centrado en una columna del ancho del botón × (w-xlarge),
+          // anclada al borde derecho. Así el centro del punto cae sobre el centro
+          // del botón × en cada breakpoint (w-xlarge es responsive como la X).
+          <span className="flex w-xlarge shrink-0 items-center justify-center">
+            <span
+              aria-hidden="true"
+              className="h-[0.45em] w-[0.45em] scale-0 rounded-full bg-primary-500 opacity-0 transition-all duration-300 ease-out group-hover:scale-100 group-hover:opacity-100"
+            />
+          </span>
         )}
       </Link>
     );

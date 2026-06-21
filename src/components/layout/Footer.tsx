@@ -25,7 +25,7 @@ export default function Footer() {
           Así el contenido del footer cae sobre los mismos ejes que el logo/hamburguesa.
           overflow-hidden recorta el wordmark (22vw) en horizontal y el sobrante vacío
           de su caja de línea (evita el espacio negro) sin cortar los glifos. */}
-      <div className="overflow-hidden rounded-t-xxlarge bg-white px-[calc(var(--space-large)-0.75rem)] pb-[5rem] pt-[2.25rem] text-grey-800 md:pt-[4rem]">
+      <div className="overflow-hidden rounded-t-xxlarge bg-white px-[calc(var(--space-large)-0.75rem)] pb-[4rem] pt-[2.25rem] text-grey-800 md:pt-[4rem]">
         {/* Móvil: columna centrada (íconos arriba, © abajo). Desktop: fila. */}
         <div className="flex flex-col-reverse items-center gap-small md:flex-row md:items-center md:justify-between md:gap-medium">
           {/* Overline mono, gris — una sola línea, centrado en móvil */}
@@ -58,7 +58,7 @@ export default function Footer() {
             Sin tracking/transform/margen: sus bordes ópticos caen sobre los gutters. */}
         <div className="mt-medium">
           <span
-            className="block w-full font-primary font-semibold leading-none text-primary-500"
+            className="block w-full text-center font-primary font-semibold leading-none text-primary-500 md:text-left"
             style={{ fontSize: "20vw" }}
           >
             Portfolio
