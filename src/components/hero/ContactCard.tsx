@@ -2,7 +2,21 @@
 
 import { AnimatePresence, motion } from "motion/react";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useSyncExternalStore } from "react";
+
+// Lee si el dispositivo soporta hover (sin setState-en-effect).
+const HOVER_QUERY = "(hover: hover)";
+function subscribeHover(callback: () => void) {
+  const mq = window.matchMedia(HOVER_QUERY);
+  mq.addEventListener("change", callback);
+  return () => mq.removeEventListener("change", callback);
+}
+function getHoverSnapshot() {
+  return window.matchMedia(HOVER_QUERY).matches;
+}
+function getHoverServerSnapshot() {
+  return true;
+}
 
 // Flecha ↗ (de /arrow.svg) inline con currentColor.
 function ArrowIcon({ className }: { className?: string }) {
@@ -23,26 +37,35 @@ function ArrowIcon({ className }: { className?: string }) {
   );
 }
 
-// Tarjeta de contacto (glass). Colapsada: foto + nombre/rol + dot con ping.
-// En hover se expande (Framer Motion: layout + crossfade) y revela email + call.
+// Tarjeta de contacto: foto FIJA a la izquierda + panel glass a la derecha.
+// El panel mantiene su ancho y crece SOLO en altura hacia arriba (anclado abajo).
+// En hover (desktop) se expande; en touch (móvil) un tap alterna el estado.
 export default function ContactCard() {
   const [open, setOpen] = useState(false);
+  const canHover = useSyncExternalStore(
+    subscribeHover,
+    getHoverSnapshot,
+    getHoverServerSnapshot,
+  );
+
+  // Variants: el contenido "rueda" hacia arriba al abrir y hacia abajo al cerrar.
+  const open_v = { initial: { opacity: 0, y: 12 }, animate: { opacity: 1, y: 0 }, exit: { opacity: 0, y: 12 } };
+  const closed_v = { initial: { opacity: 0, y: -12 }, animate: { opacity: 1, y: 0 }, exit: { opacity: 0, y: -12 } };
 
   return (
     <motion.div
-      layout
-      onHoverStart={() => setOpen(true)}
-      onHoverEnd={() => setOpen(false)}
-      transition={{ layout: { duration: 0.35, ease: [0.22, 1, 0.36, 1] } }}
-      className="relative flex items-center gap-small rounded-large border border-white/15 bg-white/10 p-2 backdrop-blur-md"
+      onHoverStart={canHover ? () => setOpen(true) : undefined}
+      onHoverEnd={canHover ? () => setOpen(false) : undefined}
+      onTap={!canHover ? () => setOpen((o) => !o) : undefined}
+      className="relative flex w-full items-end gap-small md:w-auto"
     >
-      {/* Dot con ping (esquina superior derecha) */}
-      <span className="pointer-events-none absolute -right-1 -top-1 flex h-2.5 w-2.5">
-        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary-500 opacity-75" />
+      {/* Dot con ping ancho (fuera del panel para que el pulso no se recorte) */}
+      <span className="pointer-events-none absolute right-1 top-1 z-10 flex h-2.5 w-2.5">
+        <span className="absolute inline-flex h-full w-full animate-ping-wide rounded-full bg-primary-500" />
         <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-primary-500" />
       </span>
 
-      {/* Foto */}
+      {/* Foto fija (no se mueve al expandir) */}
       <Image
         src="/photo.jpg"
         alt="Rachella Ruiz"
@@ -51,28 +74,32 @@ export default function ContactCard() {
         className="h-20 w-20 shrink-0 rounded-medium object-cover"
       />
 
-      {/* Contenido: crossfade entre colapsado y expandido */}
-      <div className="px-xsmall">
-        <AnimatePresence mode="wait" initial={false}>
+      {/* Panel glass: ancho fijo, altura animada (layout) */}
+      <motion.div
+        layout
+        transition={{ layout: { duration: 0.35, ease: [0.22, 1, 0.36, 1] } }}
+        className="relative min-w-0 flex-1 overflow-hidden rounded-xsmall bg-white/20 p-small backdrop-blur-[20px] md:w-[13rem] md:flex-none"
+      >
+        <AnimatePresence mode="popLayout" initial={false}>
           {open ? (
             <motion.div
               key="open"
-              initial={{ opacity: 0, scale: 0.96 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.96 }}
-              transition={{ duration: 0.2, ease: "easeOut" }}
-              className="min-w-[15rem] pr-small"
+              variants={open_v}
+              initial="initial"
+              animate="animate"
+              exit="exit"
+              transition={{ duration: 0.25, ease: "easeOut" }}
             >
               <p className="text-caption font-secondary uppercase tracking-overline text-text-tertiary">
                 Email
               </p>
               <a
                 href="mailto:rachellaruiz@gmail.com"
-                className="block text-body font-medium text-text-heading"
+                className="block break-all text-body-sm font-medium text-text-heading md:whitespace-nowrap md:break-normal"
               >
                 rachellaruiz@gmail.com
               </a>
-              <div className="my-xsmall border-t border-dashed border-white/20" />
+              <div className="my-xsmall border-t border-dashed border-white/25" />
               <p className="text-caption font-secondary uppercase tracking-overline text-text-tertiary">
                 Call
               </p>
@@ -80,7 +107,7 @@ export default function ContactCard() {
                 href="https://calendly.com/rachellaruiz/30min"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-body font-medium text-text-heading"
+                className="inline-flex items-center gap-1.5 text-body-sm font-medium text-text-heading"
               >
                 Schedule a call
                 <ArrowIcon className="h-2.5 w-2.5" />
@@ -89,11 +116,11 @@ export default function ContactCard() {
           ) : (
             <motion.div
               key="closed"
-              initial={{ opacity: 0, scale: 0.96 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.96 }}
-              transition={{ duration: 0.2, ease: "easeOut" }}
-              className="pr-small"
+              variants={closed_v}
+              initial="initial"
+              animate="animate"
+              exit="exit"
+              transition={{ duration: 0.25, ease: "easeOut" }}
             >
               <p className="text-body font-semibold text-text-heading">
                 Contact Rachella
@@ -102,7 +129,7 @@ export default function ContactCard() {
             </motion.div>
           )}
         </AnimatePresence>
-      </div>
+      </motion.div>
     </motion.div>
   );
 }

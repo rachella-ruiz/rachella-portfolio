@@ -207,33 +207,43 @@ body {
 
 /* Bolas de gradiente del Hero: flotan lento, offsets distintos. */
 @keyframes hero-float-warm {
-  0% { transform: translate3d(0, 0, 0); }
-  100% { transform: translate3d(9%, 7%, 0); }
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(22%, 14%); }
 }
 @keyframes hero-float-cool {
-  0% { transform: translate3d(0, 0, 0); }
-  100% { transform: translate3d(-7%, -9%, 0); }
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(-20%, -16%); }
 }
 .hero-ball-warm {
-  animation: hero-float-warm 20s ease-in-out infinite alternate;
+  animation: hero-float-warm 18s ease-in-out infinite alternate;
 }
 .hero-ball-cool {
-  animation: hero-float-cool 25s ease-in-out infinite alternate;
+  animation: hero-float-cool 23s ease-in-out infinite alternate;
 }
 
-/* Marquee horizontal en bucle: dos copias, se desplaza -50%. */
+/* Marquee horizontal en bucle: dos copias, se desplaza -50%. Lento. */
 @keyframes marquee {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
 }
 .marquee-track {
-  animation: marquee 30s linear infinite;
+  animation: marquee 60s linear infinite;
+}
+
+/* Ping del dot de la contact card: radio de expansión amplio. */
+@keyframes ping-wide {
+  0% { transform: scale(1); opacity: 0.55; }
+  75%, 100% { transform: scale(3.5); opacity: 0; }
+}
+.animate-ping-wide {
+  animation: ping-wide 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {
   .hero-ball-warm,
   .hero-ball-cool,
-  .marquee-track {
+  .marquee-track,
+  .animate-ping-wide {
     animation: none;
   }
 }

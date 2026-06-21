@@ -11,10 +11,15 @@ export default function Marquee({
   className?: string;
 }) {
   const group = Array.from({ length: repeat });
+  // Máscara de fade en los bordes (transparente en los extremos, opaco al
+  // centro). Va en el contenedor con overflow hidden, no en la pista.
+  const fadeMask =
+    "linear-gradient(270deg, rgba(0,0,0,0), black 50%, rgba(0,0,0,0))";
   return (
     <div
       aria-hidden="true"
       className={`flex overflow-hidden ${className ?? ""}`}
+      style={{ WebkitMaskImage: fadeMask, maskImage: fadeMask }}
     >
       {/* Pista: dos grupos idénticos para el loop sin costura */}
       <div className="marquee-track flex shrink-0">
