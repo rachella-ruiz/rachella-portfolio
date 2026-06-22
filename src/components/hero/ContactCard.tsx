@@ -37,6 +37,12 @@ function ArrowIcon({ className }: { className?: string }) {
   );
 }
 
+// Enlaces de la card: mismo tratamiento que los nav-links (button-lg en desktop,
+// grey-300 por defecto y grey-100 al hover). En móvil bajan a button-sm para
+// que el email quepa en una línea.
+const LINK_CLASS =
+  "text-button-sm font-primary text-grey-300 transition-colors hover:text-grey-100 md:text-button-lg";
+
 // Tarjeta de contacto: foto FIJA a la izquierda + panel glass a la derecha.
 // El panel mantiene su ancho y crece SOLO en altura hacia arriba (anclado abajo).
 // En hover (desktop) se expande; en touch (móvil) un tap alterna el estado.
@@ -57,28 +63,31 @@ export default function ContactCard() {
       onHoverStart={canHover ? () => setOpen(true) : undefined}
       onHoverEnd={canHover ? () => setOpen(false) : undefined}
       onTap={!canHover ? () => setOpen((o) => !o) : undefined}
-      className="relative flex w-full items-end gap-small md:w-auto"
+      className="relative flex w-full items-end justify-between gap-2 md:w-auto md:gap-3"
     >
-      {/* Dot con ping ancho (fuera del panel para que el pulso no se recorte) */}
-      <span className="pointer-events-none absolute right-1 top-1 z-10 flex h-2.5 w-2.5">
+      {/* Dot + ripple. Anclado a la esquina superior-derecha de la card (su lado
+          derecho es estable); sube de forma continua con el panel al desplegar,
+          sin saltar. Va fuera del panel para que el pulso no se recorte. */}
+      <span className="pointer-events-none absolute right-[1rem] top-[-0.15rem] z-20 flex h-2.5 w-2.5">
         <span className="absolute inline-flex h-full w-full animate-ping-wide rounded-full bg-primary-500" />
         <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-primary-500" />
       </span>
 
-      {/* Foto fija (no se mueve al expandir) */}
+      {/* Foto fija. radius = el del panel; misma altura que el panel colapsado. */}
       <Image
         src="/photo.jpg"
         alt="Rachella Ruiz"
         width={80}
         height={80}
-        className="h-20 w-20 shrink-0 rounded-medium object-cover"
+        className="h-14 w-14 shrink-0 rounded-xsmall object-cover md:h-20 md:w-20"
       />
 
-      {/* Panel glass: ancho fijo, altura animada (layout) */}
+      {/* Panel glass: ancho fijo, altura animada (layout). En desktop min-h iguala
+          la altura de la foto cuando está colapsado. */}
       <motion.div
         layout
         transition={{ layout: { duration: 0.35, ease: [0.22, 1, 0.36, 1] } }}
-        className="relative min-w-0 flex-1 overflow-hidden rounded-xsmall bg-white/20 p-small backdrop-blur-[20px] md:w-[13rem] md:flex-none"
+        className="relative min-w-0 flex-1 overflow-hidden rounded-xsmall bg-[var(--opacity-20)] p-small backdrop-blur-[20px] md:w-[14rem] md:flex-none md:min-h-[5rem]"
       >
         <AnimatePresence mode="popLayout" initial={false}>
           {open ? (
@@ -95,7 +104,7 @@ export default function ContactCard() {
               </p>
               <a
                 href="mailto:rachellaruiz@gmail.com"
-                className="block break-all text-body-sm font-medium text-text-heading md:whitespace-nowrap md:break-normal"
+                className={`block whitespace-nowrap ${LINK_CLASS}`}
               >
                 rachellaruiz@gmail.com
               </a>
@@ -107,7 +116,7 @@ export default function ContactCard() {
                 href="https://calendly.com/rachellaruiz/30min"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-body-sm font-medium text-text-heading"
+                className={`inline-flex items-center gap-1.5 ${LINK_CLASS}`}
               >
                 Schedule a call
                 <ArrowIcon className="h-2.5 w-2.5" />

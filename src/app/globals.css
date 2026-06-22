@@ -199,6 +199,13 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Altura del navbar fijo (logo 2.25rem + py 1rem + borde 1px).
+   Fuente única: la usan el spacer del contenido (SiteLayout) y el
+   margin-top del Hero, para que siempre coincidan. */
+:root {
+  --nav-height: calc(2.25rem + 1rem + 1px);
+}
+
 /* ============================================================
    Animaciones decorativas (Hero) — keyframes + clases.
    Se definen como clases (no inline) para poder desactivarlas
@@ -237,13 +244,14 @@ body {
   animation: marquee 60s linear infinite;
 }
 
-/* Ping del dot de la contact card: radio de expansión amplio. */
+/* Ripple del dot: parte de scale 0 con opacidad alta, crece y se desvanece
+   en ~1s con ease-out (Out Cubic), en loop continuo. */
 @keyframes ping-wide {
-  0% { transform: scale(1); opacity: 0.55; }
-  75%, 100% { transform: scale(3.5); opacity: 0; }
+  0% { transform: scale(0); opacity: 0.6; }
+  100% { transform: scale(3); opacity: 0; }
 }
 .animate-ping-wide {
-  animation: ping-wide 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;
+  animation: ping-wide 1s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {

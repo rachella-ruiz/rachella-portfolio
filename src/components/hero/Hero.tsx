@@ -10,10 +10,11 @@ export default function Hero() {
   return (
     <section
       aria-label="Hero"
-      className="mt-xhuge px-large pb-section-small"
+      className="mt-[var(--nav-height)] px-large pb-section-small"
     >
-      {/* background-container */}
-      <div className="relative overflow-hidden rounded-medium bg-grey-1000 p-large shadow-[0_0_6px_0_rgba(255,255,255,0.3)]">
+      {/* background-container. Padding móvil 3rem/1.5rem; 3rem (p-large) en desktop.
+          Halo exterior: 0 0 6px 0 rgba(255,255,255,0.3) (var(--opacity-30)). */}
+      <div className="relative overflow-hidden rounded-medium bg-grey-1000 px-[1.5rem] py-[3rem] shadow-[0_0_6px_0_var(--opacity-30)] md:p-large">
         {/* Capa oscura sobre el grey-1000 */}
         <div aria-hidden="true" className="absolute inset-0 bg-black/50" />
 
@@ -49,7 +50,7 @@ export default function Hero() {
               <span>USA based | Eastern Time</span>
             </div>
 
-            <h1 className="mt-xxlarge max-w-xl text-h4 font-primary font-semibold text-text-heading">
+            <h1 className="mt-[2rem] max-w-xl text-h4 font-primary font-semibold text-text-heading md:mt-xxlarge">
               Hey there!
               <br />
               I&apos;m Rachella, a Product Designer focused on helping people
