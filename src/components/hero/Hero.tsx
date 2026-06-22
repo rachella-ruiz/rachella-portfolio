@@ -1,20 +1,44 @@
+"use client";
+
+import { motion, useReducedMotion } from "motion/react";
+import type { Variants } from "motion/react";
 import Marquee from "@/components/Marquee";
 import ContactCard from "./ContactCard";
 import Globe from "./Globe";
 
-// Sección Hero: card (background-container) sobre grey-1000 con una capa
-// rgba(0,0,0,0.5) y un halo de borde. Las bolas de gradiente van dentro de un
-// wrapper a 80% de opacidad (clave para el color) con blend overlay; flotan
-// con CSS keyframes detrás del contenido.
+// Sección Hero. La card (background-container) va sobre grey-1000 con una capa
+// rgba(0,0,0,0.5); las bolas de gradiente (blend overlay) flotan detrás con CSS
+// keyframes y el canto lleva un borde glass (.hero-card::before).
+// El contenido entra al cargar con la MISMA animación que el menú hamburguesa
+// (itemVariants: fade + y14 → 0, 0.4s easeOut), escalonado por `custom` (delay):
+// eyebrow → h1 → marquee → ContactCard.
 export default function Hero() {
+  const reduce = useReducedMotion();
+
+  // Misma animación que MenuOverlay (itemVariants). El delay (custom) escalona.
+  const itemVariants: Variants = {
+    hidden: reduce
+      ? { opacity: 0 }
+      : { opacity: 0, y: 14, transition: { duration: 0.2 } },
+    visible: (delay: number) => ({
+      opacity: 1,
+      y: 0,
+      transition: {
+        delay: reduce ? 0 : delay,
+        duration: reduce ? 0 : 0.4,
+        ease: "easeOut",
+      },
+    }),
+  };
+
   return (
     <section
       aria-label="Hero"
       className="mt-[var(--nav-height)] px-large pb-section-small"
     >
       {/* background-container. Padding móvil 3rem/1.5rem; 3rem (p-large) en desktop.
-          Halo exterior: 0 0 6px 0 rgba(255,255,255,0.3) (var(--opacity-30)). */}
-      <div className="relative overflow-hidden rounded-medium bg-grey-1000 px-[1.5rem] py-[3rem] shadow-[0_0_6px_0_var(--opacity-30)] md:p-large">
+          .hero-card pinta el borde glass (1px gradiente) en el canto. */}
+      <div className="hero-card relative overflow-hidden rounded-medium bg-grey-1000 px-[1.5rem] py-[3rem] md:p-large">
         {/* Capa oscura sobre el grey-1000 */}
         <div aria-hidden="true" className="absolute inset-0 bg-black/50" />
 
@@ -40,34 +64,52 @@ export default function Hero() {
           />
         </div>
 
-        {/* Contenido: dos columnas 50/50 */}
-        <div className="relative z-10 flex flex-col gap-xlarge md:flex-row">
+        {/* Contenido: dos columnas 50/50. Parent del stagger de entrada. */}
+        <motion.div
+          initial="hidden"
+          animate="visible"
+          className="relative z-10 flex flex-col gap-xlarge md:flex-row"
+        >
           {/* Columna izquierda: globe (arriba), titular (medio), marquee (abajo).
               Gaps específicos: globe→h4 = 5rem (xxlarge); h4→marquee = 2rem (medium). */}
           <div className="flex w-full min-w-0 flex-col md:flex-1">
-            <div className="flex items-center gap-xsmall text-body-sm font-primary text-text-secondary">
+            <motion.div
+              variants={itemVariants}
+              custom={0.1}
+              className="flex items-center gap-xsmall text-body-sm font-primary text-text-secondary"
+            >
               <Globe className="inline-block h-5 w-5" />
               <span>USA based | Eastern Time</span>
-            </div>
+            </motion.div>
 
-            <h1 className="mt-[2rem] max-w-xl text-h4 font-primary font-semibold text-text-heading md:mt-xxlarge">
+            <motion.h1
+              variants={itemVariants}
+              custom={0.25}
+              className="mt-[2rem] max-w-xl text-h4 font-primary font-semibold text-text-heading md:mt-xxlarge"
+            >
               Hey there!
               <br />
               I&apos;m Rachella, a Product Designer focused on helping people
               navigate complex systems under uncertainty
-            </h1>
+            </motion.h1>
 
-            <Marquee
-              text="AVAILABLE FOR REMOTE ROLES"
-              className="mt-medium text-white/25"
-            />
+            <motion.div variants={itemVariants} custom={0.4} className="mt-medium">
+              <Marquee
+                text="AVAILABLE FOR REMOTE ROLES"
+                className="text-white/25"
+              />
+            </motion.div>
           </div>
 
           {/* Columna derecha: contact card anclada abajo a la derecha */}
-          <div className="flex w-full min-w-0 md:flex-1 md:items-end md:justify-end">
+          <motion.div
+            variants={itemVariants}
+            custom={0.55}
+            className="flex w-full min-w-0 md:flex-1 md:items-end md:justify-end"
+          >
             <ContactCard />
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </div>
     </section>
   );

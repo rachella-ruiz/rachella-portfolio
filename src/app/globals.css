@@ -235,6 +235,26 @@ body {
   animation: ball-cool 40s linear infinite;
 }
 
+/* Borde glass de la card del Hero: hairline de 1px con gradiente (más claro
+   arriba, se apaga hacia abajo), como luz en el canto superior de un cristal.
+   Se pinta solo el anillo de 1px gracias a la máscara (content-box xor box).
+   z alto para quedar por encima de las bolas y de la capa oscura. */
+.hero-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 30;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(180deg, var(--opacity-30), var(--opacity-10));
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
 /* Marquee horizontal en bucle: dos copias, se desplaza -50%. Lento. */
 @keyframes marquee {
   from { transform: translateX(0); }
