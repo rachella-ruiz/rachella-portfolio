@@ -16,7 +16,7 @@ const links: MenuLink[] = [
   { href: "/contact", label: "Contact" },
 ];
 
-// Flecha ↗ (de /arrow.svg) inline con currentColor.
+// Flecha ↗ (de /icons/arrow.svg) inline con currentColor.
 function ArrowIcon({ className }: { className?: string }) {
   return (
     <svg
@@ -185,14 +185,14 @@ export default function MenuOverlay({
                   className="group relative block h-60 overflow-hidden rounded-large bg-black text-grey-300 transition-colors hover:text-grey-100 md:h-44"
                 >
                   <Image
-                    src="/menu-link2.avif"
+                    src="/icons/menu-link2.avif"
                     alt=""
                     fill
                     aria-hidden="true"
                     sizes="(max-width: 640px) 90vw, 28rem"
                     className="object-contain object-right transition-transform duration-500 ease-out group-hover:scale-110"
                   />
-                  {/* Etiqueta con la flecha de /arrow.svg — hereda el color del
+                  {/* Etiqueta con la flecha de /icons/arrow.svg — hereda el color del
                       enlace (grey-300 normal, grey-100 en hover). */}
                   <span className="absolute left-medium top-medium z-10 inline-flex items-center gap-2 text-button-lg font-primary font-medium">
                     Schedule call

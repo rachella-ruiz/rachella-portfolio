@@ -1,4 +1,4 @@
-// Ícono inline (globo, de /globe.svg) con currentColor.
+// Ícono inline (globo, de /globe/globe.svg) con currentColor.
 export default function GlobeIcon({ className }: { className?: string }) {
   return (
     <svg

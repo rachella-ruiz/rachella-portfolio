@@ -5,13 +5,17 @@ const socials = [
   {
     label: "LinkedIn",
     href: "https://www.linkedin.com/in/rachella-ruiz/",
-    src: "/linkedin.svg",
+    src: "/icons/linkedin.svg",
   },
-  { label: "Email", href: "mailto:rachellaruiz@gmail.com", src: "/email.svg" },
+  {
+    label: "Email",
+    href: "mailto:rachellaruiz@gmail.com",
+    src: "/icons/email.svg",
+  },
   {
     label: "Teléfono",
     href: "https://calendly.com/rachellaruiz/30min",
-    src: "/call.svg",
+    src: "/icons/call.svg",
   },
 ];
 

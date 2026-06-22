@@ -12,7 +12,7 @@ import { trailImages } from "@/data/trail-images";
 // adelante este y el de la ContactCard del Hero apuntarán al mismo sitio.
 const SCHEDULE_CALL_HREF = "#";
 
-// Flecha ↗ (de /arrow.svg) inline con currentColor.
+// Flecha ↗ (de /icons/arrow.svg) inline con currentColor.
 function ArrowIcon({ className }: { className?: string }) {
   return (
     <svg

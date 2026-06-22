@@ -10,7 +10,7 @@ export type Project = {
 };
 
 export const projects: Project[] = [
-  { slug: "wanikiki", name: "Wanikiki", image: "/wanikiki.png" },
-  { slug: "como-va-mi-asilo", name: "Cómo va mi asilo", image: "/cvma.png" },
-  { slug: "fynce", name: "Fynce", image: "/fynce.png" },
+  { slug: "wanikiki", name: "Wanikiki", image: "/work/wanikiki.png" },
+  { slug: "como-va-mi-asilo", name: "Cómo va mi asilo", image: "/work/cvma.png" },
+  { slug: "fynce", name: "Fynce", image: "/work/fynce.png" },
 ];

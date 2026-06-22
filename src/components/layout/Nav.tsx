@@ -39,7 +39,7 @@ export default function Nav() {
           {/* Logo */}
           <Link href="/" aria-label="Inicio" className="shrink-0">
             <Image
-              src="/logo.svg"
+              src="/brand/logo.svg"
               alt="Rachella Ruiz"
               width={36}
               height={36}

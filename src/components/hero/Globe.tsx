@@ -4,7 +4,7 @@ import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
 
 // lottie-react es solo cliente: lo cargamos con ssr:false (permitido en
-// Client Components). La animación se carga desde /public/globe.json.
+// Client Components). La animación se carga desde /public/globe/globe.json.
 const Lottie = dynamic(() => import("lottie-react"), { ssr: false });
 
 export default function Globe({ className }: { className?: string }) {
@@ -12,7 +12,7 @@ export default function Globe({ className }: { className?: string }) {
 
   useEffect(() => {
     let active = true;
-    fetch("/globe.json")
+    fetch("/globe/globe.json")
       .then((r) => r.json())
       .then((d) => {
         if (active) setData(d);
