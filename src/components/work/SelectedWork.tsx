@@ -46,7 +46,7 @@ export default function SelectedWork() {
           (no crea scroll container ni toca overflow-y → la entrada vertical desde
           100vh sigue visible; y al ser hermana del sticky, no lo rompe). */}
       <div
-        className="flex flex-col gap-[var(--space-xxl)] overflow-x-clip"
+        className="flex flex-col gap-medium overflow-x-clip md:gap-[var(--space-xxl)]"
         style={{ perspective: "1000px" }}
       >
         {projects.map((project) => (

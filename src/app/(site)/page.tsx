@@ -10,7 +10,7 @@ export default function HomePage() {
       <section
         id="selected-work"
         aria-label="Selected Work"
-        className="mt-[var(--space-xhuge)] px-large py-section-small"
+        className="mt-[var(--space-xhuge)] px-large pb-section-small"
       >
         <SelectedWork />
       </section>

@@ -21,7 +21,7 @@ export default function Hero() {
   return (
     <section
       aria-label="Hero"
-      className="mt-[var(--nav-height)] px-large pb-section-small"
+      className="mt-[var(--nav-height)] px-large"
     >
       {/* background-container. Padding móvil 3rem/1.5rem; 3rem (p-large) en desktop.
           .hero-card pinta el borde glass (1px gradiente) en el canto. */}
