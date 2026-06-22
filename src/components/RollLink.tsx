@@ -19,6 +19,7 @@ export default function RollLink({
   dotPosition = "top",
   badge,
   className,
+  active = false,
 }: {
   href: string;
   label: string;
@@ -27,13 +28,19 @@ export default function RollLink({
   dotPosition?: "top" | "end";
   badge?: React.ReactNode;
   className?: string;
+  // Página actual: solo añade aria-current="page". El color del estado activo
+  // se controla por `className` (no se toca la animación de hover).
+  active?: boolean;
 }) {
+  const ariaCurrent = active ? "page" : undefined;
+
   if (dotPosition === "end") {
     // Texto a la izquierda, punto al final del contenedor (space-between).
     return (
       <Link
         href={href}
         onClick={onClick}
+        aria-current={ariaCurrent}
         className={`group flex w-full items-center justify-between ${className ?? ""}`}
       >
         <Roll label={label} />
@@ -57,6 +64,7 @@ export default function RollLink({
     <Link
       href={href}
       onClick={onClick}
+      aria-current={ariaCurrent}
       className={`group relative inline-flex items-center ${className ?? ""}`}
     >
       {showDot && (

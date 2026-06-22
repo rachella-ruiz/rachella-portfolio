@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 import RollLink from "@/components/RollLink";
 import { projects } from "@/data/projects";
@@ -9,6 +10,20 @@ import MenuOverlay from "./MenuOverlay";
 
 export default function Nav() {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
+
+  // Página actual: Work activo en /work y /work/* (nested); el resto, exacto.
+  const isActive = (href: string, nested = false) =>
+    nested ? pathname === href || pathname.startsWith(`${href}/`) : pathname === href;
+
+  // Activo = color de hover persistente (grey-100); inactivo = grey-300 con
+  // hover a grey-100. Solo color: la animación de roll sigue solo en hover.
+  const navLinkClass = (href: string, nested = false) =>
+    `text-button-lg font-primary transition-colors ${
+      isActive(href, nested)
+        ? "text-grey-100"
+        : "text-grey-300 hover:text-grey-100"
+    }`;
 
   return (
     <>
@@ -39,15 +54,17 @@ export default function Nav() {
               <RollLink
                 href="/about"
                 label="About"
-                className="text-button-lg font-primary text-grey-300 transition-colors hover:text-grey-100"
+                active={isActive("/about")}
+                className={navLinkClass("/about")}
               />
               {/* Work: excepción del navbar — roll sin punto; lleva badge data-driven.
-                  Mismo color que el resto (grey-300 / hover grey-100). */}
+                  Activo en /work y /work/* (nested). */}
               <RollLink
                 href="/work"
                 label="Work"
                 showDot={false}
-                className="text-button-lg font-primary text-grey-300 transition-colors hover:text-grey-100"
+                active={isActive("/work", true)}
+                className={navLinkClass("/work", true)}
                 badge={
                   <span className="absolute -right-4 -top-2 flex h-4 min-w-4 items-center justify-center rounded-full bg-primary-500 px-1 text-[0.625rem] font-medium leading-none text-white">
                     {projects.length}
@@ -57,7 +74,8 @@ export default function Nav() {
               <RollLink
                 href="/contact"
                 label="Contact"
-                className="text-button-lg font-primary text-grey-300 transition-colors hover:text-grey-100"
+                active={isActive("/contact")}
+                className={navLinkClass("/contact")}
               />
             </div>
 

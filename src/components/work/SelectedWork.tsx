@@ -7,7 +7,13 @@ import WorkCard from "./WorkCard";
 // ningún ancestro tiene overflow hidden/clip, así el sticky no se rompe.
 // Derecha: cards apiladas dentro de un contenedor con perspectiva 3D (para el
 // rotateX del scroll). En móvil, una sola columna y la izquierda deja de pegarse.
-export default function SelectedWork() {
+// Reutilizable: showViewAll alterna SOLO el botón "View all" (la /work futura
+// lo renderiza con showViewAll={false}).
+export default function SelectedWork({
+  showViewAll = true,
+}: {
+  showViewAll?: boolean;
+}) {
   return (
     <div className="grid grid-cols-1 gap-xlarge md:grid-cols-[minmax(min-content,1fr)_minmax(0,3fr)]">
       {/* Columna izquierda sticky (~25%). min-content evita que el titular se
@@ -37,7 +43,11 @@ export default function SelectedWork() {
             systems.
           </p>
 
-          <PrimaryButton href="/work" label="View all" className="self-start" />
+          {/* El gap-medium del flex solo aplica entre hijos presentes; al ocultar
+              el botón no queda hueco residual. */}
+          {showViewAll && (
+            <PrimaryButton href="/work" label="View all" className="self-start" />
+          )}
         </Reveal>
       </div>
 

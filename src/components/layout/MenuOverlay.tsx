@@ -2,16 +2,17 @@
 
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import type { Variants } from "motion/react";
 import RollLink from "@/components/RollLink";
 import { entranceVariants } from "@/lib/motion";
 
-type MenuLink = { href: string; label: string };
+type MenuLink = { href: string; label: string; nested?: boolean };
 
 const links: MenuLink[] = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About" },
-  { href: "/work", label: "Work" },
+  { href: "/work", label: "Work", nested: true },
   { href: "/contact", label: "Contact" },
 ];
 
@@ -42,6 +43,11 @@ export default function MenuOverlay({
   onClose: () => void;
 }) {
   const reduce = useReducedMotion();
+  const pathname = usePathname();
+
+  // Página actual: Work activo en /work y /work/* (nested); el resto, exacto.
+  const isActive = (href: string, nested?: boolean) =>
+    nested ? pathname === href || pathname.startsWith(`${href}/`) : pathname === href;
 
   // El backdrop entra con blur 0 → 16px.
   const backdropVariants: Variants = {
@@ -142,16 +148,25 @@ export default function MenuOverlay({
                 custom={0.3}
                 className="flex w-full flex-col gap-small pt-[3rem]"
               >
-                {links.map((link) => (
-                  <RollLink
-                    key={link.href}
-                    href={link.href}
-                    label={link.label}
-                    onClick={onClose}
-                    dotPosition="end"
-                    className="text-h3 font-primary font-semibold text-grey-1000"
-                  />
-                ))}
+                {links.map((link) => {
+                  const active = isActive(link.href, link.nested);
+                  // Card blanca: el hover no cambia color (solo roll). El activo
+                  // se ve "más claro" con un gris medio (grey-500). Solo color;
+                  // la animación de roll sigue solo en hover.
+                  return (
+                    <RollLink
+                      key={link.href}
+                      href={link.href}
+                      label={link.label}
+                      onClick={onClose}
+                      dotPosition="end"
+                      active={active}
+                      className={`text-h3 font-primary font-semibold ${
+                        active ? "text-grey-500" : "text-grey-1000"
+                      }`}
+                    />
+                  );
+                })}
               </motion.nav>
 
               {/* Tarjeta negra "Schedule call" (abajo; entra ~0.50s).
