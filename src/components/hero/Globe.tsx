@@ -24,7 +24,9 @@ export default function Globe({ className }: { className?: string }) {
   }, []);
 
   return (
-    <span className={className} aria-hidden="true">
+    // invert(1): el globe.json es negro; el filtro lo pinta blanco sin tocar el
+    // JSON (replica el invert-filter de Webflow; aguanta re-exports del Lottie).
+    <span className={`${className ?? ""} invert`} aria-hidden="true">
       {data && (
         <Lottie animationData={data} loop autoplay className="h-full w-full" />
       )}
