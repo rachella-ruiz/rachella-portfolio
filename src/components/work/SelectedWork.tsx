@@ -1,3 +1,4 @@
+import Reveal from "@/components/motion/Reveal";
 import PrimaryButton from "@/components/PrimaryButton";
 import { projects } from "@/data/projects";
 import WorkCard from "./WorkCard";
@@ -11,27 +12,30 @@ export default function SelectedWork() {
     <div className="grid grid-cols-1 gap-xlarge md:grid-cols-[minmax(min-content,1fr)_minmax(0,3fr)] md:gap-[var(--space-custom-3)]">
       {/* Columna izquierda sticky (~25%). min-content evita que el titular se
           recorte; margin-top space-xxl (6rem desktop). */}
-      <div className="flex flex-col gap-medium md:mt-[var(--space-xxl)] md:sticky md:top-[var(--nav-height)] md:self-start">
-        {/* Tamaño fluido: el titular se encoge con el ancho (columna ~25%) para
-            que siempre quepa en dos líneas, sin recorte ni nowrap. El clamp
-            sobrescribe solo el font-size; line-height/tracking/weight siguen de
-            text-h2. Máximo = var(--size-h2) (responsive). */}
-        <h2
-          className="text-h2 font-primary font-semibold text-text-heading"
-          style={{ fontSize: "clamp(2.5rem, 5vw, var(--size-h2))" }}
-        >
-          Selected
-          <br />
-          {/* El punto final es texto del h2 con color primary-500 (Text Span). */}
-          Work<span className="text-primary-500">.</span>
-        </h2>
+      <div className="md:mt-[var(--space-xxl)] md:sticky md:top-[var(--nav-height)] md:self-start">
+        {/* El bloque de texto entra con la animación compartida al hacer scroll. */}
+        <Reveal className="flex flex-col gap-medium">
+          {/* Tamaño fluido: el titular se encoge con el ancho (columna ~25%) para
+              que siempre quepa en dos líneas, sin recorte ni nowrap. El clamp
+              sobrescribe solo el font-size; line-height/tracking/weight siguen de
+              text-h2. Máximo = var(--size-h2) (responsive). */}
+          <h2
+            className="text-h2 font-primary font-semibold text-text-heading"
+            style={{ fontSize: "clamp(2.5rem, 5vw, var(--size-h2))" }}
+          >
+            Selected
+            <br />
+            {/* El punto final es texto del h2 con color primary-500 (Text Span). */}
+            Work<span className="text-primary-500">.</span>
+          </h2>
 
-        <p className="max-w-sm text-body-sm text-text-tertiary">
-          A selection of products across fintech, legal tech, and operational
-          systems.
-        </p>
+          <p className="max-w-sm text-body-sm text-text-tertiary">
+            A selection of products across fintech, legal tech, and operational
+            systems.
+          </p>
 
-        <PrimaryButton href="/work" label="View all" className="self-start" />
+          <PrimaryButton href="/work" label="View all" className="self-start" />
+        </Reveal>
       </div>
 
       {/* Columna derecha: cards con perspectiva para el rotateX 3D.

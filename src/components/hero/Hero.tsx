@@ -1,8 +1,8 @@
 "use client";
 
 import { motion, useReducedMotion } from "motion/react";
-import type { Variants } from "motion/react";
 import Marquee from "@/components/Marquee";
+import { entranceVariants } from "@/lib/motion";
 import ContactCard from "./ContactCard";
 import Globe from "./Globe";
 
@@ -15,21 +15,8 @@ import Globe from "./Globe";
 export default function Hero() {
   const reduce = useReducedMotion();
 
-  // Misma animación que MenuOverlay (itemVariants). El delay (custom) escalona.
-  const itemVariants: Variants = {
-    hidden: reduce
-      ? { opacity: 0 }
-      : { opacity: 0, y: 14, transition: { duration: 0.2 } },
-    visible: (delay: number) => ({
-      opacity: 1,
-      y: 0,
-      transition: {
-        delay: reduce ? 0 : delay,
-        duration: reduce ? 0 : 0.4,
-        ease: "easeOut",
-      },
-    }),
-  };
+  // Animación de entrada compartida del sitio. El delay (custom) escalona.
+  const itemVariants = entranceVariants(reduce);
 
   return (
     <section

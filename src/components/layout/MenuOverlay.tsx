@@ -4,6 +4,7 @@ import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import Image from "next/image";
 import type { Variants } from "motion/react";
 import RollLink from "@/components/RollLink";
+import { entranceVariants } from "@/lib/motion";
 
 type MenuLink = { href: string; label: string };
 
@@ -70,21 +71,9 @@ export default function MenuOverlay({
     },
   };
 
-  // Contenidos escalonados: el delay define en qué momento entra cada uno.
-  const itemVariants: Variants = {
-    hidden: reduce
-      ? { opacity: 0 }
-      : { opacity: 0, y: 14, transition: { duration: 0.2 } },
-    visible: (delay: number) => ({
-      opacity: 1,
-      y: 0,
-      transition: {
-        delay: reduce ? 0 : delay,
-        duration: reduce ? 0 : 0.4,
-        ease: "easeOut",
-      },
-    }),
-  };
+  // Contenidos escalonados con la animación de entrada compartida del sitio;
+  // el delay (custom) define en qué momento entra cada uno.
+  const itemVariants = entranceVariants(reduce);
 
   return (
     <AnimatePresence>
