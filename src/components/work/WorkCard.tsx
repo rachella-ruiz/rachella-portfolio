@@ -55,7 +55,7 @@ export default function WorkCard({ project }: { project: Project }) {
         href={`/work/${project.slug}`}
         onMouseMove={handleMove}
         aria-label={project.name}
-        className="group relative block aspect-[4/5] cursor-pointer overflow-hidden rounded-large bg-grey-800"
+        className="group relative block aspect-[16/9] cursor-pointer overflow-hidden rounded-large bg-grey-800"
       >
         {/* Imagen (cover). Fallback grey-800 con la misma aspect-ratio. */}
         {!imgError ? (

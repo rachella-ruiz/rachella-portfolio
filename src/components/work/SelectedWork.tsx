@@ -8,19 +8,15 @@ import WorkCard from "./WorkCard";
 // rotateX del scroll). En móvil, una sola columna y la izquierda deja de pegarse.
 export default function SelectedWork() {
   return (
-    <div className="grid grid-cols-1 gap-xlarge md:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] md:gap-[var(--space-custom-3)]">
-      {/* Columna izquierda sticky */}
-      <div className="flex flex-col gap-medium md:sticky md:top-[var(--nav-height)] md:self-start">
+    <div className="grid grid-cols-1 gap-xlarge md:grid-cols-[minmax(min-content,1fr)_minmax(0,3fr)] md:gap-[var(--space-custom-3)]">
+      {/* Columna izquierda sticky (~25%). min-content evita que el titular se
+          recorte; margin-top space-xxl (6rem desktop). */}
+      <div className="flex flex-col gap-medium md:mt-[var(--space-xxl)] md:sticky md:top-[var(--nav-height)] md:self-start">
         <h2 className="text-h2 font-primary font-semibold text-text-heading">
           Selected
           <br />
-          <span className="inline-flex items-center">
-            Work
-            <span
-              aria-hidden="true"
-              className="ml-[0.18em] inline-block h-[0.42em] w-[0.42em] rounded-full bg-primary-500"
-            />
-          </span>
+          {/* El punto final es texto del h2 con color primary-500 (Text Span). */}
+          Work<span className="text-primary-500">.</span>
         </h2>
 
         <p className="max-w-sm text-body-sm text-text-tertiary">
