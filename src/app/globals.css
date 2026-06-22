@@ -205,20 +205,27 @@ body {
    con prefers-reduced-motion.
    ============================================================ */
 
-/* Bolas de gradiente del Hero: flotan lento, offsets distintos. */
-@keyframes hero-float-warm {
-  0% { transform: translate(0, 0); }
-  100% { transform: translate(22%, 14%); }
+/* Bolas de gradiente del Hero (keyframes traducidos de Webflow).
+   translate en % es relativo al propio tamaño de la bola (Move % de Webflow). */
+@keyframes ball-warm {
+  0%   { transform: translate(100%, 0%) scale(1); }
+  25%  { transform: translate(100%, -100%) scale(1.5); }
+  50%  { transform: translate(0%, -100%) scale(1.25); }
+  75%  { transform: translate(0%, 0%) scale(1); }
+  100% { transform: translate(100%, 0%) scale(1); }
 }
-@keyframes hero-float-cool {
-  0% { transform: translate(0, 0); }
-  100% { transform: translate(-20%, -16%); }
+@keyframes ball-cool {
+  0%   { transform: translate(0%, 0%); }
+  25%  { transform: translate(-100%, -100%); }
+  50%  { transform: translate(-100%, 0%); }
+  75%  { transform: translate(0%, 0%); }
+  100% { transform: translate(0%, 0%); }
 }
 .hero-ball-warm {
-  animation: hero-float-warm 18s ease-in-out infinite alternate;
+  animation: ball-warm 20s linear infinite;
 }
 .hero-ball-cool {
-  animation: hero-float-cool 23s ease-in-out infinite alternate;
+  animation: ball-cool 40s linear infinite;
 }
 
 /* Marquee horizontal en bucle: dos copias, se desplaza -50%. Lento. */
