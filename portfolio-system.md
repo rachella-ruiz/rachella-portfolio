@@ -1,111 +1,97 @@
-# AI-Native Portfolio System — Summary & Architecture
+PROJECT STATE — AI-Native Portfolio (handoff)
 
-> Living document. Summarizes the system we're building and serves as the seed
-> for the repo's future `CLAUDE.md`.
-> **Status:** Phase 1 in progress (technical base set up). Last updated: June 2026.
+== THE WHY / VISION ==
+Not just redoing a portfolio. It's building a system where design work (research, decisions,
+prototypes) flows into a structured project MEMORY, and that memory turns almost on its own into
+published case studies. Goal: organize all case-study production and AUTOMATE the documentation of
+future cases with a case-study agent. Guiding principle: the repetitive/structural/consistency work
+gets automated; the creative work (narrative, design judgment) stays in human hands. Full
+architecture in portfolio-system.md (seed of the repo's future CLAUDE.md).
 
-## The system in one sentence
+== PHASE 1 — THE PORTFOLIO (current focus) ==
+Rebuild the Webflow portfolio (rachellaruiz.webflow.io) in Next.js by hand with Claude Code, with a
+custom design system and a reusable case-study template.
 
-A workspace where design work — research, decisions, prototypes — flows into a
-structured **project memory**, and that memory becomes published case studies in the
-portfolio. Guiding principle: **the boring and repetitive gets automated; the
-creative stays in human hands.**
+Stack: Next.js 16 + Tailwind v4 + TypeScript. Repo github.com/rachella-ruiz/rachella-portfolio.
+Deploy on Vercel (prod rachella-portfolio.vercel.app, auto-deploy on push). tokens.css = design
+system; guide at /styleguide. Smooth scroll with Lenis. Animations with Framer Motion + GSAP.
+Motion principle: across all pages, elements animate in on scroll (fade-in + subtle rise as they
+enter the viewport), reusing the shared entrance animation — default for every new section.
 
-## Current state
+Assets in /public: logo.svg, photo.jpg, arrow.svg, globe.svg, globe.json, call.svg, email.svg,
+linkedin.svg, IG.svg, menu-link.avif, menu-link2.avif, wanikiki.png, cvma.png, fynce.png,
+cta-img-1.avif … cta-img-5.avif (plus framework defaults next.svg, vercel.svg, file.svg).
 
-Technical base complete:
+Flow: Claude (chat) refines specs/prompts from screenshots → Claude Code builds locally →
+commit+push → Vercel → Claude reviews prod by URL (structure; hovers/animations confirmed by
+Rachella). Working language English. Max plan.
 
-- Design tokens captured from Webflow and cleaned up (`tokens.css`).
-- Next.js + Tailwind v4 project, self-hosted IBM Plex fonts, dark theme.
-- GitHub repo + automatic Vercel deploy (every push publishes itself).
+BUILT SO FAR:
+- Layout: navbar (frosted-glass background + glass hairline border; active/current-page navlink
+  state), hamburger menu overlay, footer, progressive blur.
+- Hero: two blurred gradient orbs (warm 90deg #dfc35f→#ca423f; cool 78deg #06033d→#483de1; ~55%
+  width, 80px blur, overlay blend, 15–25s keyframes); globe + "USA based | Eastern Time"; h1 "Hey
+  there! I'm Rachella, a Product Designer focused on helping people navigate complex systems under
+  uncertainty"; Marquee "AVAILABLE FOR REMOTE ROLES"; ContactCard (photo.jpg + ping dot; expands
+  UPWARD on hover/tap to reveal email rachellaruiz@gmail.com + "Schedule a call ↗", photo pinned to
+  the baseline at its closed height, 0.38s out-cubic crossfade, glass border, inner shadow removed);
+  full hero content fades in on load.
+- Selected Work: now a REUSABLE <SelectedWork showViewAll> component. Home renders it WITH the
+  "View all" PrimaryButton; the future /work page will render it with showViewAll={false}. Sticky
+  left column (sticky top 6rem) + scroll-linked card animation (Move/Rotate/Scale) + "VIEW WORK"
+  cursor-follow hover + bottom-left "• name" glass pill + landscape 16/9 cards. Heading "Selected" /
+  "Work." with a colored period span (single full-width line at 2.5rem on mobile). Left-column
+  scroll-into-view entrance. Data-driven src/data/projects.ts (Wanikiki, Cómo va mi asilo, Fynce) →
+  /work/[slug].
 
-Phase 1 remaining: rebuild the actual pages (home, about, case template) and migrate
-the 3 case studies.
+REMAINING (in order):
+- Connect CTA: "Let's connect" + GSAP image mouse-trail following the cursor (separate trail set
+  src/data/trail-images.ts → cta-img-1…5.avif) + marquee "LET'S WORK TOGETHER –" + "Send an email" +
+  "Schedule a call ↗". (Schedule-a-call link is a placeholder href="#".)
+- /work page: renders <SelectedWork showViewAll={false} /> so "View all" and the Work navlink
+  resolve to a real page (currently 404).
+- About page: gallery = own draggable horizontal marquee.
+- Reusable case-study template + 3 cases (Wanikiki, CVMA, Fynce).
 
-## The two phases
+Open placeholders: LinkedIn URL and phone number in the portfolio; the "Schedule a call" link.
 
-### Phase 1 — The portfolio
-Rebuild the portfolio in Next.js with its own design system and a **reusable
-case-study template**. The base and pipeline are ready; the pages remain.
+== PHASE 2 — MEMORY + AGENTS (after Phase 1) ==
+The system that documents projects and assembles the cases almost on their own. Built once there's
+solid memory.
 
-### Phase 2 — Memory + agents
-The system that documents projects (Nuxera, Obsara) and assembles case studies almost
-on its own. Built **after** a solid memory exists.
+Flow: Claude Chat (research/decisions) + Claude Design (prototypes) → curated markdown memory in
+projects/[project]/ → Claude Code assembles a draft → case .mdx → Vercel.
 
-## The flow
+Target repo: CLAUDE.md (configures the "agents"); src/app/ (pages); content/case-studies/ (published
+cases .mdx); projects/[project]/ (private memory: 00-overview, 01-research, 02-problem, 03-flows,
+04-decisions, 05-iterations, 06-prototypes, case-study-draft).
 
-```
-Claude Chat (research, decisions)  ┐
-Claude Design (prototypes)         ┘ → project memory (markdown, curated by you)
-                                       → Claude Code drafts the case study
-                                       → case .mdx
-                                       → published portfolio (Vercel)
-```
+The 3 agents (= Claude Code configs, NOT autonomous services; they act when invoked; they handle the
+structural work, never judgment or narrative):
+1. Memory (the librarian): files decisions/progress into the right markdown with consistent
+   format/date, links prototypes, scaffolds new projects. Commands: /new-project, /log-decision.
+2. Design System (consistency guardian): syncs tokens/components, propagates changes, audits for
+   coherent usage. Doesn't decide aesthetics.
+3. Case Study (assembler, NOT writer): builds the first draft from the memory, imposes the template,
+   places the already-polished text into the .mdx. Voice/narrative are refined in Claude Chat.
+   Command: /draft-case.
 
-The inputs (chat, Design) you curate by hand; from there on, Claude Code automates it.
+Cycle: while a project is being designed, its memory folder gets fed; as it matures, the draft
+"graduates" into a published case → the case is nearly ready by the time the project ends.
 
-## Target repo structure
+== ORGANIZATION IN CLAUDE ==
+A single "Portfolio" project as the hub (one repo, one design system). Per-case isolation lives in
+the repo files (projects/), not in separate chat projects.
 
-```
-rachella-portfolio/
-├── CLAUDE.md                 # instructions that turn Claude Code into the "agents"
-├── src/app/                  # pages (home, about, work/[slug])
-│   ├── tokens.css            # design system (source of truth)
-│   └── globals.css           # maps tokens to the Tailwind theme
-├── content/case-studies/     # PUBLISHED cases (.mdx)
-│   └── wanikiki.mdx
-└── projects/                 # PRIVATE project memory (not published)
-    ├── nuxera/
-    │   ├── 00-overview.md
-    │   ├── 01-research.md
-    │   ├── 02-problem.md
-    │   ├── 03-flows.md
-    │   ├── 04-decisions.md
-    │   ├── 05-iterations.md
-    │   ├── 06-prototypes.md   # links to Claude Design / Figma
-    │   └── case-study-draft.md
-    └── obsara/ ...
-```
+== WORKING DYNAMIC ==
+Rachella is a product designer (not a developer) and brings the vision, direction, and design
+judgment, plus screenshots and references. Claude handles the technical structure, the plan, and the
+sequencing, and guides her step by step, proactively: breaks the work into clear steps, says what's
+next, writes the prompts for Claude Code, verifies results, and keeps the overall plan on track —
+without assuming she knows the technical path. Claude explains in accessible terms, flags what's
+coming, and pressure-tests decisions. Rachella decides on design and vision; Claude proposes,
+structures, and executes the technical orchestration.
 
-## The agents — in detail
-
-**What they are (and aren't):** not autonomous services that watch everything on
-their own. They're **specialized Claude Code configurations** (a `CLAUDE.md` +
-commands or subagents) that act on the repo *when invoked*. They handle the
-structural, the repetitive, and consistency — **never design judgment or the
-narrative.** The human stays at the center of the process.
-
-### 1. Memory agent — the librarian
-- **Does:** files the decisions and progress (that you hand it after a session here
-  or in Design) into the right markdown under `projects/[project]/`, with consistent
-  formatting and dates, and links the prototypes. Scaffolds new projects.
-- **Doesn't:** interpret or invent; it captures and organizes what it receives.
-- **How it's used:** commands like `/new-project nuxera` or `/log-decision`.
-
-### 2. Design System agent — the consistency guardian
-- **Does:** keeps tokens and components in sync; propagates token changes; flags or
-  scaffolds missing components; audits that everything uses the system coherently.
-- **Doesn't:** decide how something looks; it executes and watches consistency.
-- **How it's used:** when changing tokens, or when reviewing a case before publishing.
-
-### 3. Case Study agent — the assembler (not the writer)
-- **Does:** builds a *first draft* of the case from the project memory (so you don't
-  start from a blank page), imposes the template structure, and places the polished
-  text into the published `.mdx`.
-- **Doesn't:** act as the master writer. Voice and narrative are refined with Claude
-  Chat; the agent builds the skeleton and places it.
-- **How it's used:** `/draft-case nuxera` → generates draft → refined in chat → placed
-  into `content/case-studies/nuxera.mdx` → push → published.
-
-## A project's lifecycle
-
-While a project (Nuxera, Obsara) is being designed, its memory folder gets fed with
-decisions and progress. When the project matures, its draft "graduates" to a
-published case. That way the case study is **nearly ready by the time the project
-wraps.**
-
-## Guiding principle
-
-Build a solid memory first; automate only afterward. The structural and
-inconsistency-prone parts (capture, organize, sync, publish) are done by the agents;
-judgment and narrative stay with the designer.
+== RULES ==
+Everything in English — conversation, Claude Code prompts, deliverables, code, and docs. Rachella may
+sometimes write in Spanish; Claude keeps replying in English unless she says otherwise.
