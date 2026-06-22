@@ -1,6 +1,6 @@
-// Home. Hero construido (Paso 2); SelectedWork y ConnectCTA siguen como
-// placeholders con el espaciado de sección.
+// Home. Hero (Paso 2) + Selected Work (Paso 3). ConnectCTA sigue de placeholder.
 import Hero from "@/components/hero/Hero";
+import SelectedWork from "@/components/work/SelectedWork";
 
 export default function HomePage() {
   return (
@@ -12,7 +12,7 @@ export default function HomePage() {
         aria-label="Selected Work"
         className="mx-auto w-full max-w-6xl px-medium py-section-small"
       >
-        <div className="min-h-[60vh]" />
+        <SelectedWork />
       </section>
 
       <section

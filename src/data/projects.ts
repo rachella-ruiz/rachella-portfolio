@@ -1,11 +1,16 @@
-// Fuente de verdad de los proyectos. El badge de "Work" en el Nav deriva su
-// número de la longitud de este array (data-driven), así que se actualiza solo.
-// Por ahora está vacío a propósito (badge = 0) para verificar la integración;
-// en producción se irá poblando con los proyectos reales.
+// Fuente de verdad de los proyectos (data-driven). El badge de "Work" en el Nav
+// deriva su número de la longitud de este array, y la sección Selected Work se
+// alimenta del mismo. Campos en este orden: slug, name, image.
+// Las imágenes viven en /public en minúscula; respetar las rutas tal cual
+// (Vercel distingue mayúsculas/minúsculas).
 export type Project = {
   slug: string;
-  title: string;
-  tag: string;
+  name: string;
+  image: string;
 };
 
-export const projects: Project[] = [];
+export const projects: Project[] = [
+  { slug: "wanikiki", name: "Wanikiki", image: "/wanikiki.png" },
+  { slug: "como-va-mi-asilo", name: "Cómo va mi asilo", image: "/cvma.png" },
+  { slug: "fynce", name: "Fynce", image: "/fynce.png" },
+];

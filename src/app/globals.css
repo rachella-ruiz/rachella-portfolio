@@ -274,11 +274,32 @@ body {
   animation: ping-wide 1s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
 }
 
+/* Dot del botón primario: el ripple ping-wide se reproduce UNA sola vez al
+   hacer hover (se dispara desde :hover, no global, así reinicia limpio en cada
+   entrada del cursor). Solo transform + opacity → corre por compositor (GPU). */
+.pb-dot {
+  position: relative;
+}
+.pb-dot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  background: var(--primary-500);
+  transform: scale(0);
+  opacity: 0;
+  pointer-events: none;
+}
+.group:hover .pb-dot::after {
+  animation: ping-wide 1s cubic-bezier(0.215, 0.61, 0.355, 1) 1;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .hero-ball-warm,
   .hero-ball-cool,
   .marquee-track,
-  .animate-ping-wide {
+  .animate-ping-wide,
+  .group:hover .pb-dot::after {
     animation: none;
   }
 }

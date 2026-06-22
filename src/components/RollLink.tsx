@@ -1,22 +1,9 @@
 import Link from "next/link";
+import RollText from "@/components/RollText";
 
-// Markup del "roll" vertical (dos copias apiladas; una sube y sale, la otra
-// entra desde abajo), ~0.4s, reversible.
-function Roll({ label }: { label: string }) {
-  return (
-    <span className="relative block overflow-hidden">
-      <span className="block transition-transform duration-[400ms] ease-out group-hover:-translate-y-full">
-        {label}
-      </span>
-      <span
-        aria-hidden="true"
-        className="absolute inset-0 block translate-y-full transition-transform duration-[400ms] ease-out group-hover:translate-y-0"
-      >
-        {label}
-      </span>
-    </span>
-  );
-}
+// El "roll" vertical del texto vive en RollText (compartido con el botón
+// primario). Alias local para no tocar el resto del componente.
+const Roll = RollText;
 
 // Link con hover compartido por el navbar y el menú:
 //  - "roll" vertical del texto.
