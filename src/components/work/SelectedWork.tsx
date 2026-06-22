@@ -12,7 +12,14 @@ export default function SelectedWork() {
       {/* Columna izquierda sticky (~25%). min-content evita que el titular se
           recorte; margin-top space-xxl (6rem desktop). */}
       <div className="flex flex-col gap-medium md:mt-[var(--space-xxl)] md:sticky md:top-[var(--nav-height)] md:self-start">
-        <h2 className="text-h2 font-primary font-semibold text-text-heading">
+        {/* Tamaño fluido: el titular se encoge con el ancho (columna ~25%) para
+            que siempre quepa en dos líneas, sin recorte ni nowrap. El clamp
+            sobrescribe solo el font-size; line-height/tracking/weight siguen de
+            text-h2. Máximo = var(--size-h2) (responsive). */}
+        <h2
+          className="text-h2 font-primary font-semibold text-text-heading"
+          style={{ fontSize: "clamp(2.5rem, 5vw, var(--size-h2))" }}
+        >
           Selected
           <br />
           {/* El punto final es texto del h2 con color primary-500 (Text Span). */}
