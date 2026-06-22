@@ -9,10 +9,11 @@ import WorkCard from "./WorkCard";
 // rotateX del scroll). En móvil, una sola columna y la izquierda deja de pegarse.
 export default function SelectedWork() {
   return (
-    <div className="grid grid-cols-1 gap-xlarge md:grid-cols-[minmax(min-content,1fr)_minmax(0,3fr)] md:gap-[var(--space-custom-3)]">
+    <div className="grid grid-cols-1 gap-xlarge md:grid-cols-[minmax(min-content,1fr)_minmax(0,3fr)]">
       {/* Columna izquierda sticky (~25%). min-content evita que el titular se
-          recorte; margin-top space-xxl (6rem desktop). */}
-      <div className="md:mt-[var(--space-xxl)] md:sticky md:top-[var(--nav-height)] md:self-start">
+          recorte. Sticky offset = space-xxl (6rem) en el `top` (sin margin-top,
+          para no duplicar el hueco). */}
+      <div className="md:sticky md:top-[var(--space-xxl)] md:self-start">
         {/* El bloque de texto entra con la animación compartida al hacer scroll. */}
         <Reveal className="flex flex-col gap-medium">
           {/* Tamaño fluido: el titular se encoge con el ancho (columna ~25%) para
@@ -23,13 +24,15 @@ export default function SelectedWork() {
             className="text-h2 font-primary font-semibold text-text-heading"
             style={{ fontSize: "clamp(2.5rem, 5vw, var(--size-h2))" }}
           >
-            Selected
-            <br />
+            Selected{" "}
+            {/* Salto de línea solo en desktop/tablet (columna estrecha ~25%);
+                en móvil (full-width) el titular queda en una sola línea. */}
+            <br className="max-md:hidden" />
             {/* El punto final es texto del h2 con color primary-500 (Text Span). */}
             Work<span className="text-primary-500">.</span>
           </h2>
 
-          <p className="max-w-sm text-body-sm text-text-tertiary">
+          <p className="max-w-sm text-body text-text-tertiary">
             A selection of products across fintech, legal tech, and operational
             systems.
           </p>
@@ -43,7 +46,7 @@ export default function SelectedWork() {
           (no crea scroll container ni toca overflow-y → la entrada vertical desde
           100vh sigue visible; y al ser hermana del sticky, no lo rompe). */}
       <div
-        className="flex flex-col gap-[var(--space-custom-3)] overflow-x-clip"
+        className="flex flex-col gap-[var(--space-xxl)] overflow-x-clip"
         style={{ perspective: "1000px" }}
       >
         {projects.map((project) => (
