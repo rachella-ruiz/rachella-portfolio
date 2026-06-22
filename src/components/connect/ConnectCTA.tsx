@@ -1,0 +1,154 @@
+"use client";
+
+import gsap from "gsap";
+import Link from "next/link";
+import { useEffect, useRef } from "react";
+import Marquee from "@/components/Marquee";
+import PrimaryButton from "@/components/PrimaryButton";
+import Reveal from "@/components/motion/Reveal";
+import { trailImages } from "@/data/trail-images";
+
+// Destino de "Schedule a call": placeholder único y fácil de cambiar. Más
+// adelante este y el de la ContactCard del Hero apuntarán al mismo sitio.
+const SCHEDULE_CALL_HREF = "#";
+
+// Flecha ↗ (de /arrow.svg) inline con currentColor.
+function ArrowIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 9 9"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={1.5}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden="true"
+    >
+      <path d="M8 1L1 8" />
+      <path d="M2.91 1H8V6.09" />
+    </svg>
+  );
+}
+
+// Connect CTA: sección de cierre antes del footer. Marquee + titular gigante +
+// botones. Sobre el desktop con puntero fino, un mouse-trail de imágenes
+// (GSAP) sigue al cursor SOLO dentro de esta sección.
+export default function ConnectCTA() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const overlayRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    // Guards: nada de trail con reduced-motion ni en punteros gruesos (touch).
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (!window.matchMedia("(pointer: fine)").matches) return;
+
+    const section = sectionRef.current;
+    const overlay = overlayRef.current;
+    if (!section || !overlay) return;
+
+    let lastX = 0;
+    let lastY = 0;
+    let index = 0;
+    let primed = false;
+
+    // Crea un clon y lo anima de (fromX,fromY) al punto actual; al terminar se
+    // elimina del DOM para que los nodos no se acumulen.
+    const spawn = (
+      fromX: number,
+      fromY: number,
+      toX: number,
+      toY: number,
+      src: string,
+    ) => {
+      const clone = document.createElement("div");
+      clone.className = "cta-trail-clone";
+      const img = document.createElement("img");
+      img.src = src;
+      img.alt = "";
+      clone.appendChild(img);
+      overlay.appendChild(clone);
+
+      gsap.set(clone, {
+        x: fromX,
+        y: fromY,
+        xPercent: -50,
+        yPercent: -50,
+        opacity: 0,
+      });
+      const tl = gsap.timeline({ onComplete: () => clone.remove() });
+      tl.to(clone, { opacity: 1, duration: 0.2 });
+      // El movimiento arranca a la vez que el fade-in ("<").
+      tl.to(clone, { x: toX, y: toY, duration: 0.5 }, "<");
+      // Fade-out + encogido del <img>, DESPUÉS del movimiento.
+      tl.to(img, { opacity: 0, scale: 0.6, duration: 0.2 });
+    };
+
+    const onMove = (e: PointerEvent) => {
+      const x = e.clientX;
+      const y = e.clientY;
+      // Primer movimiento: solo fija el origen (evita un clon volando desde 0,0).
+      if (!primed) {
+        lastX = x;
+        lastY = y;
+        primed = true;
+        return;
+      }
+      // Umbral POR EJE (no distancia): >100px en X o en Y.
+      if (Math.abs(x - lastX) > 100 || Math.abs(y - lastY) > 100) {
+        // Captura el punto del spawn ANTERIOR antes de actualizar last*.
+        const fromX = lastX;
+        const fromY = lastY;
+        lastX = x;
+        lastY = y;
+        spawn(fromX, fromY, x, y, trailImages[index]);
+        // Cicla el array (cualquier longitud): vuelve a 0 tras el último.
+        index = (index + 1) % trailImages.length;
+      }
+    };
+
+    section.addEventListener("pointermove", onMove);
+    return () => section.removeEventListener("pointermove", onMove);
+  }, []);
+
+  return (
+    <section
+      ref={sectionRef}
+      id="connect"
+      aria-label="Connect"
+      className="relative px-large py-section-large"
+    >
+      <Reveal className="flex flex-col items-center text-center">
+        {/* Marquee a ancho completo, muy tenue. El componente añade " –". */}
+        <Marquee text="LET'S WORK TOGETHER" className="w-full text-white/15" />
+
+        <h1 className="mt-section-small text-h1 font-primary font-semibold text-text-heading">
+          Let&rsquo;s connect
+        </h1>
+
+        <div className="mt-large flex flex-col items-center gap-medium">
+          <PrimaryButton
+            href="mailto:rachellaruiz@gmail.com"
+            label="Send an email"
+          />
+          <Link
+            href={SCHEDULE_CALL_HREF}
+            className="group inline-flex items-center gap-2 text-button-lg font-primary text-grey-300 transition-colors hover:text-grey-100"
+          >
+            Schedule a call
+            <ArrowIcon className="h-2.5 w-2.5" />
+          </Link>
+        </div>
+      </Reveal>
+
+      {/* Overlay del trail: fixed inset-0, pointer-events-none, por encima del
+          contenido. Los clones (fixed + clientX/clientY) no necesitan cálculo
+          de scroll. Solo se generan al mover el cursor DENTRO de la sección. */}
+      <div
+        ref={overlayRef}
+        aria-hidden="true"
+        className="pointer-events-none fixed inset-0 z-40"
+      />
+    </section>
+  );
+}

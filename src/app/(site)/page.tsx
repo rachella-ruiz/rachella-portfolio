@@ -1,4 +1,5 @@
-// Home. Hero (Paso 2) + Selected Work (Paso 3). ConnectCTA sigue de placeholder.
+// Home. Hero (Paso 2) + Selected Work (Paso 3) + Connect CTA (Paso 4).
+import ConnectCTA from "@/components/connect/ConnectCTA";
 import Hero from "@/components/hero/Hero";
 import SelectedWork from "@/components/work/SelectedWork";
 
@@ -15,13 +16,7 @@ export default function HomePage() {
         <SelectedWork />
       </section>
 
-      <section
-        id="connect"
-        aria-label="Connect"
-        className="mx-auto w-full max-w-6xl px-medium py-section-small"
-      >
-        <div className="min-h-[40vh]" />
-      </section>
+      <ConnectCTA />
     </>
   );
 }

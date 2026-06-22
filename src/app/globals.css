@@ -264,6 +264,23 @@ body {
   animation: marquee 60s linear infinite;
 }
 
+/* Mouse-trail del Connect CTA: cada clon es un thumbnail absoluto dentro del
+   overlay fixed. GSAP anima transform (x/y/scale) y opacity (compositor). */
+.cta-trail-clone {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 10rem;
+  border-radius: var(--radius-large);
+  overflow: hidden;
+  will-change: transform, opacity;
+}
+.cta-trail-clone img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
 /* Ripple del dot: parte de scale 0 con opacidad alta, crece y se desvanece
    en ~1s con ease-out (Out Cubic), en loop continuo. */
 @keyframes ping-wide {
