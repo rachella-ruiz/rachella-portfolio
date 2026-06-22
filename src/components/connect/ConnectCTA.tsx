@@ -119,8 +119,12 @@ export default function ConnectCTA() {
       className="relative px-large py-section-large"
     >
       <Reveal className="flex flex-col items-center text-center">
-        {/* Marquee a ancho completo, muy tenue. El componente añade " –". */}
-        <Marquee text="LET'S WORK TOGETHER" className="w-full text-white/15" />
+        {/* Mismo texto que el marquee del Hero (mismo componente). Ancho completo
+            y muy tenue. El componente añade " –". */}
+        <Marquee
+          text="AVAILABLE FOR REMOTE ROLES"
+          className="w-full text-white/15"
+        />
 
         <h1 className="mt-section-small text-h1 font-primary font-semibold text-text-heading">
           Let&rsquo;s connect
