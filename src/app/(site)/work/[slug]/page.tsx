@@ -25,7 +25,7 @@ export default async function WorkDetailPage({
   if (!caseStudy) notFound();
 
   return (
-    <article className="pt-[calc(var(--space-xhuge)-var(--nav-height))] pb-section-medium">
+    <article className="pt-xlarge pb-section-medium">
       {/* Cada bloque entra con la animación de scroll compartida (whileInView). */}
       <Reveal>
         <CaseHeader header={caseStudy.header} />

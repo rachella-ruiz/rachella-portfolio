@@ -28,7 +28,7 @@ export default function FeatureSection({
   const media = <Media item={section.media} />;
 
   return (
-    <div className="mx-auto max-w-[75rem] px-large">
+    <div className="px-large">
       <SplitLayout
         ratio="minmax(0,1fr) minmax(0,1fr)"
         left={mediaOnLeft ? media : text}

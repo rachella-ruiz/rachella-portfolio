@@ -11,7 +11,7 @@ export default function ProcessSteps({
   section: ProcessSectionData;
 }) {
   return (
-    <div className="mx-auto max-w-[75rem] px-large">
+    <div className="px-large">
       <SplitLayout
         ratio="minmax(0,1fr) minmax(0,1fr)"
         left={

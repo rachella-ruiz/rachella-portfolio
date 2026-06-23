@@ -10,27 +10,31 @@ export default function NextCase({ currentSlug }: { currentSlug: string }) {
   if (index === -1) return null;
   const next = projects[(index + 1) % projects.length];
 
+  // Outer section is full-width (px-large, like the other case sections); the
+  // clickable inner block stays constrained to container-tiny (36rem), centered.
   return (
-    <Link
-      href={`/work/${next.slug}`}
-      className="mx-auto block max-w-[36rem] px-large text-center"
-    >
-      <div className="flex flex-wrap items-center justify-center gap-small">
-        <span className="text-overline font-secondary uppercase text-text-tertiary">
-          Next case
-        </span>
-        <span className="inline-flex items-center gap-2 rounded-full bg-[var(--opacity-10)] px-3 py-1.5 backdrop-blur-md">
-          <span className="h-1.5 w-1.5 rounded-full bg-primary-400" />
-          <span className="text-button-sm font-primary uppercase text-text-heading">
-            {next.name}
+    <div className="px-large">
+      <Link
+        href={`/work/${next.slug}`}
+        className="mx-auto block max-w-[36rem] text-center"
+      >
+        <div className="flex flex-wrap items-center justify-center gap-small">
+          <span className="text-overline font-secondary uppercase text-text-tertiary">
+            Next case
           </span>
-        </span>
-      </div>
-      <img
-        src={next.image}
-        alt={next.name}
-        className="mt-large block h-auto w-full rounded-large"
-      />
-    </Link>
+          <span className="inline-flex items-center gap-2 rounded-full bg-[var(--opacity-10)] px-3 py-1.5 backdrop-blur-md">
+            <span className="h-1.5 w-1.5 rounded-full bg-primary-400" />
+            <span className="text-button-sm font-primary uppercase text-text-heading">
+              {next.name}
+            </span>
+          </span>
+        </div>
+        <img
+          src={next.image}
+          alt={next.name}
+          className="mt-large block h-auto w-full rounded-large"
+        />
+      </Link>
+    </div>
   );
 }

@@ -17,11 +17,10 @@ export default function MediaBand({
   section: MediaSectionData;
 }) {
   const fullBleed = section.fullBleed ?? false;
-  // Contained = the 75rem container + px-large gutter (same as the other case
-  // sections). Full-bleed = edge-to-edge (no gutter / no cap), so it breaks out
-  // wider than the contained 75rem sections.
+  // Contained = the site's full-width px-large gutter (same as the other case
+  // sections). Full-bleed = edge-to-edge (no gutter), so it spans wider still.
   return (
-    <div className={fullBleed ? "w-full" : "mx-auto max-w-[75rem] px-large"}>
+    <div className={fullBleed ? "w-full" : "px-large"}>
       <div className={LAYOUT_CLASS[section.layout]}>
         {section.items.map((item, i) => (
           <Media key={i} item={item} />

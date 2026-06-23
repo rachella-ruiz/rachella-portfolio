@@ -1,17 +1,17 @@
 import type { CaseStudy } from "@/data/case-studies/types";
 import Media from "./Media";
 
-// Case-study header inside the 75rem container: pill + overline row, the H1
-// (H3 type scale) on the left with the intro (tertiary) in a right-hand column,
-// a wrapping row of tag pills, then the hero media (contained inside the container).
-// Rows are 1rem (--space-small) apart.
+// Case-study header in the site's full-width (px-large) container: pill + overline
+// row, the H1 (H3 type scale) on the left with the intro (tertiary) in a right-hand
+// column, a wrapping row of tag pills, then the hero media. Rows are 1rem
+// (--space-small) apart.
 export default function CaseHeader({
   header,
 }: {
   header: CaseStudy["header"];
 }) {
   return (
-    <header className="mx-auto max-w-[75rem] px-large">
+    <header className="px-large">
       {/* Pill (glass + leading dot) + overline */}
       <div className="flex flex-wrap items-center gap-small">
         <span className="inline-flex items-center gap-2 rounded-full bg-[var(--opacity-10)] px-3 py-1.5 backdrop-blur-md">
