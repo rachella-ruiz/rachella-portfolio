@@ -1,0 +1,41 @@
+import type { FeatureSection as FeatureSectionData } from "@/data/case-studies/types";
+import Media from "./Media";
+import RichText from "./RichText";
+import SplitLayout from "./SplitLayout";
+
+// Text on one side, a single Media on the other, controlled by mediaSide
+// ('right' default). On mobile it stacks with TEXT FIRST regardless of mediaSide
+// (reverseOnMobile is set so the text leads).
+export default function FeatureSection({
+  section,
+}: {
+  section: FeatureSectionData;
+}) {
+  const mediaSide = section.mediaSide ?? "right";
+  const mediaOnLeft = mediaSide === "left";
+
+  const text = (
+    <div>
+      <h2 className="text-h3 font-primary font-semibold text-text-heading">
+        {section.heading}
+      </h2>
+      <RichText
+        items={section.body}
+        className="mt-large text-body-lg leading-body text-text-primary"
+      />
+    </div>
+  );
+  const media = <Media item={section.media} />;
+
+  return (
+    <div className="mx-auto max-w-[75rem] px-large">
+      <SplitLayout
+        ratio="minmax(0,1fr) minmax(0,1fr)"
+        left={mediaOnLeft ? media : text}
+        right={mediaOnLeft ? text : media}
+        // Media on the left → text is the right slot → bring it first on mobile.
+        reverseOnMobile={mediaOnLeft}
+      />
+    </div>
+  );
+}
