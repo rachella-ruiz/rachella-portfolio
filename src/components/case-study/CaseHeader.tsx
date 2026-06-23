@@ -10,7 +10,7 @@ export default function CaseHeader({
   header: CaseStudy["header"];
 }) {
   return (
-    <header className="mx-auto max-w-[75rem] px-large">
+    <header className="px-large">
       {/* Pill (glass + leading dot) + overline */}
       <div className="flex flex-wrap items-center gap-small">
         <span className="inline-flex items-center gap-2 rounded-full bg-[var(--opacity-10)] px-3 py-1.5 backdrop-blur-md">
@@ -24,8 +24,8 @@ export default function CaseHeader({
         </span>
       </div>
 
-      {/* Title (left) + intro (right column, single column) */}
-      <div className="mt-large grid grid-cols-1 gap-xlarge min-[992px]:grid-cols-2">
+      {/* Title (left ~60%) + intro (right ~40% column, aligned lower) */}
+      <div className="mt-large grid grid-cols-1 gap-xlarge min-[992px]:grid-cols-[3fr_2fr]">
         <h1 className="text-h1 font-primary font-semibold text-text-heading">
           {header.title}
         </h1>
