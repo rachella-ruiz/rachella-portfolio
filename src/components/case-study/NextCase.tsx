@@ -20,7 +20,7 @@ export default function NextCase({ currentSlug }: { currentSlug: string }) {
           Next case
         </span>
         <span className="inline-flex items-center gap-2 rounded-full bg-[var(--opacity-10)] px-3 py-1.5 backdrop-blur-md">
-          <span className="h-1.5 w-1.5 rounded-full bg-primary-500" />
+          <span className="h-1.5 w-1.5 rounded-full bg-primary-400" />
           <span className="text-button-sm font-primary uppercase text-text-heading">
             {next.name}
           </span>

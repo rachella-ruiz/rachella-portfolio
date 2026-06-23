@@ -7,7 +7,7 @@ import RollText from "@/components/RollText";
 //     horizontal. Layout flex, gap space-custom-2 (1.5rem) entre label y dot.
 //   - Texto con el MISMO roll que los nav-links (RollText; el texto se anima, no
 //     cambia de color).
-//   - Dot primary-500 a la derecha; al hover dispara el ripple ping-wide UNA vez
+//   - Dot primary-400 a la derecha; al hover dispara el ripple ping-wide UNA vez
 //     (vía .pb-dot::after, ver globals.css).
 export default function PrimaryButton({
   href,
@@ -26,7 +26,7 @@ export default function PrimaryButton({
       <RollText label={label} />
       <span
         aria-hidden="true"
-        className="pb-dot inline-flex h-2 w-2 rounded-full bg-primary-500"
+        className="pb-dot inline-flex h-2 w-2 rounded-full bg-primary-400"
       />
     </Link>
   );

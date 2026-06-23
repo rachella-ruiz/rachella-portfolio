@@ -111,6 +111,12 @@
   --primary-900: #06033d;
   --primary-1000: #020226;
 
+  /* THE primary accent of the system = primary-400 (#6257f2). All flat accent
+     usages (button/badge dots, the brand period, icons, borders) resolve to
+     this. --primary-500 (#483de1) is kept in the palette but is no longer the
+     primary accent. (--text-link still uses --primary-300, unchanged.) */
+  --color-primary: var(--primary-400);
+
   /* ---------- Color: base ---------- */
   --white: #ffffff;
   --black: #000000;

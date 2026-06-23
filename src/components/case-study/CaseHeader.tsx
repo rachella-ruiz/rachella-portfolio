@@ -14,7 +14,7 @@ export default function CaseHeader({
       {/* Pill (glass + leading dot) + overline */}
       <div className="flex flex-wrap items-center gap-small">
         <span className="inline-flex items-center gap-2 rounded-full bg-[var(--opacity-10)] px-3 py-1.5 backdrop-blur-md">
-          <span className="h-1.5 w-1.5 rounded-full bg-primary-500" />
+          <span className="h-1.5 w-1.5 rounded-full bg-primary-400" />
           <span className="text-button-sm font-primary text-text-heading">
             {header.pill}
           </span>

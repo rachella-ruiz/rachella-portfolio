@@ -62,7 +62,7 @@ export default function Footer() {
             Sin tracking/transform/margen: sus bordes ópticos caen sobre los gutters. */}
         <div className="mt-medium">
           <span
-            className="block w-full text-center font-primary font-semibold leading-none text-primary-500 md:text-left"
+            className="block w-full text-center font-primary font-semibold leading-none text-primary-400 md:text-left"
             style={{ fontSize: "20vw" }}
           >
             Portfolio

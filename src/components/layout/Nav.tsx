@@ -66,7 +66,7 @@ export default function Nav() {
                 active={isActive("/work", true)}
                 className={navLinkClass("/work", true)}
                 badge={
-                  <span className="absolute -right-4 -top-2 flex h-4 min-w-4 items-center justify-center rounded-full bg-primary-500 px-1 text-[0.625rem] font-medium leading-none text-white">
+                  <span className="absolute -right-4 -top-2 flex h-4 min-w-4 items-center justify-center rounded-full bg-primary-400 px-1 text-[0.625rem] font-medium leading-none text-white">
                     {projects.length}
                   </span>
                 }

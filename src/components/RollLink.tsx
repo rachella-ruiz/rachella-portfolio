@@ -51,7 +51,7 @@ export default function RollLink({
           <span className="flex w-xlarge shrink-0 items-center justify-center">
             <span
               aria-hidden="true"
-              className="h-[0.45em] w-[0.45em] scale-0 rounded-full bg-primary-500 opacity-0 transition-all duration-300 ease-out group-hover:scale-100 group-hover:opacity-100"
+              className="h-[0.45em] w-[0.45em] scale-0 rounded-full bg-primary-400 opacity-0 transition-all duration-300 ease-out group-hover:scale-100 group-hover:opacity-100"
             />
           </span>
         )}
@@ -70,7 +70,7 @@ export default function RollLink({
       {showDot && (
         <span
           aria-hidden="true"
-          className="pointer-events-none absolute right-0 top-0 h-[0.3em] w-[0.3em] -translate-y-1/2 translate-x-[150%] scale-0 rounded-full bg-primary-500 opacity-0 transition-all duration-300 ease-out group-hover:scale-100 group-hover:opacity-100"
+          className="pointer-events-none absolute right-0 top-0 h-[0.3em] w-[0.3em] -translate-y-1/2 translate-x-[150%] scale-0 rounded-full bg-primary-400 opacity-0 transition-all duration-300 ease-out group-hover:scale-100 group-hover:opacity-100"
         />
       )}
       <Roll label={label} />

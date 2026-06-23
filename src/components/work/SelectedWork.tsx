@@ -34,8 +34,8 @@ export default function SelectedWork({
             {/* Salto de línea solo en desktop/tablet (columna estrecha ~25%);
                 en móvil (full-width) el titular queda en una sola línea. */}
             <br className="max-md:hidden" />
-            {/* El punto final es texto del h2 con color primary-500 (Text Span). */}
-            Work<span className="text-primary-500">.</span>
+            {/* El punto final es texto del h2 con color primary-400 (Text Span). */}
+            Work<span className="text-primary-400">.</span>
           </h2>
 
           <p className="max-w-sm text-body text-text-tertiary">

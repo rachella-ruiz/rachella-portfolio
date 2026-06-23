@@ -35,6 +35,10 @@
   --color-primary-800: var(--primary-800);
   --color-primary-900: var(--primary-900);
   --color-primary-1000: var(--primary-1000);
+  /* THE primary accent of the system = primary-400 (#6257f2). Exposes
+     bg-primary / text-primary / border-primary. primary-500 stays in the
+     palette but is no longer the primary accent. */
+  --color-primary: var(--color-primary);
 
   /* ---------- Color: base + sistema + accent ---------- */
   --color-white: var(--white);
@@ -302,7 +306,7 @@ body {
   position: absolute;
   inset: 0;
   border-radius: 9999px;
-  background: var(--primary-500);
+  background: var(--primary-400);
   transform: scale(0);
   opacity: 0;
   pointer-events: none;

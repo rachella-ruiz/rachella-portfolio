@@ -101,8 +101,8 @@ export default function ContactCard() {
     >
       {/* Dot + ripple, en la esquina superior-derecha de la card. */}
       <span className="pointer-events-none absolute right-[1rem] top-[-0.15rem] z-20 flex h-2.5 w-2.5">
-        <span className="absolute inline-flex h-full w-full animate-ping-wide rounded-full bg-primary-500" />
-        <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-primary-500" />
+        <span className="absolute inline-flex h-full w-full animate-ping-wide rounded-full bg-primary-400" />
+        <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-primary-400" />
       </span>
 
       {/* Foto: pegada a la base, alto = card cerrada (medido), no crece. */}

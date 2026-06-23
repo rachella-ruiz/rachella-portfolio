@@ -75,7 +75,7 @@ export default function WorkCard({ project }: { project: Project }) {
         <span className="absolute bottom-medium left-medium z-10 inline-flex items-center gap-2 rounded-full bg-black/40 px-3 py-1.5 backdrop-blur-md">
           <span
             aria-hidden="true"
-            className="h-1.5 w-1.5 rounded-full bg-primary-500"
+            className="h-1.5 w-1.5 rounded-full bg-primary-400"
           />
           <span className="text-body-sm font-medium text-white">
             {project.name}

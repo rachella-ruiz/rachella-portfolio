@@ -35,7 +35,7 @@ export default function AboutPage() {
       <div className="mx-auto max-w-[52rem] px-large pt-[var(--space-xhuge)]">
         {/* Cabecera centrada: eyebrow morado + titular con dot redondo. */}
         <Reveal className="flex flex-col items-center gap-medium text-center">
-          <p className="text-overline font-secondary uppercase tracking-overline text-primary-500">
+          <p className="text-overline font-secondary uppercase tracking-overline text-primary-400">
             The journey that has shaped my work
           </p>
           {/* Titular display centrado. El clamp sube el tamaño por encima de h1
@@ -46,11 +46,11 @@ export default function AboutPage() {
             style={{ fontSize: "clamp(var(--size-h1), 14vw, 11rem)" }}
           >
             About
-            {/* Dot redondo de marca (primary-500), no un punto de texto.
+            {/* Dot redondo de marca (primary-400), no un punto de texto.
                 Tamaño en em → escala con el titular. */}
             <span
               aria-hidden="true"
-              className="ml-[0.04em] inline-block h-[0.16em] w-[0.16em] rounded-full bg-primary-500 align-baseline"
+              className="ml-[0.04em] inline-block h-[0.16em] w-[0.16em] rounded-full bg-primary-400 align-baseline"
             />
           </h1>
         </Reveal>
@@ -89,7 +89,7 @@ export default function AboutPage() {
           <ul className="mt-medium flex flex-col gap-small">
             {hobbies.map((item) => (
               <li key={item} className="flex items-start gap-2">
-                <span aria-hidden="true" className="shrink-0 text-primary-500">
+                <span aria-hidden="true" className="shrink-0 text-primary-400">
                   —
                 </span>
                 <span>{item}</span>
