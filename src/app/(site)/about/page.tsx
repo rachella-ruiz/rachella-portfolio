@@ -30,59 +30,73 @@ const hobbies = [
 export default function AboutPage() {
   return (
     <>
-      {/* Contenedor centrado MÁS ESTRECHO que el ancho por defecto. pt-xhuge para
-          que el titular quede cómodamente bajo el navbar fijo. */}
-      <div className="mx-auto max-w-[75rem] px-large pt-[var(--space-xhuge)]">
-        {/* Misma estructura de dos columnas que SelectedWork (25/75, mismo gap,
-            izquierda sticky), pero colapsa a una columna en ≤991px. */}
-        <div className="grid grid-cols-1 gap-xlarge min-[992px]:grid-cols-[minmax(min-content,1fr)_minmax(0,3fr)]">
-          {/* Columna izquierda sticky: titular + subtítulo */}
-          <div className="min-[992px]:sticky min-[992px]:top-[var(--space-xxl)] min-[992px]:self-start">
-            <Reveal className="flex flex-col gap-medium">
-              <h1 className="text-h1 font-primary font-semibold text-text-heading">
-                About
-                {/* Punto final coloreado (mismo tratamiento que SelectedWork). */}
-                <span className="text-primary-500">.</span>
-              </h1>
-              <p className="text-h6 font-primary font-semibold text-grey-400">
-                The journey that has shaped my work
-              </p>
-            </Reveal>
+      {/* Estructura CENTRADA en una columna estrecha (sustituye a las dos
+          columnas). pt-xhuge libra el navbar fijo; gutter por px-large. */}
+      <div className="mx-auto max-w-[52rem] px-large pt-[var(--space-xhuge)]">
+        {/* Cabecera centrada: eyebrow morado + titular con dot redondo. */}
+        <Reveal className="flex flex-col items-center gap-medium text-center">
+          <p className="text-overline font-secondary uppercase tracking-overline text-primary-500">
+            The journey that has shaped my work
+          </p>
+          {/* Titular display centrado. El clamp sube el tamaño por encima de h1
+              (no hay token mayor) para llenar la columna como en la referencia;
+              line-height/tracking/weight siguen de text-h1. */}
+          <h1
+            className="text-h1 font-primary font-semibold text-text-heading"
+            style={{ fontSize: "clamp(var(--size-h1), 14vw, 11rem)" }}
+          >
+            About
+            {/* Dot redondo de marca (primary-500), no un punto de texto.
+                Tamaño en em → escala con el titular. */}
+            <span
+              aria-hidden="true"
+              className="ml-[0.04em] inline-block h-[0.16em] w-[0.16em] rounded-full bg-primary-500 align-baseline"
+            />
+          </h1>
+        </Reveal>
+
+        {/* Contenido centrado en la columna, texto alineado a la izquierda. */}
+        <Reveal className="mt-xlarge text-body-lg leading-body text-text-primary">
+          <div className="flex flex-col gap-medium">
+            <p>{paragraphs[0]}</p>
+            <p>{paragraphs[1]}</p>
+            {/* P3 con el título en cursiva */}
+            <p>
+              In 2021 I moved to Spain, completed a master&rsquo;s in UX Design
+              and Web Development, and immediately embedded myself in the fintech
+              and legal sectors. In 2023 I co-founded LegalES, a legal tech
+              company supporting immigrants through Spain&rsquo;s bureaucratic
+              processes. I led the entire digital strategy: product, platform,
+              brand, and growth. The tool we built, <em>¿Cómo va mi asilo?</em>,
+              let asylum seekers check the status of their case in seconds
+              instead of navigating the process blind, and became widely adopted
+              within a community of 120K people.
+            </p>
+            <p>{paragraphs[2]}</p>
+            <p>{paragraphs[3]}</p>
+            <p>{paragraphs[4]}</p>
+            <p>{paragraphs[5]}</p>
           </div>
 
-          {/* Columna derecha: contenido */}
-          <Reveal className="text-body-lg leading-body text-text-primary">
-            <div className="flex flex-col gap-medium">
-              <p>{paragraphs[0]}</p>
-              <p>{paragraphs[1]}</p>
-              {/* P3 con el título en cursiva */}
-              <p>
-                In 2021 I moved to Spain, completed a master&rsquo;s in UX Design
-                and Web Development, and immediately embedded myself in the
-                fintech and legal sectors. In 2023 I co-founded LegalES, a legal
-                tech company supporting immigrants through Spain&rsquo;s
-                bureaucratic processes. I led the entire digital strategy:
-                product, platform, brand, and growth. The tool we built,{" "}
-                <em>¿Cómo va mi asilo?</em>, let asylum seekers check the status
-                of their case in seconds instead of navigating the process blind,
-                and became widely adopted within a community of 120K people.
-              </p>
-              <p>{paragraphs[2]}</p>
-              <p>{paragraphs[3]}</p>
-              <p>{paragraphs[4]}</p>
-              <p>{paragraphs[5]}</p>
-            </div>
-
-            <h2 className="mt-large text-h5 font-primary font-semibold text-text-heading">
-              When I&rsquo;m not working:
-            </h2>
-            <ul className="mt-medium list-disc space-y-small pl-5">
-              {hobbies.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
-          </Reveal>
-        </div>
+          {/* Divisor sutil + heading + lista con marcador "—" morado. */}
+          <div
+            aria-hidden="true"
+            className="my-large h-px w-full bg-grey-800"
+          />
+          <h2 className="text-h5 font-primary font-semibold text-text-heading">
+            When I&rsquo;m not working:
+          </h2>
+          <ul className="mt-medium flex flex-col gap-small">
+            {hobbies.map((item) => (
+              <li key={item} className="flex items-start gap-2">
+                <span aria-hidden="true" className="shrink-0 text-primary-500">
+                  —
+                </span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </Reveal>
       </div>
 
       {/* Galería full-bleed (rompe el contenedor estrecho). Entrada compartida. */}
