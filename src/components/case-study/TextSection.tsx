@@ -13,7 +13,7 @@ export default function TextSection({
 }) {
   const columns = section.columns ?? 2;
   return (
-    <div className="px-large">
+    <div className="mx-auto max-w-[75rem] px-large">
       <SplitLayout
         left={
           <div>

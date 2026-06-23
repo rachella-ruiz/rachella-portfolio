@@ -13,7 +13,7 @@ export default function NextCase({ currentSlug }: { currentSlug: string }) {
   return (
     <Link
       href={`/work/${next.slug}`}
-      className="block px-large text-center"
+      className="mx-auto block max-w-[36rem] px-large text-center"
     >
       <div className="flex flex-wrap items-center justify-center gap-small">
         <span className="text-overline font-secondary uppercase text-text-tertiary">

@@ -1,16 +1,17 @@
 import type { CaseStudy } from "@/data/case-studies/types";
 import Media from "./Media";
 
-// Case-study header inside the 75rem container: pill + overline row, large H1
-// on the left with the intro in a right-hand column, a wrapping row of tag
-// pills, then the hero media (contained, full-width inside the container).
+// Case-study header inside the 75rem container: pill + overline row, the H1
+// (H3 type scale) on the left with the intro (tertiary) in a right-hand column,
+// a wrapping row of tag pills, then the hero media (contained inside the container).
+// Rows are 1rem (--space-small) apart.
 export default function CaseHeader({
   header,
 }: {
   header: CaseStudy["header"];
 }) {
   return (
-    <header className="px-large">
+    <header className="mx-auto max-w-[75rem] px-large">
       {/* Pill (glass + leading dot) + overline */}
       <div className="flex flex-wrap items-center gap-small">
         <span className="inline-flex items-center gap-2 rounded-full bg-[var(--opacity-10)] px-3 py-1.5 backdrop-blur-md">
@@ -24,19 +25,21 @@ export default function CaseHeader({
         </span>
       </div>
 
-      {/* Title (left ~60%) + intro (right ~40% column, aligned lower) */}
-      <div className="mt-large grid grid-cols-1 gap-xlarge min-[992px]:grid-cols-[3fr_2fr]">
-        <h1 className="text-h1 font-primary font-semibold text-text-heading">
+      {/* Title (left ~60%, H3 scale) + intro (right ~40% column, aligned lower).
+          mt-small (1rem) = gap to the pill/overline row above. */}
+      <div className="mt-small grid grid-cols-1 gap-xlarge min-[992px]:grid-cols-[3fr_2fr]">
+        <h1 className="text-h3 font-primary font-semibold text-text-heading">
           {header.title}
         </h1>
-        <p className="text-body-lg leading-body text-text-primary min-[992px]:self-end">
+        <p className="text-body-lg leading-body text-text-tertiary min-[992px]:self-end">
           {header.intro}
         </p>
       </div>
 
-      {/* Tag pills */}
+      {/* Tag pills. mt-small (1rem) = gap to the H1 row above; gap-xsmall (0.5rem)
+          between individual pills (row + column, since they wrap). */}
       {header.tags.length > 0 && (
-        <ul className="mt-large flex flex-wrap gap-small">
+        <ul className="mt-small flex flex-wrap gap-xsmall">
           {header.tags.map((tag) => (
             <li
               key={tag}

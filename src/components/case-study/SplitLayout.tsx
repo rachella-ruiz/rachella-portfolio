@@ -18,7 +18,7 @@ export default function SplitLayout({
 }) {
   return (
     <div
-      className="grid grid-cols-1 gap-xlarge min-[992px]:grid-cols-[var(--split-cols)] min-[992px]:gap-[var(--space-xlarge)]"
+      className="grid grid-cols-1 gap-xlarge min-[992px]:grid-cols-[var(--split-cols)] min-[992px]:gap-[var(--space-xxlarge)]"
       style={{ "--split-cols": ratio } as CSSProperties}
     >
       {/* DOM order stays left→right so desktop columns are deterministic;
