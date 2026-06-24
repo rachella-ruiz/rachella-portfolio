@@ -108,22 +108,25 @@ export default function MenuOverlay({
             className="absolute right-0 top-0 h-full w-full overflow-hidden p-3 md:w-1/2"
           >
             {/* Card interna "menu_content": blanca, flex col, space-between, gap 2rem,
-                altura 100% del shell. Padding desktop 5rem/2.25rem; en móvil se reduce
-                (top 4rem, lados 1.25rem, bottom 1.5rem) para ganar ancho de contenido. */}
-            <div className="relative flex h-full w-full flex-col items-start justify-between gap-medium overflow-hidden rounded-xxlarge bg-white px-[1.25rem] pb-[1.5rem] pt-[4rem] text-grey-1000 md:px-[2.25rem] md:pb-[2.25rem] md:pt-xxlarge">
+                altura 100% del shell. Padding lateral = px-large (sistema global:
+                1rem en móvil ≤479, 3rem en desktop) — igual que páginas y footer.
+                Vertical sin cambios (top 4rem→xxlarge, bottom 1.5rem→2.25rem). */}
+            <div className="relative flex h-full w-full flex-col items-start justify-between gap-medium overflow-hidden rounded-xxlarge bg-white px-large pb-[1.5rem] pt-[4rem] text-grey-1000 md:pb-[2.25rem] md:pt-xxlarge">
               {/* Botón de cierre 4rem (absoluto arriba-derecha; entra al final ~0.70s).
-                  Su `right` iguala el padding lateral del menu_content en cada breakpoint,
-                  así su borde derecho cae sobre el borde derecho del contenido. */}
+                  Fila full-width con px-large + justify-end: el borde derecho de la X
+                  cae sobre el borde del contenido (= borde de los enlaces) en cada
+                  breakpoint, siguiendo px-large sin valores hardcodeados. Vertical
+                  (top) sin cambios. pointer-events-none en la fila para no bloquear. */}
               <motion.div
                 variants={itemVariants}
                 custom={0.7}
-                className="absolute right-[1.25rem] top-[1.25rem] md:right-[2.25rem] md:top-[2.25rem]"
+                className="pointer-events-none absolute inset-x-0 top-[1.25rem] flex justify-end px-large md:top-[2.25rem]"
               >
                 <button
                   type="button"
                   onClick={onClose}
                   aria-label="Cerrar menú"
-                  className="flex h-xlarge w-xlarge items-center justify-center rounded-full bg-grey-100 p-0 text-grey-900 transition-colors hover:bg-grey-200"
+                  className="pointer-events-auto flex h-xlarge w-xlarge items-center justify-center rounded-full bg-grey-100 p-0 text-grey-900 transition-colors hover:bg-grey-200"
                 >
                   <svg
                     viewBox="0 0 24 24"
