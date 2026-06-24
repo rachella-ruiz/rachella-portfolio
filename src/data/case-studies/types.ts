@@ -54,7 +54,6 @@ export interface ProcessSection {
   overline: string; // e.g. "LEAN UX"
   heading: string; // e.g. "Design Process"
   steps: ProcessStep[];
-  media?: MediaItem[]; // stacked on the right; may mix embeds and images
 }
 
 export interface MediaSection {

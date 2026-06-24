@@ -2,16 +2,15 @@ import type { TextSection as TextSectionData } from "@/data/case-studies/types";
 import RichText from "./RichText";
 import SplitLayout from "./SplitLayout";
 
-// 25/75 grid in the 75rem container (matching SelectedWork). Left 25%: the label
-// (and optional heading), top-aligned, NOT sticky. Right 75%: the body via
-// RichText. columns===2 (default) flows the body in two CSS columns on desktop,
-// collapsing to one ≤991px; bullet items use break-inside:avoid (in RichText).
+// 25/75 grid in the full-width container (matching SelectedWork). Left 25%: the
+// label (and optional heading), top-aligned, NOT sticky. Right 75%: the body via
+// RichText, ALWAYS a single column at every breakpoint. The `columns?` field is
+// kept in the type for back-compat but no longer changes the layout.
 export default function TextSection({
   section,
 }: {
   section: TextSectionData;
 }) {
-  const columns = section.columns ?? 2;
   return (
     <div className="px-large">
       <SplitLayout
@@ -30,11 +29,7 @@ export default function TextSection({
         right={
           <RichText
             items={section.body}
-            className={`text-body-lg leading-body text-text-primary${
-              columns === 2
-                ? " min-[992px]:columns-2 min-[992px]:[column-gap:var(--space-xlarge)]"
-                : ""
-            }`}
+            className="text-body-lg leading-body text-text-primary"
           />
         }
       />

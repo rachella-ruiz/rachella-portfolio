@@ -129,6 +129,11 @@
   /* ---------- Color: accent ---------- */
   --color-accent: #cedb8e;
 
+  /* ---------- Color: surface (semántico) ---------- */
+  /* Fondo sutil de las cards sobre secciones oscuras (3% blanco, exacto — NO
+     redondear a 5%). Única fuente de verdad para fondos de card. */
+  --surface-card: rgba(255, 255, 255, 0.03);
+
   /* ---------- Color: texto (semántico) ---------- */
   --text-primary: var(--grey-100);
   --text-secondary: var(--grey-300);

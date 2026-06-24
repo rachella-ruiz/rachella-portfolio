@@ -87,13 +87,25 @@ export const fynce: CaseStudy = {
           ],
         },
       ],
-      media: [
+    },
+    {
+      kind: "media",
+      layout: "single",
+      fullBleed: false,
+      items: [
         {
           type: "embed",
           src: "https://whimsical.com/embed/VH3P6CkZAkdfkEKRx5FkaM",
           title: "Fynce user flow diagrams",
           ratio: "16 / 9",
         },
+      ],
+    },
+    {
+      kind: "media",
+      layout: "single",
+      fullBleed: false,
+      items: [
         {
           type: "image",
           src: "/work/fynce/fynce-design-system.jpg",
