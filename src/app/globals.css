@@ -112,6 +112,11 @@
   --text-body--letter-spacing: var(--tracking-body);
   --text-body--font-weight: var(--weight-regular);
 
+  --text-body-md: var(--size-body-md);
+  --text-body-md--line-height: var(--leading-body);
+  --text-body-md--letter-spacing: var(--tracking-body);
+  --text-body-md--font-weight: var(--weight-regular);
+
   --text-body-sm: var(--size-body-sm);
   --text-body-sm--line-height: var(--leading-body-sm);
   --text-body-sm--letter-spacing: var(--tracking-body-sm);

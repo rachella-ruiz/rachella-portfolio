@@ -34,14 +34,17 @@ export default async function WorkDetailPage({
       <div className="mt-section-medium flex flex-col">
         {caseStudy.sections.map((section, i) => {
           const prev = caseStudy.sections[i - 1];
-          // Consecutive medium-width media blocks (the Design Process artifacts)
-          // sit tight (--space-small) instead of the default section gap.
-          const tight =
-            section.kind === "media" &&
-            section.width === "medium" &&
-            prev?.kind === "media" &&
-            prev.width === "medium";
-          const spacing = i === 0 ? "" : tight ? "mt-small" : "mt-section-medium";
+          // Medium-width media are the Design Process artifacts. They belong to
+          // that block, so the FIRST one hugs the cards with the same rhythm as
+          // the heading→cards gap (--space-large via mt-large); subsequent ones
+          // stack tight (--space-small). Everything else uses the section gap.
+          const isMediumMedia =
+            section.kind === "media" && section.width === "medium";
+          const prevIsMediumMedia =
+            prev?.kind === "media" && prev.width === "medium";
+          let spacing = "mt-section-medium";
+          if (i === 0) spacing = "";
+          else if (isMediumMedia) spacing = prevIsMediumMedia ? "mt-small" : "mt-large";
           return (
             <Reveal key={i} className={spacing}>
               {section.kind === "text" ? (
