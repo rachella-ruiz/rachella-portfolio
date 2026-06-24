@@ -10,7 +10,7 @@ export default function ProcessSteps({
   section: ProcessSectionData;
 }) {
   return (
-    <div className="px-large">
+    <div className="mx-auto max-w-[var(--container-medium)] px-large">
       {/* Cabecera centrada: overline (secundaria) + heading. */}
       <div className="flex flex-col items-center text-center">
         <p className="text-overline font-secondary uppercase text-text-tertiary">

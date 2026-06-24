@@ -193,6 +193,12 @@
   --radius-large: 1.125rem;
   --radius-xxlarge: 1.5rem;
   --radius-ultra: 3rem;
+
+  /* ---------- Layout widths ----------
+     Sistema de dos anchos: las secciones FULL-WIDTH usan la utilidad de padding
+     `px-large` (solo gutter, sin tope); las secciones CONSTRAINED usan
+     --container-medium (75rem), centradas. Se leen como un mismo sistema. */
+  --container-medium: 75rem; /* 1200px — max-width de text sections y Design Process */
 }
 
 /* ============================================================

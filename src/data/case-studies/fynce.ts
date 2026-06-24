@@ -116,7 +116,8 @@ export const fynce: CaseStudy = {
     {
       kind: "media",
       layout: "single",
-      fullBleed: true,
+      // px-large (same width treatment as the hero); not full-bleed/edge-to-edge.
+      fullBleed: false,
       items: [
         {
           type: "image",

@@ -2,17 +2,17 @@ import type { TextSection as TextSectionData } from "@/data/case-studies/types";
 import RichText from "./RichText";
 import SplitLayout from "./SplitLayout";
 
-// 25/75 grid in the full-width container (matching SelectedWork). Left 25%: the
-// label (and optional heading), top-aligned, NOT sticky. Right 75%: the body via
-// RichText, ALWAYS a single column at every breakpoint. The `columns?` field is
-// kept in the type for back-compat but no longer changes the layout.
+// 25/75 grid inside the MEDIUM container (--container-medium, 75rem, centered).
+// Left 25%: the label (and optional heading), top-aligned, NOT sticky. Right 75%:
+// the body via RichText, ALWAYS a single column at every breakpoint. The
+// `columns?` field is kept in the type for back-compat but no longer changes it.
 export default function TextSection({
   section,
 }: {
   section: TextSectionData;
 }) {
   return (
-    <div className="px-large">
+    <div className="mx-auto max-w-[var(--container-medium)] px-large">
       <SplitLayout
         left={
           <div>

@@ -25,9 +25,10 @@ export default function CaseHeader({
         </span>
       </div>
 
-      {/* Title (left ~60%, H3 scale) + intro (right ~40% column, aligned lower).
+      {/* Title (left 50%, H3 scale) + intro (right 50% column, bottom-aligned:
+          self-end pushes its last line to the bottom of the H1 block).
           mt-small (1rem) = gap to the pill/overline row above. */}
-      <div className="mt-small grid grid-cols-1 gap-xlarge min-[992px]:grid-cols-[3fr_2fr]">
+      <div className="mt-small grid grid-cols-1 gap-xlarge min-[992px]:grid-cols-2">
         <h1 className="text-h3 font-primary font-semibold text-text-heading">
           {header.title}
         </h1>
@@ -36,10 +37,10 @@ export default function CaseHeader({
         </p>
       </div>
 
-      {/* Tag pills. mt-small (1rem) = gap to the H1 row above; gap-xsmall (0.5rem)
-          between individual pills (row + column, since they wrap). */}
+      {/* Tag pills. mt-large (3rem = --space-large) = gap to the H1 row above;
+          gap-xsmall (0.5rem) between individual pills (row + column, they wrap). */}
       {header.tags.length > 0 && (
-        <ul className="mt-small flex flex-wrap gap-xsmall">
+        <ul className="mt-large flex flex-wrap gap-xsmall">
           {header.tags.map((tag) => (
             <li
               key={tag}
