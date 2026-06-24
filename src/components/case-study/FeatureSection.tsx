@@ -27,8 +27,15 @@ export default function FeatureSection({
   );
   const media = <Media item={section.media} />;
 
+  // medium = --container-medium (75rem) centered (same system as MediaBand /
+  // TextSection); full (default) = px-large gutter.
+  const outerClass =
+    section.width === "medium"
+      ? "mx-auto max-w-[var(--container-medium)] px-large"
+      : "px-large";
+
   return (
-    <div className="px-large">
+    <div className={outerClass}>
       <SplitLayout
         ratio="minmax(0,1fr) minmax(0,1fr)"
         left={mediaOnLeft ? media : text}

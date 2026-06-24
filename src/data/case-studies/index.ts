@@ -1,4 +1,5 @@
 import type { CaseStudy } from "./types";
+import { cvma } from "./cvma";
 import { fynce } from "./fynce";
 
 // The registry is the ONLY boundary where case content is loaded. Components
@@ -6,4 +7,5 @@ import { fynce } from "./fynce";
 // individual case file directly — so the content format stays swappable.
 export const caseStudies: Record<string, CaseStudy> = {
   fynce,
+  "como-va-mi-asilo": cvma,
 };

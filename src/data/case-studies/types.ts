@@ -71,6 +71,7 @@ export interface FeatureSection {
   body: BodyItem[]; // paragraphs + bullet lists, may contain **bold**
   media: MediaItem; // a single media item beside the text
   mediaSide?: "left" | "right"; // which side the media sits on (desktop); default "right"
+  width?: "full" | "medium"; // section width; default "full" (px-large). "medium" = --container-medium (75rem), centered
 }
 
 export type CaseSection =
