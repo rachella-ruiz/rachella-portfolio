@@ -59,7 +59,8 @@ export interface ProcessSection {
 export interface MediaSection {
   kind: "media";
   layout: "single" | "pair" | "grid";
-  fullBleed?: boolean; // default false
+  width?: "full" | "medium"; // section width; default "full" (px-large). "medium" = --container-medium (75rem), centered
+  fullBleed?: boolean; // default false (only applies when width is "full")
   caption?: string; // optional band-level caption (per-item captions live on MediaItem)
   items: MediaItem[];
 }

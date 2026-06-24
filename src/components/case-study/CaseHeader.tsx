@@ -25,32 +25,39 @@ export default function CaseHeader({
         </span>
       </div>
 
-      {/* Title (left 50%, H3 scale) + intro (right 50% column, bottom-aligned:
-          self-end pushes its last line to the bottom of the H1 block).
+      {/* Two equal-height columns (50/50, grid stretch). LEFT: H1 at the top and
+          the tag pills anchored to the BOTTOM. RIGHT: the intro anchored to the
+          BOTTOM. So pills (left) and intro (right) share the same bottom baseline.
           mt-small (1rem) = gap to the pill/overline row above. */}
       <div className="mt-small grid grid-cols-1 gap-xlarge min-[992px]:grid-cols-2">
-        <h1 className="text-h3 font-primary font-semibold text-text-heading">
-          {header.title}
-        </h1>
-        <p className="text-body-lg leading-body text-text-tertiary min-[992px]:self-end">
-          {header.intro}
-        </p>
-      </div>
+        {/* LEFT: flex column. gap-large = the MINIMUM gap between H1 and pills;
+            justify-between (desktop) pushes the pills to the bottom when the
+            column is stretched to match the right one. */}
+        <div className="flex flex-col gap-large min-[992px]:justify-between">
+          <h1 className="text-h3 font-primary font-semibold text-text-heading">
+            {header.title}
+          </h1>
+          {header.tags.length > 0 && (
+            <ul className="flex flex-wrap gap-xsmall">
+              {header.tags.map((tag) => (
+                <li
+                  key={tag}
+                  className="rounded-full border border-[var(--opacity-15)] px-3 py-1.5 text-button-sm font-primary text-text-secondary"
+                >
+                  {tag}
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
 
-      {/* Tag pills. mt-large (3rem = --space-large) = gap to the H1 row above;
-          gap-xsmall (0.5rem) between individual pills (row + column, they wrap). */}
-      {header.tags.length > 0 && (
-        <ul className="mt-large flex flex-wrap gap-xsmall">
-          {header.tags.map((tag) => (
-            <li
-              key={tag}
-              className="rounded-full border border-[var(--opacity-15)] px-3 py-1.5 text-button-sm font-primary text-text-secondary"
-            >
-              {tag}
-            </li>
-          ))}
-        </ul>
-      )}
+        {/* RIGHT: intro anchored to the bottom of the column (justify-end). */}
+        <div className="flex flex-col min-[992px]:justify-end">
+          <p className="text-body-lg leading-body text-text-tertiary">
+            {header.intro}
+          </p>
+        </div>
+      </div>
 
       {/* Hero media: contained full-width inside the container */}
       <div className="mt-xlarge">

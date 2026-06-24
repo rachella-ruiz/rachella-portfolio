@@ -31,7 +31,7 @@ export default function ProcessSteps({
             <p className="text-body-lg font-semibold text-text-heading">
               {step.number}. {step.title}
             </p>
-            <ul className="mt-small list-disc space-y-small pl-5 text-body-lg leading-body text-text-primary">
+            <ul className="mt-small list-disc space-y-small pl-5 text-body-sm leading-body text-text-primary">
               {step.bullets.map((bullet, i) => (
                 <li key={i}>{bullet}</li>
               ))}

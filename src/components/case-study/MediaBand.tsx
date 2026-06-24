@@ -16,11 +16,18 @@ export default function MediaBand({
 }: {
   section: MediaSectionData;
 }) {
+  const width = section.width ?? "full";
   const fullBleed = section.fullBleed ?? false;
-  // Contained = the site's full-width px-large gutter (same as the other case
-  // sections). Full-bleed = edge-to-edge (no gutter), so it spans wider still.
+  // medium = --container-medium (75rem) centered, matching TextSection/ProcessSteps.
+  // full (default): px-large gutter, or w-full edge-to-edge when fullBleed.
+  const outerClass =
+    width === "medium"
+      ? "mx-auto max-w-[var(--container-medium)] px-large"
+      : fullBleed
+        ? "w-full"
+        : "px-large";
   return (
-    <div className={fullBleed ? "w-full" : "px-large"}>
+    <div className={outerClass}>
       <div className={LAYOUT_CLASS[section.layout]}>
         {section.items.map((item, i) => (
           <Media key={i} item={item} />

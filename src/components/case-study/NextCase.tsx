@@ -1,11 +1,19 @@
+"use client";
+
 /* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
+import CursorFollowPill, {
+  useCursorFollow,
+} from "@/components/motion/CursorFollowPill";
 import { projects } from "@/data/projects";
 
 // Next case is derived from projects.ts array order, wrapping last → first.
 // The whole block links to the next project's case page. Renders nothing if the
-// current slug isn't found (defensive).
+// current slug isn't found (defensive). The image carries the same cursor-follow
+// "VIEW WORK" pill hover as the home WorkCards (shared CursorFollowPill).
 export default function NextCase({ currentSlug }: { currentSlug: string }) {
+  const { x, y, onMouseMove } = useCursorFollow();
+
   const index = projects.findIndex((p) => p.slug === currentSlug);
   if (index === -1) return null;
   const next = projects[(index + 1) % projects.length];
@@ -29,11 +37,18 @@ export default function NextCase({ currentSlug }: { currentSlug: string }) {
             </span>
           </span>
         </div>
-        <img
-          src={next.image}
-          alt={next.name}
-          className="mt-large block h-auto w-full rounded-large"
-        />
+        {/* Image = cursor-follow hover target (same behavior as the home cards). */}
+        <div
+          onMouseMove={onMouseMove}
+          className="group relative mt-large overflow-hidden rounded-large"
+        >
+          <img
+            src={next.image}
+            alt={next.name}
+            className="block h-auto w-full"
+          />
+          <CursorFollowPill x={x} y={y} label="View work" />
+        </div>
       </Link>
     </div>
   );

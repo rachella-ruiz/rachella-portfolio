@@ -31,20 +31,31 @@ export default async function WorkDetailPage({
         <CaseHeader header={caseStudy.header} />
       </Reveal>
 
-      <div className="mt-section-medium flex flex-col gap-section-medium">
-        {caseStudy.sections.map((section, i) => (
-          <Reveal key={i}>
-            {section.kind === "text" ? (
-              <TextSection section={section} />
-            ) : section.kind === "process" ? (
-              <ProcessSteps section={section} />
-            ) : section.kind === "media" ? (
-              <MediaBand section={section} />
-            ) : (
-              <FeatureSection section={section} />
-            )}
-          </Reveal>
-        ))}
+      <div className="mt-section-medium flex flex-col">
+        {caseStudy.sections.map((section, i) => {
+          const prev = caseStudy.sections[i - 1];
+          // Consecutive medium-width media blocks (the Design Process artifacts)
+          // sit tight (--space-small) instead of the default section gap.
+          const tight =
+            section.kind === "media" &&
+            section.width === "medium" &&
+            prev?.kind === "media" &&
+            prev.width === "medium";
+          const spacing = i === 0 ? "" : tight ? "mt-small" : "mt-section-medium";
+          return (
+            <Reveal key={i} className={spacing}>
+              {section.kind === "text" ? (
+                <TextSection section={section} />
+              ) : section.kind === "process" ? (
+                <ProcessSteps section={section} />
+              ) : section.kind === "media" ? (
+                <MediaBand section={section} />
+              ) : (
+                <FeatureSection section={section} />
+              )}
+            </Reveal>
+          );
+        })}
       </div>
 
       <Reveal className="mt-section-medium">

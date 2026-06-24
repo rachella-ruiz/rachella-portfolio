@@ -91,7 +91,8 @@ export const fynce: CaseStudy = {
     {
       kind: "media",
       layout: "single",
-      fullBleed: false,
+      // Artifact of the Design Process block → same medium width (75rem).
+      width: "medium",
       items: [
         {
           type: "embed",
@@ -104,7 +105,8 @@ export const fynce: CaseStudy = {
     {
       kind: "media",
       layout: "single",
-      fullBleed: false,
+      // Artifact of the Design Process block → same medium width (75rem).
+      width: "medium",
       items: [
         {
           type: "image",

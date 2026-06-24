@@ -1,15 +1,12 @@
 "use client";
 
-import {
-  cubicBezier,
-  motion,
-  useMotionValue,
-  useScroll,
-  useTransform,
-} from "motion/react";
+import { cubicBezier, motion, useScroll, useTransform } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRef, useState } from "react";
+import CursorFollowPill, {
+  useCursorFollow,
+} from "@/components/motion/CursorFollowPill";
 import type { Project } from "@/data/projects";
 
 // Ease-out cúbico (mismo del sitio) para el translateY ligado al scroll.
@@ -35,14 +32,8 @@ export default function WorkCard({ project }: { project: Project }) {
   const rotateX = useTransform(scrollYProgress, [0, 0.5, 1], [100, 0, 0]);
   const scale = useTransform(scrollYProgress, [0, 0.5, 1], [1.1, 1, 0.9]);
 
-  // Posición del cursor (motion values → no re-renderiza por píxel).
-  const mx = useMotionValue(0);
-  const my = useMotionValue(0);
-  const handleMove = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    const r = e.currentTarget.getBoundingClientRect();
-    mx.set(e.clientX - r.left);
-    my.set(e.clientY - r.top);
-  };
+  // Etiqueta "VIEW WORK" que sigue al cursor (lógica compartida con Next case).
+  const { x, y, onMouseMove } = useCursorFollow();
 
   const [imgError, setImgError] = useState(false);
 
@@ -53,7 +44,7 @@ export default function WorkCard({ project }: { project: Project }) {
     >
       <Link
         href={`/work/${project.slug}`}
-        onMouseMove={handleMove}
+        onMouseMove={onMouseMove}
         aria-label={project.name}
         className="group relative block aspect-[16/9] cursor-pointer overflow-hidden rounded-large bg-grey-800"
       >
@@ -83,14 +74,7 @@ export default function WorkCard({ project }: { project: Project }) {
         </span>
 
         {/* "VIEW WORK" que sigue al cursor (fade in en hover; no bloquea el link). */}
-        <motion.div
-          style={{ x: mx, y: my }}
-          className="pointer-events-none absolute left-0 top-0 z-20"
-        >
-          <span className="inline-block -translate-x-1/2 -translate-y-1/2 rounded-full bg-black/60 px-3 py-1.5 text-overline font-secondary uppercase tracking-overline text-white opacity-0 backdrop-blur-md transition-opacity duration-300 ease-out group-hover:opacity-100">
-            View work
-          </span>
-        </motion.div>
+        <CursorFollowPill x={x} y={y} label="View work" />
       </Link>
     </motion.div>
   );
