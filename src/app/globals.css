@@ -324,3 +324,16 @@ body {
     animation: none;
   }
 }
+
+/* Móvil (≤479px): el gutter lateral de página (px-large) baja a 1rem
+   (--space-small). Solo se reduce el padding horizontal de página; NO se toca
+   --space-large, así que gap-large / mt-large (ritmo vertical, gaps del header)
+   conservan su valor. Aplica en todas las páginas, el footer y demás secciones
+   que usan px-large.
+   Selector .px-large doblado a propósito: sube la especificidad para ganar a la
+   utility de Tailwind y evita que el motor lo trate como utility y lo regenere. */
+@media (max-width: 479px) {
+  .px-large.px-large {
+    padding-inline: var(--space-small);
+  }
+}
