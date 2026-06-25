@@ -11,15 +11,18 @@ import WorkCard from "./WorkCard";
 // lo renderiza con showViewAll={false}).
 export default function SelectedWork({
   showViewAll = true,
+  stickyTop = "var(--space-xxl)",
 }: {
   showViewAll?: boolean;
+  // Offset `top` de la columna sticky. Default = valor original (Home no cambia).
+  // Se aplica inline porque el valor es dinámico (no se puede JIT como clase).
+  stickyTop?: string;
 }) {
   return (
     <div className="grid grid-cols-1 gap-xlarge md:grid-cols-[minmax(min-content,1fr)_minmax(0,3fr)]">
       {/* Columna izquierda sticky (~25%). min-content evita que el titular se
-          recorte. Sticky offset = space-xxl (6rem) en el `top` (sin margin-top,
-          para no duplicar el hueco). */}
-      <div className="md:sticky md:top-[var(--space-xxl)] md:self-start">
+          recorte. El `top` (offset sticky) llega por `stickyTop` (inline). */}
+      <div className="md:sticky md:self-start" style={{ top: stickyTop }}>
         {/* El bloque de texto entra con la animación compartida al hacer scroll. */}
         <Reveal className="flex flex-col gap-medium">
           {/* Tamaño fluido: el titular se encoge con el ancho (columna ~25%) para

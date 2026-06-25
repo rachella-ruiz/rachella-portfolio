@@ -14,7 +14,12 @@ export const metadata: Metadata = {
 export default function WorkPage() {
   return (
     <section className="px-large pt-[var(--space-xhuge)] pb-section-small">
-      <SelectedWork showViewAll={false} />
+      {/* Sticky top = limpieza del navbar + gap superior de página (GROUP B,
+          --space-xhuge), para que la columna quede fijada desde scroll=0. */}
+      <SelectedWork
+        showViewAll={false}
+        stickyTop="calc(var(--nav-height) + var(--space-xhuge))"
+      />
     </section>
   );
 }
