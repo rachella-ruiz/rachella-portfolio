@@ -31,7 +31,7 @@ export default function Nav() {
           El contenido se compensa con padding-top en SiteLayout.
           Al abrir el menú se oculta para dejar libre la X del overlay. */}
       <header
-        className={`fixed inset-x-0 top-0 z-[100] w-full border-b border-dotted border-grey-600 bg-black transition-opacity duration-300 ${
+        className={`fixed inset-x-0 top-0 z-[100] w-full border-b border-grey-800 bg-black transition-opacity duration-300 ${
           open ? "pointer-events-none opacity-0" : "opacity-100"
         }`}
       >
