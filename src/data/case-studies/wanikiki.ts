@@ -140,7 +140,8 @@ export const wanikiki: CaseStudy = {
           type: "image",
           src: "/work/wanikiki/wanikiki-2021.jpg",
           alt: "A grid of the original 2021 Wanikiki product screens on a dark background.",
-          caption: "The original product launched in 2021",
+          caption:
+            "The original product launched in 2021. The experience was primarily designed around the sender, while most delivery coordination remained operational rather than productized.",
         },
       ],
     },
