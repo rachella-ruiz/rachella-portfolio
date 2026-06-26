@@ -156,9 +156,9 @@ export default function MenuOverlay({
                 {links.map((link) => {
                   const active = isActive(link.href, link.nested);
                   // Card blanca → dirección inversa a la navbar: reposo grey-1000
-                  // (oscuro) → hover grey-800 (un paso más claro). Activo = grey-800
-                  // (se queda en el color de hover para marcar "estás aquí").
-                  // transition-colors igual que los navlinks.
+                  // (oscuro) → hover grey-700 (salto de 3 pasos para que se perciba;
+                  // grey-700 ≈ 7.5:1 sobre blanco, AA). Activo = grey-700 (se queda
+                  // en el color de hover). transition-colors igual que los navlinks.
                   return (
                     <RollLink
                       key={link.href}
@@ -168,7 +168,7 @@ export default function MenuOverlay({
                       dotPosition="end"
                       active={active}
                       className={`text-h3 font-primary font-semibold transition-colors ${
-                        active ? "text-grey-800" : "text-grey-1000 hover:text-grey-800"
+                        active ? "text-grey-700" : "text-grey-1000 hover:text-grey-700"
                       }`}
                     />
                   );
