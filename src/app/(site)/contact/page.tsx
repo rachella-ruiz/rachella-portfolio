@@ -49,11 +49,14 @@ export default function ContactPage() {
           className="text-h1 font-primary font-semibold text-text-heading"
           style={{ fontSize: "clamp(var(--size-h1), 14vw, 11rem)" }}
         >
-          Contact
-          <span
-            aria-hidden="true"
-            className="ml-[0.04em] inline-block h-[0.16em] w-[0.16em] rounded-full bg-primary-400 align-baseline"
-          />
+          {/* Palabra + dot en un span whitespace-nowrap → el dot nunca orfana. */}
+          <span className="whitespace-nowrap">
+            Contact
+            <span
+              aria-hidden="true"
+              className="ml-[0.04em] inline-block h-[0.16em] w-[0.16em] rounded-full bg-primary-400 align-baseline"
+            />
+          </span>
         </h1>
       </Reveal>
 

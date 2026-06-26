@@ -19,24 +19,25 @@ export default function SelectedWork({
   stickyTop?: string;
 }) {
   return (
-    <div className="grid grid-cols-1 gap-xlarge md:grid-cols-[minmax(min-content,1fr)_minmax(0,3fr)]">
+    <div className="grid grid-cols-1 gap-xlarge md:grid-cols-[minmax(min-content,1fr)_minmax(0,2fr)]">
       {/* Columna izquierda sticky (~25%). min-content evita que el titular se
           recorte. El `top` (offset sticky) llega por `stickyTop` (inline). */}
       <div className="md:sticky md:self-start" style={{ top: stickyTop }}>
         {/* El bloque de texto entra con la animación compartida al hacer scroll. */}
         <Reveal className="flex flex-col gap-medium">
-          {/* Titular "Work." con el MISMO tamaño (text-h1, el token de About/
-              Contact) y el MISMO dot de acento redondo. Texto corto → cabe en la
-              columna ~25% sin romper el grid (a diferencia del viejo "Selected
-              Work."). No se aplica el clamp 14vw/11rem de About/Contact porque a
-              ese tamaño desbordaría la columna estrecha. */}
+          {/* Titular "Work." con el tamaño token h1 (= About/Contact) y el mismo
+              dot de acento. Columna a 33.33% (más ancha) para que respire. El clamp
+              14vw/11rem de About/Contact NO se aplica: desbordaría incluso 1/3 en
+              anchos desktop estrechos y rompería el ratio. La palabra + el dot van
+              en un span whitespace-nowrap para que el dot NUNCA caiga a otra línea. */}
           <h2 className="text-h1 font-primary font-semibold text-text-heading">
-            Work
-            {/* Dot redondo de marca (primary-400), idéntico a About/Contact. */}
-            <span
-              aria-hidden="true"
-              className="ml-[0.04em] inline-block h-[0.16em] w-[0.16em] rounded-full bg-primary-400 align-baseline"
-            />
+            <span className="whitespace-nowrap">
+              Work
+              <span
+                aria-hidden="true"
+                className="ml-[0.04em] inline-block h-[0.16em] w-[0.16em] rounded-full bg-primary-400 align-baseline"
+              />
+            </span>
           </h2>
 
           <p className="max-w-sm text-body text-text-tertiary">

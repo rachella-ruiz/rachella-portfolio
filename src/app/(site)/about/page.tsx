@@ -45,13 +45,15 @@ export default function AboutPage() {
             className="text-h1 font-primary font-semibold text-text-heading"
             style={{ fontSize: "clamp(var(--size-h1), 14vw, 11rem)" }}
           >
-            About
-            {/* Dot redondo de marca (primary-400), no un punto de texto.
-                Tamaño en em → escala con el titular. */}
-            <span
-              aria-hidden="true"
-              className="ml-[0.04em] inline-block h-[0.16em] w-[0.16em] rounded-full bg-primary-400 align-baseline"
-            />
+            {/* Palabra + dot en un span whitespace-nowrap → el dot nunca orfana
+                a otra línea. Dot redondo de marca (primary-400), tamaño en em. */}
+            <span className="whitespace-nowrap">
+              About
+              <span
+                aria-hidden="true"
+                className="ml-[0.04em] inline-block h-[0.16em] w-[0.16em] rounded-full bg-primary-400 align-baseline"
+              />
+            </span>
           </h1>
         </Reveal>
 
