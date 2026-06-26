@@ -154,9 +154,10 @@ export default function MenuOverlay({
               >
                 {links.map((link) => {
                   const active = isActive(link.href, link.nested);
-                  // Card blanca: el hover no cambia color (solo roll). El activo
-                  // se ve "más claro" con un gris medio (grey-500). Solo color;
-                  // la animación de roll sigue solo en hover.
+                  // Card blanca → dirección inversa a la navbar: reposo grey-1000
+                  // (oscuro) → hover grey-800 (un paso más claro). Activo = grey-800
+                  // (se queda en el color de hover para marcar "estás aquí").
+                  // transition-colors igual que los navlinks.
                   return (
                     <RollLink
                       key={link.href}
@@ -165,8 +166,8 @@ export default function MenuOverlay({
                       onClick={onClose}
                       dotPosition="end"
                       active={active}
-                      className={`text-h3 font-primary font-semibold ${
-                        active ? "text-grey-500" : "text-grey-1000"
+                      className={`text-h3 font-primary font-semibold transition-colors ${
+                        active ? "text-grey-800" : "text-grey-1000 hover:text-grey-800"
                       }`}
                     />
                   );
