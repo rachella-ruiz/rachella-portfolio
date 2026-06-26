@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import CaseHeader from "@/components/case-study/CaseHeader";
 import FeatureSection from "@/components/case-study/FeatureSection";
@@ -12,6 +13,26 @@ import { caseStudies } from "@/data/case-studies";
 // no static pages are generated yet — expected, not a bug.
 export function generateStaticParams() {
   return Object.keys(caseStudies).map((slug) => ({ slug }));
+}
+
+// Título por case study = nombre del proyecto (header.pill), única fuente en la
+// data del caso (sin mapa de slugs hardcodeado). El template del root añade
+// "| Rachella Ruiz" → "<Proyecto> | Rachella Ruiz". OG title = mismo nombre para
+// que los enlaces compartidos muestren el proyecto. (OG description hereda la del
+// sitio; header.intro existe pero es un intro largo, no una meta-descripción.)
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const caseStudy = caseStudies[slug];
+  if (!caseStudy) return {};
+  const name = caseStudy.header.pill;
+  return {
+    title: name,
+    openGraph: { title: name },
+  };
 }
 
 // En Next 16 `params` es un Promise: hay que await.

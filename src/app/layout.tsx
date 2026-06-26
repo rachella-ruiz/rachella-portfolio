@@ -22,7 +22,10 @@ const ibmPlexMono = IBM_Plex_Mono({
   display: "swap",
 });
 
-const SITE_TITLE = "Rachella Ruiz — Product Designer";
+const SITE_NAME = "Rachella Ruiz";
+// Home (default) is the ONLY title that includes the role. Every other page sets
+// just its short name; the template appends "| Rachella Ruiz". Separator always "|".
+const HOME_TITLE = "Rachella Ruiz | Product Designer";
 const SITE_DESCRIPTION =
   "Product designer with 7+ years across fintech, legaltech, and civic tech — making complex, high-stakes systems workable for the people who use them.";
 const SITE_URL = "https://rachellaruiz.com";
@@ -33,21 +36,21 @@ const SITE_URL = "https://rachellaruiz.com";
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: SITE_TITLE,
-    template: `%s | ${SITE_TITLE}`,
+    default: HOME_TITLE,
+    template: `%s | ${SITE_NAME}`,
   },
   description: SITE_DESCRIPTION,
   openGraph: {
     type: "website",
-    siteName: "Rachella Ruiz",
+    siteName: SITE_NAME,
     locale: "en_US",
     url: SITE_URL,
-    title: SITE_TITLE,
+    title: HOME_TITLE,
     description: SITE_DESCRIPTION,
   },
   twitter: {
     card: "summary_large_image",
-    title: SITE_TITLE,
+    title: HOME_TITLE,
     description: SITE_DESCRIPTION,
   },
 };
