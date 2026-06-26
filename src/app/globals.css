@@ -122,6 +122,11 @@
   --text-button-lg--letter-spacing: var(--tracking-button-lg);
   --text-button-lg--font-weight: var(--weight-medium);
 
+  --text-button-md: var(--size-button-md);
+  --text-button-md--line-height: var(--leading-button);
+  --text-button-md--letter-spacing: var(--tracking-button-sm);
+  --text-button-md--font-weight: var(--weight-medium);
+
   --text-button-sm: var(--size-button-sm);
   --text-button-sm--line-height: var(--leading-button);
   --text-button-sm--letter-spacing: var(--tracking-button-sm);

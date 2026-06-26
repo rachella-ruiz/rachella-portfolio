@@ -7,12 +7,11 @@
 export const PILL_BASE = "inline-flex items-center rounded-full px-3 py-1.5";
 
 // pill-tag (informativa: discipline pills) y pill-action (interactiva: View work)
-// resuelven al MISMO estilo: relleno gris oscuro semi-transparente (black/60), SIN
-// borde, sans-serif, caja normal, sin tracking. Nombres separados por propósito;
-// estilo idéntico (el outline se mueve al botón secundario "Schedule a call").
-const PILL_FILLED = `${PILL_BASE} bg-black/60 text-button-sm font-primary tracking-normal text-white`;
-export const PILL_TAG = PILL_FILLED;
-export const PILL_ACTION = PILL_FILLED;
+// comparten geometría base, relleno (black/60) y texto sans caja-normal sin
+// tracking. Difieren SOLO en el tamaño: pill-action usa button-lg (es un elemento
+// de acción); pill-tag usa button-sm (etiqueta informativa).
+export const PILL_TAG = `${PILL_BASE} bg-black/60 text-button-sm font-primary tracking-normal text-white`;
+export const PILL_ACTION = `${PILL_BASE} bg-black/60 text-button-lg font-primary tracking-normal text-white`;
 
 // Rol PRIMARY: relleno blanco (grey-200) + texto negro. COMPARTIDO por el botón
 // "Send an email" y el badge de proyecto, vía esta misma constante → quedan

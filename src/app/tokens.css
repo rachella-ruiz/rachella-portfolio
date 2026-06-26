@@ -82,8 +82,11 @@
   --size-body-lg: 1.25rem;
   --size-body: 1rem;
   --size-body-sm: 0.875rem;
-  --size-button-lg: 1rem;
-  --size-button-sm: 0.875rem;
+  /* Tamaños de botón = escala de body (mismo valor por breakpoint). El peso y el
+     tracking de botón viven en sus propios tokens (no se tocan aquí). */
+  --size-button-lg: 1.25rem; /* = --size-body-lg */
+  --size-button-md: 1rem; /* = --size-body (nuevo) */
+  --size-button-sm: 0.875rem; /* = --size-body-sm */
   --size-overline: 0.875rem;
   --size-caption: 0.75rem;
 
@@ -215,6 +218,7 @@
     --size-h5: 1.5rem;
     --size-h6: 1.125rem;
     --size-body-lg: 1.125rem;
+    --size-button-lg: 1.125rem; /* lockstep con --size-body-lg */
 
     /* secciones */
     --section-xsmall: 2.75rem;
@@ -247,6 +251,7 @@
     --size-h5: 1.25rem;
     --size-h6: 1rem;
     --size-body-lg: 1rem;
+    --size-button-lg: 1rem; /* lockstep con --size-body-lg */
 
     /* spacers (solo móvil cambia) */
     --space-medium: 1.5rem;
