@@ -22,9 +22,34 @@ const ibmPlexMono = IBM_Plex_Mono({
   display: "swap",
 });
 
+const SITE_TITLE = "Rachella Ruiz — Product Designer";
+const SITE_DESCRIPTION =
+  "Product designer with 7+ years across fintech, legaltech, and civic tech — making complex, high-stakes systems workable for the people who use them.";
+const SITE_URL = "https://rachellaruiz.com";
+
+// Icons + OG image come from the /app file conventions (icon.svg, apple-icon.png,
+// opengraph-image.jpg). Do NOT list them here too — Next emits them automatically
+// and a manual `icons`/`openGraph.images` field would duplicate the tags.
 export const metadata: Metadata = {
-  title: "Rachella Ruiz — Portfolio",
-  description: "Portafolio personal de Rachella Ruiz.",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: SITE_TITLE,
+    template: `%s | ${SITE_TITLE}`,
+  },
+  description: SITE_DESCRIPTION,
+  openGraph: {
+    type: "website",
+    siteName: "Rachella Ruiz",
+    locale: "en_US",
+    url: SITE_URL,
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+  },
 };
 
 export default function RootLayout({
