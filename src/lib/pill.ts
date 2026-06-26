@@ -6,12 +6,17 @@
 // que ya compartían todas las pills.
 export const PILL_BASE = "inline-flex items-center rounded-full px-3 py-1.5";
 
-// pill-tag (informativa: discipline pills) y pill-action (interactiva: View work)
-// comparten geometría base, relleno (black/60) y texto sans caja-normal sin
-// tracking. Difieren SOLO en el tamaño: pill-action usa button-lg (es un elemento
-// de acción); pill-tag usa button-sm (etiqueta informativa).
-export const PILL_TAG = `${PILL_BASE} bg-black/60 text-button-sm font-primary tracking-normal text-white`;
-export const PILL_ACTION = `${PILL_BASE} bg-black/60 text-button-lg font-primary tracking-normal text-white`;
+// pill-tag y pill-action comparten la GEOMETRÍA base (radio + padding) y el texto
+// sans caja-normal sin tracking, pero el RELLENO se decopla por contexto:
+//
+// pill-tag (discipline pills, sobre fondo NEGRO del case study): relleno SÓLIDO
+// grey-900 para que sean visibles. Sin blur, sin transparencia.
+export const PILL_TAG = `${PILL_BASE} bg-grey-900 text-button-sm font-primary tracking-normal text-white`;
+
+// pill-action (View work, sobre la card de proyecto con contenido detrás): GLASS
+// — translúcido (bg-black/60) + backdrop-blur (valores glass originales). El blur
+// necesita contenido rico detrás (que el negro no da), por eso no se usa en tag.
+export const PILL_ACTION = `${PILL_BASE} bg-black/60 backdrop-blur-md text-button-lg font-primary tracking-normal text-white`;
 
 // Rol PRIMARY: relleno blanco (grey-200) + texto negro. COMPARTIDO por el botón
 // "Send an email" y el badge de proyecto, vía esta misma constante → quedan

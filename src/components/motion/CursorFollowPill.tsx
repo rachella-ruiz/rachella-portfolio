@@ -38,10 +38,10 @@ export default function CursorFollowPill({
       style={{ x, y }}
       className="pointer-events-none absolute left-0 top-0 z-20"
     >
-      {/* pill-action (geometría base compartida): relleno, sans, sentence case,
-          sin mono/tracking, sin hover. Solo el reveal por opacidad + el follow. */}
+      {/* pill-action (geometría base + glass translúcido/blur ya en PILL_ACTION):
+          sans, sentence case, sin hover. Aquí solo el reveal por opacidad + follow. */}
       <span
-        className={`${PILL_ACTION} -translate-x-1/2 -translate-y-1/2 opacity-0 backdrop-blur-md transition-opacity duration-300 ease-out group-hover:opacity-100`}
+        className={`${PILL_ACTION} -translate-x-1/2 -translate-y-1/2 opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-100`}
       >
         {label}
       </span>
