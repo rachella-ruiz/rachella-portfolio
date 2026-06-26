@@ -29,7 +29,7 @@ export default function ScheduleCallLink() {
       href={SCHEDULE_CALL_HREF}
       target="_blank"
       rel="noopener noreferrer"
-      className="group inline-flex items-center gap-2 text-button-lg font-primary text-grey-300 transition-colors hover:text-grey-100"
+      className="group inline-flex items-center gap-2 text-button-lg font-primary text-grey-100 transition-colors hover:text-grey-300"
     >
       Schedule a call
       <ArrowIcon className="h-2.5 w-2.5" />

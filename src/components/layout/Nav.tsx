@@ -16,13 +16,14 @@ export default function Nav() {
   const isActive = (href: string, nested = false) =>
     nested ? pathname === href || pathname.startsWith(`${href}/`) : pathname === href;
 
-  // Activo = color de hover persistente (grey-100); inactivo = grey-300 con
-  // hover a grey-100. Solo color: la animación de roll sigue solo en hover.
+  // Hover unificado light→dark (Familia A): reposo grey-100 (claro) → hover
+  // grey-300 (más oscuro). Activo = color de hover persistente (grey-300) para
+  // marcar "estás aquí". Solo color: la animación de roll sigue solo en hover.
   const navLinkClass = (href: string, nested = false) =>
     `text-button-lg font-primary transition-colors ${
       isActive(href, nested)
-        ? "text-grey-100"
-        : "text-grey-300 hover:text-grey-100"
+        ? "text-grey-300"
+        : "text-grey-100 hover:text-grey-300"
     }`;
 
   return (
