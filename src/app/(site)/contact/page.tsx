@@ -69,13 +69,15 @@ export default function ContactPage() {
             Schedule an intro call to talk about what you&rsquo;re building, or
             just reach out directly.
           </p>
-          <div className="mt-large flex flex-wrap items-center gap-medium">
+          {/* Mobile: botón y link apilados (uno por fila). Desktop (lg): en fila. */}
+          <div className="mt-large flex flex-col items-start gap-medium lg:flex-row lg:items-center">
             <PrimaryButton href={EMAIL_HREF} label="Send an email" />
             <ScheduleCallLink />
           </div>
         </div>
 
-        <div className="flex flex-wrap gap-xlarge">
+        {/* Mobile: EMAIL / LINKEDIN / BASED IN apiladas (una por fila). Desktop: fila. */}
+        <div className="flex flex-col gap-large lg:flex-row lg:gap-xlarge">
           <InfoColumn label="Email">
             <a href={EMAIL_HREF} className={VALUE_LINK}>
               {EMAIL}
