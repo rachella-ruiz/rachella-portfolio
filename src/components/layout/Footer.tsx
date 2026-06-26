@@ -1,4 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
+import { SCHEDULE_CALL_HREF } from "@/data/contact";
+
 // Íconos sociales servidos directamente desde /public (SVG de líneas).
 // Se usan <img> a propósito (iconos decorativos de tamaño fijo).
 const socials = [
@@ -14,7 +16,7 @@ const socials = [
   },
   {
     label: "Teléfono",
-    href: "https://calendly.com/rachellaruiz/30min",
+    href: SCHEDULE_CALL_HREF,
     src: "/icons/call.svg",
   },
 ];

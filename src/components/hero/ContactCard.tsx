@@ -10,6 +10,7 @@ import {
   useState,
   useSyncExternalStore,
 } from "react";
+import { SCHEDULE_CALL_HREF } from "@/data/contact";
 
 // useLayoutEffect en cliente, useEffect en server (evita el warning de SSR).
 const useIsoLayoutEffect =
@@ -150,7 +151,7 @@ export default function ContactCard() {
             Call
           </p>
           <a
-            href="https://calendly.com/rachellaruiz/30min"
+            href={SCHEDULE_CALL_HREF}
             target="_blank"
             rel="noopener noreferrer"
             className={`inline-flex items-center gap-1.5 ${LINK_CLASS}`}

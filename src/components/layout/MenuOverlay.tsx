@@ -5,6 +5,7 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import type { Variants } from "motion/react";
 import RollLink from "@/components/RollLink";
+import { SCHEDULE_CALL_HREF } from "@/data/contact";
 import { entranceVariants } from "@/lib/motion";
 
 type MenuLink = { href: string; label: string; nested?: boolean };
@@ -181,7 +182,7 @@ export default function MenuOverlay({
                 className="w-full"
               >
                 <a
-                  href="https://calendly.com/rachellaruiz/30min"
+                  href={SCHEDULE_CALL_HREF}
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={onClose}

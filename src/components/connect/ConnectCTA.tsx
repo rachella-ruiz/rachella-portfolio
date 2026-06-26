@@ -1,35 +1,13 @@
 "use client";
 
 import gsap from "gsap";
-import Link from "next/link";
 import { useEffect, useRef } from "react";
 import Marquee from "@/components/Marquee";
 import PrimaryButton from "@/components/PrimaryButton";
+import ScheduleCallLink from "@/components/ScheduleCallLink";
 import Reveal from "@/components/motion/Reveal";
+import { EMAIL_HREF } from "@/data/contact";
 import { trailImages } from "@/data/trail-images";
-
-// Destino de "Schedule a call": placeholder único y fácil de cambiar. Más
-// adelante este y el de la ContactCard del Hero apuntarán al mismo sitio.
-const SCHEDULE_CALL_HREF = "#";
-
-// Flecha ↗ (de /icons/arrow.svg) inline con currentColor.
-function ArrowIcon({ className }: { className?: string }) {
-  return (
-    <svg
-      viewBox="0 0 9 9"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={1.5}
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-      aria-hidden="true"
-    >
-      <path d="M8 1L1 8" />
-      <path d="M2.91 1H8V6.09" />
-    </svg>
-  );
-}
 
 // Connect CTA: sección de cierre antes del footer. Marquee + titular gigante +
 // botones. Sobre el desktop con puntero fino, un mouse-trail de imágenes
@@ -132,17 +110,8 @@ export default function ConnectCTA() {
         </h1>
 
         <div className="mt-large flex flex-col items-center gap-medium">
-          <PrimaryButton
-            href="mailto:rachellaruiz@gmail.com"
-            label="Send an email"
-          />
-          <Link
-            href={SCHEDULE_CALL_HREF}
-            className="group inline-flex items-center gap-2 text-button-lg font-primary text-grey-300 transition-colors hover:text-grey-100"
-          >
-            Schedule a call
-            <ArrowIcon className="h-2.5 w-2.5" />
-          </Link>
+          <PrimaryButton href={EMAIL_HREF} label="Send an email" />
+          <ScheduleCallLink />
         </div>
       </Reveal>
 
