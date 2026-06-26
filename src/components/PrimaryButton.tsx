@@ -1,5 +1,6 @@
 import Link from "next/link";
 import RollText from "@/components/RollText";
+import { PRIMARY_FILL } from "@/lib/pill";
 
 // Botón primario CANÓNICO del sitio.
 //   - Fondo grey-200, texto black, estilo button-lg.
@@ -21,7 +22,7 @@ export default function PrimaryButton({
   return (
     <Link
       href={href}
-      className={`group inline-flex items-center gap-[var(--space-custom-2)] rounded-full bg-grey-200 px-[var(--space-custom-1)] py-[1.125rem] text-button-lg font-primary text-black ${className ?? ""}`}
+      className={`group inline-flex items-center gap-[var(--space-custom-2)] rounded-full ${PRIMARY_FILL} px-[var(--space-custom-1)] py-[1.125rem] text-button-lg font-primary ${className ?? ""}`}
     >
       <RollText label={label} />
       <span
