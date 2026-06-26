@@ -66,7 +66,7 @@ export default function Hero() {
               className="flex items-center gap-xsmall text-body-sm font-primary text-text-secondary"
             >
               <Globe className="inline-block h-5 w-5" />
-              <span>USA based | Eastern Time</span>
+              <span>USA | Eastern Time</span>
             </motion.div>
 
             <motion.h1

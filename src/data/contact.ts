@@ -11,4 +11,4 @@ export const LINKEDIN_URL = "https://www.linkedin.com/in/rachella-ruiz/";
 export const SCHEDULE_CALL_HREF = "https://calendly.com/rachellaruiz/30min";
 
 // Location label — mirrors the hero's globe-row wording.
-export const LOCATION_LABEL = "USA based | Eastern Time";
+export const LOCATION_LABEL = "USA | Eastern Time";
