@@ -32,7 +32,7 @@ export default function AboutPage() {
     <>
       {/* Estructura CENTRADA en una columna estrecha (sustituye a las dos
           columnas). pt-xhuge libra el navbar fijo; gutter por px-large. */}
-      <div className="mx-auto max-w-[52rem] px-large pt-[var(--space-xhuge)]">
+      <div className="mx-auto max-w-[52rem] px-large pt-[var(--space-xlarge)]">
         {/* Cabecera centrada: eyebrow morado + titular con dot redondo. */}
         <Reveal className="flex flex-col items-center gap-medium text-center">
           <p className="text-overline font-secondary uppercase tracking-overline text-primary-400">

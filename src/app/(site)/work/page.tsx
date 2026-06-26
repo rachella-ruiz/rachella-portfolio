@@ -9,16 +9,16 @@ export const metadata: Metadata = {
 // el botón "View all" (showViewAll={false}). Vive dentro del grupo (site) para
 // heredar Nav + Footer del layout compartido.
 // Aquí la sección es el primer contenido bajo el navbar fijo: el main ya añade
-// pt = --nav-height; sumamos pt-[var(--space-xhuge)] para que el titular y la
+// pt = --nav-height; sumamos pt-[var(--space-xlarge)] para que el titular y la
 // primera card queden cómodamente POR DEBAJO del navbar, no pegados a él.
 export default function WorkPage() {
   return (
-    <section className="px-large pt-[var(--space-xhuge)] pb-section-small">
-      {/* Sticky top = limpieza del navbar + gap superior de página (GROUP B,
-          --space-xhuge), para que la columna quede fijada desde scroll=0. */}
+    <section className="px-large pt-[var(--space-xlarge)] pb-section-small">
+      {/* Sticky top = limpieza del navbar + gap superior de página (--space-xlarge),
+          para que la columna quede fijada desde scroll=0. */}
       <SelectedWork
         showViewAll={false}
-        stickyTop="calc(var(--nav-height) + var(--space-xhuge))"
+        stickyTop="calc(var(--nav-height) + var(--space-xlarge))"
       />
     </section>
   );

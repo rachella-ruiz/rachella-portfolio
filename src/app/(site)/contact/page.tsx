@@ -39,9 +39,9 @@ const VALUE_LINK =
 
 export default function ContactPage() {
   return (
-    // Group B (About/Work): pt = --space-xhuge, gutter px-large. min-h llena el
-    // viewport bajo el navbar fijo para anclar el bloque inferior abajo (mt-auto).
-    <section className="flex min-h-[calc(100svh-var(--nav-height))] flex-col px-large pt-[var(--space-xhuge)] pb-section-small">
+    // Top gap unificado --space-xlarge, gutter px-large. min-h llena el viewport
+    // bajo el navbar fijo para anclar el bloque inferior abajo (mt-auto).
+    <section className="flex min-h-[calc(100svh-var(--nav-height))] flex-col px-large pt-[var(--space-xlarge)] pb-section-small">
       {/* Titular gigante con dot de acento — MISMO tratamiento que el título de
           About (text-h1 + clamp + span dot primary-400), aquí alineado a la izq. */}
       <Reveal>
