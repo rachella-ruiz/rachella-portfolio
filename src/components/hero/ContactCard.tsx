@@ -55,10 +55,10 @@ function ArrowIcon({ className }: { className?: string }) {
   );
 }
 
-// Enlaces de la card: mismo tratamiento que los nav-links (button-lg,
-// grey-300 por defecto y grey-100 al hover).
+// Enlaces de la card: mismo tratamiento que los nav-links (hover unificado
+// light→dark: grey-100 en reposo, grey-300 al hover).
 const LINK_CLASS =
-  "font-primary text-button-sm text-grey-300 transition-colors hover:text-grey-100 md:text-button-lg";
+  "font-primary text-button-sm text-grey-100 transition-colors hover:text-grey-300 md:text-button-lg";
 
 // Tarjeta de contacto que se abre HACIA ARRIBA: la base/foto quedan ancladas
 // abajo (items-end) y el alto extra aparece por encima.
