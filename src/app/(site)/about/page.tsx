@@ -3,7 +3,7 @@ import AboutGallery from "@/components/about/AboutGallery";
 import Reveal from "@/components/motion/Reveal";
 
 export const metadata: Metadata = {
-  title: "About — Rachella Ruiz",
+  title: "About",
 };
 
 // Párrafos (verbatim) como strings para no escapar apóstrofos/comillas en JSX.

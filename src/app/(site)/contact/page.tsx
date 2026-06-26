@@ -13,7 +13,7 @@ import {
 } from "@/data/contact";
 
 export const metadata: Metadata = {
-  title: "Contact — Rachella Ruiz",
+  title: "Contact",
 };
 
 // Columna de info: overline mono (token de overline del sitio) + valor debajo.

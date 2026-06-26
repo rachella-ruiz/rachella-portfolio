@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import SelectedWork from "@/components/work/SelectedWork";
 
 export const metadata: Metadata = {
-  title: "Work — Rachella Ruiz",
+  title: "Work",
 };
 
 // Página /work: reutiliza el MISMO componente SelectedWork que la home, pero sin
