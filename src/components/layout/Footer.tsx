@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { SCHEDULE_CALL_HREF } from "@/data/contact";
+import { ICON_BUTTON_CLASS } from "@/lib/icon-button";
 
 // Íconos sociales servidos directamente desde /public (SVG de líneas).
 // Se usan <img> a propósito (iconos decorativos de tamaño fijo).
@@ -53,7 +54,7 @@ export default function Footer() {
                     {...(external
                       ? { target: "_blank", rel: "noopener noreferrer" }
                       : {})}
-                    className="m-0 flex h-14 w-14 items-center justify-center rounded-full border border-[#ececec] p-0 transition-[opacity,background-color] duration-200 ease-[ease] hover:bg-[#ececec] hover:opacity-60"
+                    className={`m-0 h-14 w-14 p-0 ${ICON_BUTTON_CLASS}`}
                   >
                     <img src={src} alt="" className="h-5 w-5" />
                   </a>

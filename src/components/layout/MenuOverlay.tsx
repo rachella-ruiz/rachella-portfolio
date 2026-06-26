@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import type { Variants } from "motion/react";
 import RollLink from "@/components/RollLink";
 import { SCHEDULE_CALL_HREF } from "@/data/contact";
+import { ICON_BUTTON_CLASS } from "@/lib/icon-button";
 import { entranceVariants } from "@/lib/motion";
 
 type MenuLink = { href: string; label: string; nested?: boolean };
@@ -127,7 +128,7 @@ export default function MenuOverlay({
                   type="button"
                   onClick={onClose}
                   aria-label="Cerrar menú"
-                  className="pointer-events-auto flex h-xlarge w-xlarge items-center justify-center rounded-full bg-grey-100 p-0 text-grey-900 transition-colors hover:bg-grey-200"
+                  className={`pointer-events-auto h-xlarge w-xlarge p-0 text-grey-900 ${ICON_BUTTON_CLASS}`}
                 >
                   <svg
                     viewBox="0 0 24 24"
