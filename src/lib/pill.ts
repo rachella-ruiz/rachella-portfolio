@@ -10,3 +10,8 @@ export const PILL_BASE = "inline-flex items-center rounded-full px-3 py-1.5";
 // pill-tag: variante INFORMATIVA. Outline (borde sutil, relleno transparente),
 // sans-serif, capitalización normal, SIN dot, SIN hover. (Las discipline pills.)
 export const PILL_TAG = `${PILL_BASE} border border-[var(--opacity-15)] text-button-sm font-primary text-text-secondary`;
+
+// pill-action: variante INTERACTIVA. Relleno (se distingue del outline de
+// pill-tag), sans-serif, sentence case, SIN mono/tracking, SIN hover (sigue al
+// cursor: no hay superficie hovereable; el movimiento es la señal). (View work.)
+export const PILL_ACTION = `${PILL_BASE} bg-black/60 text-button-sm font-primary tracking-normal text-white`;

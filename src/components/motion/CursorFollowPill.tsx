@@ -2,6 +2,7 @@
 
 import { motion, useMotionValue } from "motion/react";
 import type { MotionValue } from "motion/react";
+import { PILL_ACTION } from "@/lib/pill";
 
 // Cursor-follow label shared by the home WorkCards and the case-study Next case.
 // `useCursorFollow()` owns the pointer motion values + the move handler (motion
@@ -37,7 +38,11 @@ export default function CursorFollowPill({
       style={{ x, y }}
       className="pointer-events-none absolute left-0 top-0 z-20"
     >
-      <span className="inline-block -translate-x-1/2 -translate-y-1/2 rounded-full bg-black/60 px-3 py-1.5 text-overline font-secondary uppercase tracking-overline text-white opacity-0 backdrop-blur-md transition-opacity duration-300 ease-out group-hover:opacity-100">
+      {/* pill-action (geometría base compartida): relleno, sans, sentence case,
+          sin mono/tracking, sin hover. Solo el reveal por opacidad + el follow. */}
+      <span
+        className={`${PILL_ACTION} -translate-x-1/2 -translate-y-1/2 opacity-0 backdrop-blur-md transition-opacity duration-300 ease-out group-hover:opacity-100`}
+      >
         {label}
       </span>
     </motion.div>
