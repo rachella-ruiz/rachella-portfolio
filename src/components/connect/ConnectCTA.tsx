@@ -107,6 +107,12 @@ export default function ConnectCTA() {
 
         <h1 className="mt-section-small text-h1 font-primary font-semibold text-text-heading">
           Let&rsquo;s connect
+          {/* Dot de acento (primary-400), MISMO tratamiento que los títulos de
+              About y Contact: span redondo en em (escala con el titular). */}
+          <span
+            aria-hidden="true"
+            className="ml-[0.04em] inline-block h-[0.16em] w-[0.16em] rounded-full bg-primary-400 align-baseline"
+          />
         </h1>
 
         <div className="mt-large flex flex-col items-center gap-medium">
