@@ -186,7 +186,7 @@ export default function MenuOverlay({
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={onClose}
-                  className="group relative block h-60 overflow-hidden rounded-large bg-black text-grey-300 transition-colors hover:text-grey-100 md:h-44"
+                  className="group relative block h-60 overflow-hidden rounded-large bg-black text-grey-100 transition-colors hover:text-grey-300 md:h-44"
                 >
                   <Image
                     src="/icons/menu-link2.avif"

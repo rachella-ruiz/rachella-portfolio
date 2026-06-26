@@ -86,7 +86,7 @@ export default function Nav() {
               onClick={() => setOpen(true)}
               aria-label="Abrir menú"
               aria-expanded={open}
-              className="flex h-10 w-10 flex-col items-center justify-center gap-1.5 text-grey-300 transition-colors hover:text-grey-100"
+              className="flex h-10 w-10 flex-col items-center justify-center gap-1.5 text-grey-100 transition-colors hover:text-grey-300"
             >
               <span className="h-0.5 w-8 bg-current" />
               <span className="h-0.5 w-8 bg-current" />
