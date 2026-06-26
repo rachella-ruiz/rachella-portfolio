@@ -1,4 +1,5 @@
 import ProgressiveBlur from "@/components/ProgressiveBlur";
+import ConditionalFooter from "./ConditionalFooter";
 import Footer from "./Footer";
 import Nav from "./Nav";
 
@@ -13,7 +14,10 @@ export default function SiteLayout({
       <Nav />
       {/* pt = alto del navbar fijo (variable compartida --nav-height) */}
       <main className="flex-1 pt-[var(--nav-height)]">{children}</main>
-      <Footer />
+      {/* Footer en todas las rutas excepto /contact (ver ConditionalFooter). */}
+      <ConditionalFooter>
+        <Footer />
+      </ConditionalFooter>
       {/* Desenfoque progresivo decorativo, fijo al borde inferior del viewport */}
       <ProgressiveBlur />
     </div>
