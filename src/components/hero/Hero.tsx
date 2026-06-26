@@ -77,7 +77,7 @@ export default function Hero() {
               Hey there!
               <br />
               I&apos;m Rachella, a Product Designer focused on helping people
-              navigate complex systems under uncertainty
+              navigate complex, high-stakes systems
             </motion.h1>
 
             <motion.div variants={itemVariants} custom={0.4} className="mt-medium">
