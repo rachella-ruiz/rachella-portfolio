@@ -25,20 +25,18 @@ export default function SelectedWork({
       <div className="md:sticky md:self-start" style={{ top: stickyTop }}>
         {/* El bloque de texto entra con la animación compartida al hacer scroll. */}
         <Reveal className="flex flex-col gap-medium">
-          {/* Tamaño fluido: el titular se encoge con el ancho (columna ~25%) para
-              que siempre quepa en dos líneas, sin recorte ni nowrap. El clamp
-              sobrescribe solo el font-size; line-height/tracking/weight siguen de
-              text-h2. Máximo = var(--size-h2) (responsive). */}
-          <h2
-            className="text-h2 font-primary font-semibold text-text-heading"
-            style={{ fontSize: "clamp(2.5rem, 5vw, var(--size-h2))" }}
-          >
-            Selected{" "}
-            {/* Salto de línea solo en desktop/tablet (columna estrecha ~25%);
-                en móvil (full-width) el titular queda en una sola línea. */}
-            <br className="max-md:hidden" />
-            {/* El punto final es texto del h2 con color primary-400 (Text Span). */}
-            Work<span className="text-primary-400">.</span>
+          {/* Titular "Work." con el MISMO tamaño (text-h1, el token de About/
+              Contact) y el MISMO dot de acento redondo. Texto corto → cabe en la
+              columna ~25% sin romper el grid (a diferencia del viejo "Selected
+              Work."). No se aplica el clamp 14vw/11rem de About/Contact porque a
+              ese tamaño desbordaría la columna estrecha. */}
+          <h2 className="text-h1 font-primary font-semibold text-text-heading">
+            Work
+            {/* Dot redondo de marca (primary-400), idéntico a About/Contact. */}
+            <span
+              aria-hidden="true"
+              className="ml-[0.04em] inline-block h-[0.16em] w-[0.16em] rounded-full bg-primary-400 align-baseline"
+            />
           </h2>
 
           <p className="max-w-sm text-body text-text-tertiary">
