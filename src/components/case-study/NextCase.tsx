@@ -5,6 +5,7 @@ import Link from "next/link";
 import CursorFollowPill, {
   useCursorFollow,
 } from "@/components/motion/CursorFollowPill";
+import ProjectBadge from "@/components/ProjectBadge";
 import { projects } from "@/data/projects";
 
 // Next case is derived from projects.ts array order, wrapping last → first.
@@ -30,12 +31,7 @@ export default function NextCase({ currentSlug }: { currentSlug: string }) {
           <span className="text-overline font-secondary uppercase text-text-tertiary">
             Next case
           </span>
-          <span className="inline-flex items-center gap-2 rounded-full bg-[var(--opacity-10)] px-3 py-1.5 backdrop-blur-md">
-            <span className="h-1.5 w-1.5 rounded-full bg-primary-400" />
-            <span className="text-button-sm font-primary uppercase text-text-heading">
-              {next.name}
-            </span>
-          </span>
+          <ProjectBadge name={next.name} />
         </div>
         {/* Image = cursor-follow hover target (same behavior as the home cards). */}
         <div

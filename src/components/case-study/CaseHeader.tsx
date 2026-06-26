@@ -1,4 +1,6 @@
 import type { CaseStudy } from "@/data/case-studies/types";
+import ProjectBadge from "@/components/ProjectBadge";
+import { PILL_TAG } from "@/lib/pill";
 import Media from "./Media";
 
 // Case-study header in the site's full-width (px-large) container: pill + overline
@@ -12,14 +14,9 @@ export default function CaseHeader({
 }) {
   return (
     <header className="px-large">
-      {/* Pill (glass + leading dot) + overline */}
+      {/* Badge de proyecto (pill-tag + dot) + overline */}
       <div className="flex flex-wrap items-center gap-small">
-        <span className="inline-flex items-center gap-2 rounded-full bg-[var(--opacity-10)] px-3 py-1.5 backdrop-blur-md">
-          <span className="h-1.5 w-1.5 rounded-full bg-primary-400" />
-          <span className="text-button-sm font-primary text-text-heading">
-            {header.pill}
-          </span>
-        </span>
+        <ProjectBadge name={header.pill} />
         <span className="text-overline font-secondary uppercase text-text-tertiary">
           {header.overline}
         </span>
@@ -40,10 +37,7 @@ export default function CaseHeader({
           {header.tags.length > 0 && (
             <ul className="flex flex-wrap gap-xsmall">
               {header.tags.map((tag) => (
-                <li
-                  key={tag}
-                  className="rounded-full border border-[var(--opacity-15)] px-3 py-1.5 text-button-sm font-primary text-text-secondary"
-                >
+                <li key={tag} className={PILL_TAG}>
                   {tag}
                 </li>
               ))}
